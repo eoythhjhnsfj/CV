@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
 
+
 Sitemap: https://www.badre.site/sitemap.xml
+
