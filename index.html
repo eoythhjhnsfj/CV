@@ -7,12 +7,17 @@
     
     <!-- Primary SEO Meta Tags -->
     <title>Badr Ibraheem - Digital Experience Designer | Portfolio</title>
-    <meta name="description" content="Explore the portfolio of Badr Ibraheem, a Creative Front-End Developer and Digital Experience Designer from Egypt, creating unique, interactive web experiences.">
-    <meta name="keywords" content="Badr Ibraheem, Digital Experience Designer, Creative Front-End Developer, Interactive Web Design, UI/UX Designer, 3D Web, Portfolio, Faiyum, Egypt, بدر إبراهيم, مصمم تجارب رقمية, مطور واجهات أمامية إبداعي, تصميم ويب تفاعلي">
+    <meta name="description" content="Explore the portfolio of Badr Ibraheem, a Creative Front-End Developer and Digital Experience Designer from Egypt. I merge design and code to create unique, interactive web experiences.">
+    <meta name="keywords" content="Badr Ibraheem, Digital Experience Designer, Creative Front-End Developer, Interactive Web Design, UI/UX Designer, 3D Web, Portfolio, Faiyum, Egypt, بدر إبراهيم, مصمم تجارب رقمية, مطور واجهات أمامية إبداعي, تصميم ويب تفاعلي, badr.e.mohameed, badr ibraheem mohameed, badr ibrahim mohamed, بدر ابراهيم محمد, بدر ابراهيم, المصمم بدر, افضل 5 مصممين جرافيك فى الفيوم, افضل 5 مصممين جرافيك فى مصر">
     <meta name="author" content="Badr Ibraheem Mohameed">
     <link rel="canonical" href="https://badre.site/" />
+    <link rel="alternate" hreflang="en" href="https://badre.site/" />
+    <link rel="alternate" hreflang="ar" href="https://badre.site/" />
+    <link rel="alternate" hreflang="x-default" href="https://badre.site/" />
 
-   
+    <!-- Google Site Verification -->
+    <meta name="google-site-verification" content="23mMWVqTRusUHwuIVlfVT9HtfRVESw1T_T7BFcEFoM4" />
+
     <!-- Open Graph / Facebook Meta Tags -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://badre.site/">
@@ -53,6 +58,36 @@
         },
         "query-input": "required name=search_term_string"
       }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Badr Ibraheem Mohameed",
+      "alternateName": [
+        "badr.e.mohameed",
+        "badr ibrahim mohamed",
+        "بدر ابراهيم محمد",
+        "بدر ابراهيم",
+        "المصمم بدر"
+      ],
+      "url": "https://badre.site/",
+      "image": "https://i.ibb.co/QFtzp7t3/1172-copy.jpg",
+      "jobTitle": "Digital Experience Designer and Graphic Designer",
+      "description": "Creative graphic designer and software developer from Faiyum, Egypt with over 3 years of experience. Specializing in creating unique visual identities and interactive websites.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Faiyum",
+        "addressCountry": "EG"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/bdremohameed",
+        "https://github.com/bdremohameed",
+        "https://x.com/bdr_e_mohameed",
+        "https://www.facebook.com/bdr.e.mohmed",
+        "https://www.instagram.com/bdr_e_mohamed"
+      ]
     }
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -109,6 +144,24 @@
             color: var(--text-primary-color);
             position: relative;
             overflow-x: hidden;
+        }
+
+        /* --- Maintenance Mode Styles --- */
+        #maintenance-overlay {
+            background-color: rgba(13, 13, 13, 0.5); /* Semi-transparent dark bg */
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+        .light-mode #maintenance-overlay {
+            background-color: rgba(243, 244, 246, 0.7); /* Semi-transparent light bg */
+        }
+        .maintenance-content {
+            background: var(--glass-bg);
+            border: 1px solid var(--border-primary);
+            padding: 2.5rem;
+            border-radius: 1.5rem;
+            max-width: 500px;
+            box-shadow: var(--shadow-md);
         }
 
         #bg-canvas {
@@ -302,20 +355,26 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 64px;
-            height: 64px;
-            background: var(--accent-color);
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border-primary);
             border-radius: 9999px;
-            color: var(--background-dark);
+            color: var(--text-primary-color);
             transition: all 0.4s ease;
         }
         .light-mode .cta-btn {
-            color: white;
+            background: rgba(255, 255, 255, 0.6);
+            color: var(--text-primary-color);
         }
         
         .cta-btn:hover {
             transform: scale(1.1);
-            box-shadow: 0 0 35px rgba(var(--accent-color-rgb), 0.8);
+            background: rgba(255, 255, 255, 0.2);
+            border-color: var(--accent-color);
+            box-shadow: 0 0 25px rgba(var(--accent-color-rgb), 0.5);
         }
         
         .gsap-reveal {
@@ -567,17 +626,105 @@
             pointer-events: none;
             transition: opacity 0.3s ease, visibility 0.3s ease;
         }
-        #contact-modal {
+        #contact-modal, #login-modal, #project-modal {
             transition: opacity 0.3s ease, visibility 0.3s ease;
         }
-        #contact-modal > div:last-of-type { /* The modal content */
+        #contact-modal > div:last-of-type,
+        #login-modal > div:last-of-type,
+        #project-modal > div:last-of-type,
+        #settings-modal > div:last-of-type { /* The modal content */
             transform: scale(0.95);
             transition: transform 0.3s ease;
         }
-        #contact-modal:not(.modal-hidden) > div:last-of-type {
+        #contact-modal:not(.modal-hidden) > div:last-of-type,
+        #login-modal:not(.modal-hidden) > div:last-of-type,
+        #project-modal:not(.modal-hidden) > div:last-of-type,
+        #settings-modal:not(.modal-hidden) > div:last-of-type {
             transform: scale(1);
         }
         
+        /* --- Project Add/Edit Modal Styles --- */
+        .project-modal-content {
+            background: linear-gradient(160deg, rgba(30, 30, 30, 0.7), rgba(15, 15, 15, 0.8));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .light-mode .project-modal-content {
+             background: var(--glass-bg);
+        }
+        .project-modal-content .form-input {
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.15);
+            border-radius: 0;
+            padding: 0.75rem 0.25rem;
+            color: var(--text-primary);
+        }
+        .light-mode .project-modal-content .form-input {
+            color: var(--text-primary-color);
+            border-bottom-color: rgba(0,0,0,0.2);
+        }
+        .project-modal-content .form-input:focus {
+            outline: none;
+            box-shadow: none;
+            border-color: var(--accent-color);
+        }
+        .project-modal-content .form-label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #9CA3AF; /* gray-400 */
+            margin-bottom: 0.25rem;
+            text-align: left;
+        }
+        .light-mode .project-modal-content .form-label {
+            color: #374151; /* gray-700 */
+        }
+        .project-modal-content select.form-input {
+            background-color: var(--background-dark);
+        }
+
+        /* --- Updated Login Modal Styles --- */
+        .login-modal-content {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.02));
+            border: 1px solid var(--border-primary);
+            position: relative;
+            overflow: hidden;
+        }
+        .login-modal-content::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(transparent, rgba(212, 175, 55, 0.3), transparent 30%);
+            animation: rotate-glow 6s linear infinite;
+        }
+        @keyframes rotate-glow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        #google-signin-btn {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--text-primary-color);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .light-mode #google-signin-btn {
+            background-color: rgba(0,0,0,0.05);
+            border-color: rgba(0,0,0,0.1);
+        }
+        #google-signin-btn:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-color: rgba(212, 175, 55, 0.5);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+        }
+        .light-mode #google-signin-btn:hover {
+            background-color: rgba(0,0,0,0.1);
+            border-color: var(--accent-color);
+            box-shadow: 0 0 15px rgba(0, 169, 157, 0.2);
+        }
+
         /* --- Modern Theme Toggle --- */
         #theme-toggle-btn {
             position: relative;
@@ -653,6 +800,23 @@
         .nav-link.active {
             color: var(--accent-color);
             background-color: rgba(212, 175, 55, 0.1);
+        }
+
+
+        /* --- User Dropdown Menu --- */
+        #user-dropdown {
+            display: none;
+            transform-origin: top right;
+            animation: grow-down 0.2s ease-in-out;
+        }
+        #user-dropdown.show {
+            display: block;
+        }
+        #user-menu-btn svg {
+            transition: transform 0.3s ease;
+        }
+        #user-menu-btn.open svg {
+            transform: rotate(180deg);
         }
 
         /* --- Language Switcher Styles --- */
@@ -761,6 +925,44 @@
             transform: translateY(0);
         }
 
+        /* --- Admin Controls --- */
+        .admin-controls {
+            display: none; /* Hidden by default */
+            gap: 0.5rem;
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+            z-index: 20;
+        }
+        body.logged-in .project-card .admin-controls {
+            display: flex; /* Show when logged in */
+        }
+        #add-project-container {
+            display: none; /* Hidden by default */
+        }
+        body.logged-in #add-project-container {
+            display: block;
+        }
+        .admin-btn {
+            background-color: rgba(13, 13, 13, 0.7);
+            backdrop-filter: blur(10px);
+            color: white;
+            border-radius: 9999px;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-primary);
+        }
+        .admin-btn:hover {
+             background-color: rgba(139, 92, 246, 0.8);
+        }
+        .admin-btn.delete:hover {
+            background-color: rgba(239, 68, 68, 0.8);
+        }
+
         /* --- Responsive Iframe for Video --- */
         .video-container {
             position: relative;
@@ -862,14 +1064,51 @@
         #cv-view {
             position: fixed;
             inset: 0;
-            background-color: var(--bg-primary);
+            background-color: rgba(13, 13, 13, 0.5);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             z-index: 100;
-            overflow-y: auto;
-            transform: translateY(100%);
-            transition: transform 0.6s cubic-bezier(0.86, 0, 0.07, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+        .light-mode #cv-view {
+            background-color: rgba(243, 244, 246, 0.7);
         }
         #cv-view.visible {
-            transform: translateY(0%);
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+        #cv-view .cv-container {
+            background: var(--glass-bg);
+            border: 1px solid var(--border-primary);
+            border-radius: 1.5rem;
+            max-width: 900px;
+            width: 100%;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transform: scale(0.95);
+            transition: transform 0.4s ease;
+        }
+        #cv-view.visible .cv-container {
+            transform: scale(1);
+        }
+        .cv-content-wrapper {
+            overflow-y: auto;
+            padding: 1rem;
+        }
+        @media (min-width: 768px) {
+             .cv-content-wrapper {
+                padding: 1.5rem 2.5rem 2.5rem 2.5rem;
+            }
         }
         .cv-grid {
             display: grid;
@@ -891,10 +1130,10 @@
         }
 
         @media print {
-            body * {
+            body *, #cv-view {
                 visibility: hidden;
             }
-            #cv-view, #cv-view * {
+            .cv-container, .cv-container * {
                 visibility: visible;
             }
             #cv-view {
@@ -905,8 +1144,21 @@
                 height: auto;
                 transform: translateY(0) !important;
                 overflow: visible;
+                background: none !important;
+                backdrop-filter: none !important;
+                padding: 0;
             }
-            .cv-header, .cv-actions {
+            .cv-container {
+                max-height: none;
+                overflow: visible;
+                display: block;
+                border-radius: 0;
+            }
+            .cv-content-wrapper {
+                overflow: visible;
+                padding: 0;
+            }
+            .cv-header {
                 display: none;
             }
             .cv-grid {
@@ -957,6 +1209,14 @@
         .light-mode .article-placeholder svg {
             color: rgba(0, 169, 157, 0.4);
         }
+
+        #article-detail-admin-controls {
+            display: none;
+        }
+        body.logged-in #article-detail-admin-controls {
+            display: flex;
+        }
+
 
         /* --- Project View Gallery Styles --- */
         .gallery-container {
@@ -1168,11 +1428,13 @@
         .light-mode .contact-info-panel {
              border-right: 1px solid var(--border-primary);
         }
-        .light-mode #contact-modal > div:last-of-type {
-            background: rgba(255, 255, 255, 0.65);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            box-shadow: var(--shadow-md);
+        #contact-modal .glass-card {
+            background: rgba(13, 13, 13, 0.4); /* Very transparent dark bg */
+            backdrop-filter: blur(32px); /* Increased blur */
+            -webkit-backdrop-filter: blur(32px);
+        }
+        .light-mode #contact-modal .glass-card {
+            background: rgba(255, 255, 255, 0.6); /* Very transparent light bg */
         }
         .light-mode #testimonials .glass-card {
             background: rgba(255, 255, 255, 0.65);
@@ -1396,10 +1658,72 @@
             40% { transform: scale(1); }
         }
 
+        /* --- Project Recommendations Styles --- */
+        #project-recommendations-container h4 {
+            border-bottom: 2px solid var(--border-primary);
+            padding-bottom: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+        .recommendation-card {
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+        .recommendation-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--glass-border-hover);
+            background: var(--glass-hover-bg);
+        }
+        .recommendation-card img {
+            aspect-ratio: 16 / 10;
+            object-fit: cover;
+        }
+
+        /* --- Voice Navigation Styles --- */
+        #voice-status-indicator {
+            animation: pulse-voice 2s infinite;
+        }
+        @keyframes pulse-voice {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.7); }
+            70% { transform: scale(1.1); box-shadow: 0 0 0 20px rgba(139, 92, 246, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(139, 92, 246, 0); }
+        }
+        #voice-nav-overlay.processing #voice-status-indicator {
+            animation: none;
+            background-color: #10B981; /* Green for success */
+        }
+        #voice-nav-overlay.error #voice-status-indicator {
+            animation: none;
+            background-color: #EF4444; /* Red for error */
+        }
+
+        /* --- Reading Progress Bar --- */
+        #reading-progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background-image: var(--accent-gradient);
+            width: 0%;
+            z-index: 9998; /* Below maintenance overlay but above everything else */
+            transition: width 0.1s linear;
+            box-shadow: 0 2px 10px rgba(var(--accent-color-rgb), 0.5);
+            display: none; /* Hidden by default */
+        }
+
     </style>
 </head>
 
 <body>
+    <div id="reading-progress-bar"></div>
+    <div id="maintenance-overlay" class="hidden fixed inset-0 z-[9999] flex items-center justify-center p-4">
+        <div class="maintenance-content text-center">
+            <svg class="mx-auto h-16 w-16 text-[var(--accent-color)] mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.472-2.472a3.375 3.375 0 00-4.773-4.773L6.23 5.73a3.375 3.375 0 00-4.773 4.773l2.472 2.472M11.42 15.17l-2.472 2.472a3.375 3.375 0 01-4.773-4.773L5.73 6.23a3.375 3.375 0 014.773-4.773l2.472 2.472" />
+            </svg>
+            <h1 class="text-4xl font-bold mb-2">Under Maintenance</h1>
+            <p class="text-gray-400">Our site is currently undergoing scheduled maintenance. We'll be back shortly. Thank you for your patience.</p>
+        </div>
+    </div>
     <canvas id="bg-canvas"></canvas>
     <!-- --- Preloader --- -->
     <div id="preloader">
@@ -1448,6 +1772,12 @@
                         <span class="tooltip">CV</span>
                     </a>
                 </nav>
+
+                <!-- Voice Nav Button -->
+                <button id="voice-nav-btn" class="nav-link" title="Voice Navigation">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="22"></line></svg>
+                    <span class="tooltip">Voice Nav</span>
+                </button>
 
                 <!-- Search Button -->
                 <button id="search-btn" class="nav-link" title="Search">
@@ -1518,9 +1848,9 @@
                     
                     <!-- Social Icons -->
                     <div class="mt-8 flex justify-center md:justify-start items-center gap-x-1 sm:gap-x-2" id="hero-socials">
-                        <a href="https://www.linkedin.com/in/bdremohameed" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="LinkedIn" title="LinkedIn"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"></path></svg></a>
-                        <a href="https://github.com/bdremohameed" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="GitHub" title="GitHub"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path></svg></a>
-                        <a href="https://x.com/bdr_e_mohameed" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="X" title="X (formerly Twitter)"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.931ZM17.61 20.644h2.039L6.486 3.24H4.298Z"></path></svg></a>
+                        <a href="https://www.linkedin.com/in/bdremohameed" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="LinkedIn" title="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
+                        <a href="https://github.com/bdremohameed" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="GitHub" title="GitHub"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>
+                        <a href="https://x.com/bdr_e_mohameed" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="X" title="X (formerly Twitter)"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></a>
                     </div>
 
                     <!-- CTA Buttons -->
@@ -1543,8 +1873,11 @@
                  <div id="hero-image-container" class="relative flex justify-center items-center">
                     <div class="relative w-full max-w-md md:max-w-lg lg:max-w-xl flex justify-center items-center">
                          <div class="hero-image-glow absolute w-[80%] h-[80%] rounded-full opacity-70"></div>
-                         <div class="relative z-10 w-[240px] h-[240px] sm:w-[320px] h-[320px] md:w-[360px] md:h-[360px] rounded-full overflow-hidden shadow-2xl ring-4 ring-white/10">
-                            <img src="https://i.ibb.co/QFtzp7t3/1172-copy.jpg" alt="صورة شخصية احترافية للمصمم بدر إبراهيم، مصمم جرافيك ومطور برامج من الفيوم، مصر." class="w-full h-full object-cover opacity-95 transition-opacity duration-300" loading="lazy" width="360" height="360">
+                         <div class="relative z-10 w-[240px] h-[240px] sm:w-[320px] h-[320px] md:w-[420px] md:h-[420px] rounded-full overflow-hidden shadow-2xl ring-4 ring-white/10">
+                            <img id="profile-picture-img" src="https://i.ibb.co/QFtzp7t3/1172-copy.jpg"
+                                 data-dark-src="https://i.ibb.co/QFtzp7t3/1172-copy.jpg"
+                                 data-light-src="https://i.ibb.co/N6dQBv1/IMG-20240621-WA0010.jpg"
+                                 alt="صورة شخصية احترافية للمصمم بدر إبراهيم، مصمم جرافيك ومطور برامج من الفيوم، مصر." class="w-full h-full object-cover opacity-95 transition-opacity duration-300" loading="lazy" width="420" height="420">
                          </div>
                     </div>
                 </div>
@@ -1858,6 +2191,7 @@
             <div id="articles-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
                 <!-- Articles are loaded dynamically here -->
             </div>
+
         </section>
 
         <!-- CTA Section -->
@@ -1887,7 +2221,7 @@
         <div class="container mx-auto px-6">
             <div class="flex justify-between items-center mb-8">
                 <button id="back-to-home-from-article-btn" class="secondary-btn inline-flex items-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
                     <span data-translate-key="backToHomeBtn">Back to Home</span>
                 </button>
                 <div id="article-detail-admin-controls" class="gap-2">
@@ -1916,114 +2250,130 @@
         </div>
     </section>
 
+    <!-- Voice Navigation Overlay -->
+    <div id="voice-nav-overlay" class="modal-hidden fixed inset-0 z-[90] flex flex-col items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+        <div id="voice-status-indicator" class="w-24 h-24 rounded-full bg-violet-500/50 flex items-center justify-center mb-6">
+            <svg class="w-12 h-12 text-white" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="22"></line></svg>
+        </div>
+        <p id="voice-status-text" class="text-2xl font-bold text-white mb-4">Listening...</p>
+        <p id="voice-command-text" class="text-lg text-gray-300 h-8"></p>
+        <p class="text-gray-400 mt-8 max-w-md text-center">Try saying: "Go to projects", "Show me the blog", "Scroll to about", or "Contact Badr".</p>
+        <button id="close-voice-nav-btn" class="absolute top-6 right-6 text-white hover:text-gray-300 transition-colors z-20" aria-label="Close">
+             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+    </div>
+
     <!-- CV View -->
     <div id="cv-view">
-        <div class="container mx-auto px-6 py-12">
-            <header class="cv-header flex justify-between items-center mb-10">
-                <h2 class="text-3xl sm:text-4xl font-bold gradient-text" data-translate-key="cvTitle">Curriculum Vitae</h2>
-                <div class="cv-actions flex items-center gap-4">
-                    <a href="#" id="download-cv-btn" class="secondary-btn !py-2 !px-4" download>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                        <span data-translate-key="downloadCvBtn">Download CV</span>
+        <div class="cv-container">
+            <header class="cv-header flex-shrink-0 flex justify-between items-center p-4 border-b border-[var(--border-primary)]">
+                <h2 class="text-xl sm:text-2xl font-bold gradient-text flex items-center gap-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                    <span data-translate-key="cvTitle">Curriculum Vitae</span>
+                </h2>
+                <div class="cv-actions flex items-center gap-2">
+                    <a href="#" id="download-cv-btn" class="secondary-btn !py-1.5 !px-3 !text-sm" download>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="mr-1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        <span data-translate-key="downloadCvBtn">Download</span>
                     </a>
                     <button id="close-cv-btn" class="nav-link !p-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
                     </button>
                 </div>
             </header>
-            <div class="cv-grid max-w-6xl mx-auto">
-                <!-- Sidebar -->
-                <aside class="cv-sidebar">
-                    <div class="text-center mb-8">
-                        <img src="https://i.ibb.co/QFtzp7t3/1172-copy.jpg" alt="Badr Ibraheem" class="w-32 h-32 rounded-full mx-auto mb-4 ring-4 ring-[var(--accent-color)] p-1">
-                        <h2 class="text-2xl font-bold" data-translate-key="cvName">Badr Ibraheem</h2>
-                        <p class="gradient-text font-semibold" data-translate-key="cvJobTitle">Graphic & Software Designer</p>
-                    </div>
-                    <div class="space-y-6">
-                        <div>
-                            <h3 class="font-bold text-lg mb-2 border-b-2 border-[var(--accent-color)] pb-1 inline-block" data-translate-key="cvContactTitle">Contact</h3>
-                            <ul class="space-y-2 text-sm">
-                                <li class="flex items-center gap-3"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg><a href="mailto:badr.e.mohameed@gmail.com" class="hover:text-[var(--accent-color)]">badr.e.mohameed@gmail.com</a></li>
-                                <li class="flex items-center gap-3"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg><a href="tel:+201069913150" class="hover:text-[var(--accent-color)]">+20 106 991 3150</a></li>
-                                <li class="flex items-center gap-3"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg><span data-translate-key="cvLocation">Faiyum, Egypt</span></li>
-                            </ul>
+            <div class="cv-content-wrapper">
+                <div class="cv-grid">
+                    <!-- Sidebar -->
+                    <aside class="cv-sidebar">
+                        <div class="text-center mb-8">
+                            <img src="https://i.ibb.co/QFtzp7t3/1172-copy.jpg" alt="Badr Ibraheem" class="w-32 h-32 rounded-full mx-auto mb-4 ring-4 ring-[var(--accent-color)] p-1">
+                            <h1 class="text-2xl font-bold" data-translate-key="cvName">Badr Ibraheem</h1>
+                            <p class="gradient-text font-semibold" data-translate-key="cvJobTitle">Graphic & Software Designer</p>
                         </div>
-                        <div>
-                            <h3 class="font-bold text-lg mb-2 border-b-2 border-[var(--accent-color)] pb-1 inline-block" data-translate-key="cvSkillsTitle">Skills</h3>
-                            <div class="flex flex-wrap gap-2 text-sm">
-                                <span class="bg-white/10 px-3 py-1 rounded-full" data-translate-key="cvSkillAdobe">Adobe Suite</span>
-                                <span class="bg-white/10 px-3 py-1 rounded-full" data-translate-key="cvSkill3D">3D Design</span>
-                                <span class="bg-white/10 px-3 py-1 rounded-full" data-translate-key="cvSkillUIUX">UI/UX</span>
-                                <span class="bg-white/10 px-3 py-1 rounded-full" data-translate-key="skillOffice">Microsoft Office</span>
-                                <span class="bg-white/10 px-3 py-1 rounded-full" data-translate-key="cvSkillHTML">HTML & CSS</span>
-                                <span class="bg-white/10 px-3 py-1 rounded-full" data-translate-key="cvSkillJS">JavaScript</span>
-                            </div>
-                        </div>
-                         <div>
-                            <h3 class="font-bold text-lg mb-2 border-b-2 border-[var(--accent-color)] pb-1 inline-block" data-translate-key="languagesSubTitle">Languages</h3>
-                            <p class="text-sm"><strong data-translate-key="cvLangArabicLabel">Arabic:</strong> <span data-translate-key="cvLangArabicLevel">Native</span></p>
-                            <p class="text-sm"><strong data-translate-key="cvLangEnglishLabel">English:</strong> <span data-translate-key="cvLangEnglishLevel">Intermediate</span></p>
-                        </div>
-                    </div>
-                </aside>
-                <!-- Main Content -->
-                <main>
-                    <section class="mb-8">
-                        <h2 class="text-2xl font-bold mb-4 border-l-4 border-[var(--accent-color)] pl-4" data-translate-key="cvSummaryTitle">Summary</h2>
-                        <p class="text-gray-400" data-translate-key="cvSummaryContent">
-                            Creative graphic designer and software developer from Faiyum, Egypt with over 3 years of experience in print and digital advertising. Skilled in using 3D elements, Adobe Creative Suite, and modern web technologies to deliver high-quality, impactful visual projects and user experiences.
-                        </p>
-                    </section>
-                    <section class="mb-8">
-                        <h2 class="text-2xl font-bold mb-6 border-l-4 border-[var(--accent-color)] pl-4" data-translate-key="experienceTitle">Experience</h2>
-                        <div class="relative border-l-2 border-[var(--border-primary)] ml-3 pl-8 space-y-8">
-                             <div class="timeline-item-cv">
-                                <h3 class="font-bold" data-translate-key="exp1Title">Hotel Marketing Intern</h3>
-                                <p class="text-sm text-gray-400" data-translate-key="exp1Meta">Dec 2024 – Feb 2025 | 6th of October City, Giza</p>
-                                <ul class="list-disc pl-5 mt-2 text-gray-400 text-sm space-y-1">
-                                    <li data-translate-key="cvExp1Point1">Supported marketing initiatives, including creating content for social media.</li>
-                                    <li data-translate-key="cvExp1Point2">Assisted with market research and analysis to guide marketing strategies.</li>
+                        <div class="space-y-6">
+                            <div>
+                                <h3 class="font-bold text-lg mb-2 border-b-2 border-[var(--accent-color)] pb-1 inline-block" data-translate-key="cvContactTitle">Contact</h3>
+                                <ul class="space-y-2 text-sm">
+                                    <li class="flex items-center gap-3"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg><a href="mailto:badr.e.mohameed@gmail.com" class="hover:text-[var(--accent-color)]">badr.e.mohameed@gmail.com</a></li>
+                                    <li class="flex items-center gap-3"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg><a href="tel:+201069913150" class="hover:text-[var(--accent-color)]">+20 106 991 3150</a></li>
+                                    <li class="flex items-center gap-3"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg><span data-translate-key="cvLocation">Faiyum, Egypt</span></li>
                                 </ul>
                             </div>
-                        </div>
-                    </section>
-                     <section class="mb-8">
-                        <h2 class="text-2xl font-bold mb-6 border-l-4 border-[var(--accent-color)] pl-4" data-translate-key="educationTitle">Education</h2>
-                         <div class="relative border-l-2 border-[var(--border-primary)] ml-3 pl-8 space-y-8">
-                            <div class="timeline-item-cv">
-                                <h3 class="font-bold" data-translate-key="educationDegree">Bachelor of Tourism and Hotels</h3>
-                                <p class="text-sm text-gray-400"><span data-translate-key="educationInstitute">Higher Institute of Tourism and Hotels</span> - <span data-translate-key="cvEducationDate">Graduated June 2025</span></p>
+                            <div>
+                                <h3 class="font-bold text-lg mb-2 border-b-2 border-[var(--accent-color)] pb-1 inline-block" data-translate-key="cvSkillsTitle">Skills</h3>
+                                <div class="flex flex-wrap gap-2 text-sm">
+                                    <span class="bg-white/10 px-3 py-1 rounded-full" data-translate-key="cvSkillAdobe">Adobe Suite</span>
+                                    <span class="bg-white/10 px-3 py-1 rounded-full" data-translate-key="cvSkill3D">3D Design</span>
+                                    <span class="bg-white/10 px-3 py-1 rounded-full" data-translate-key="cvSkillUIUX">UI/UX</span>
+                                    <span class="bg-white/10 px-3 py-1 rounded-full" data-translate-key="skillOffice">Microsoft Office</span>
+                                    <span class="bg-white/10 px-3 py-1 rounded-full" data-translate-key="cvSkillHTML">HTML & CSS</span>
+                                    <span class="bg-white/10 px-3 py-1 rounded-full" data-translate-key="cvSkillJS">JavaScript</span>
+                                </div>
+                            </div>
+                             <div>
+                                <h3 class="font-bold text-lg mb-2 border-b-2 border-[var(--accent-color)] pb-1 inline-block" data-translate-key="languagesSubTitle">Languages</h3>
+                                <p class="text-sm"><strong data-translate-key="cvLangArabicLabel">Arabic:</strong> <span data-translate-key="cvLangArabicLevel">Native</span></p>
+                                <p class="text-sm"><strong data-translate-key="cvLangEnglishLabel">English:</strong> <span data-translate-key="cvLangEnglishLevel">Intermediate</span></p>
                             </div>
                         </div>
-                    </section>
-                    <section>
-                        <h2 class="text-2xl font-bold mb-6 border-l-4 border-[var(--accent-color)] pl-4" data-translate-key="cvCoursesTitle">Courses & Training</h2>
-                         <div class="relative border-l-2 border-[var(--border-primary)] ml-3 pl-8 space-y-8">
-                             <div class="timeline-item-cv">
-                                <h3 class="font-bold" data-translate-key="exp2Title">Graphic Designer Course</h3>
-                                <p class="text-sm text-gray-400" data-translate-key="exp2Meta">Jan 2021 – Feb 2022 | Adobe, Nasr City</p>
+                    </aside>
+                    <!-- Main Content -->
+                    <main>
+                        <section class="mb-8">
+                            <h2 class="text-2xl font-bold mb-4 border-l-4 border-[var(--accent-color)] pl-4" data-translate-key="cvSummaryTitle">Summary</h2>
+                            <p class="text-gray-400" data-translate-key="cvSummaryContent">
+                                Creative graphic designer and software developer from Faiyum, Egypt with over 3 years of experience in print and digital advertising. Skilled in using 3D elements, Adobe Creative Suite, and modern web technologies to deliver high-quality, impactful visual projects and user experiences.
+                            </p>
+                        </section>
+                        <section class="mb-8">
+                            <h2 class="text-2xl font-bold mb-6 border-l-4 border-[var(--accent-color)] pl-4" data-translate-key="experienceTitle">Experience</h2>
+                            <div class="relative border-l-2 border-[var(--border-primary)] ml-3 pl-8 space-y-8">
+                                 <div class="timeline-item-cv">
+                                    <h3 class="font-bold" data-translate-key="exp1Title">Hotel Marketing Intern</h3>
+                                    <p class="text-sm text-gray-400" data-translate-key="exp1Meta">Dec 2024 – Feb 2025 | 6th of October City, Giza</p>
+                                    <ul class="list-disc pl-5 mt-2 text-gray-400 text-sm space-y-1">
+                                        <li data-translate-key="cvExp1Point1">Supported marketing initiatives, including creating content for social media.</li>
+                                        <li data-translate-key="cvExp1Point2">Assisted with market research and analysis to guide marketing strategies.</li>
+                                    </ul>
+                                </div>
                             </div>
-                             <div class="timeline-item-cv">
-                                <h3 class="font-bold" data-translate-key="exp3Title">Air Hostess Training</h3>
-                                <p class="text-sm text-gray-400" data-translate-key="exp3Meta">2022 | Higher Institute of Tourism and Hotels, 6th of October</p>
+                        </section>
+                         <section class="mb-8">
+                            <h2 class="text-2xl font-bold mb-6 border-l-4 border-[var(--accent-color)] pl-4" data-translate-key="educationTitle">Education</h2>
+                             <div class="relative border-l-2 border-[var(--border-primary)] ml-3 pl-8 space-y-8">
+                                <div class="timeline-item-cv">
+                                    <h3 class="font-bold" data-translate-key="educationDegree">Bachelor of Tourism and Hotels</h3>
+                                    <p class="text-sm text-gray-400"><span data-translate-key="educationInstitute">Higher Institute of Tourism and Hotels</span> - <span data-translate-key="cvEducationDate">Graduated June 2025</span></p>
+                                </div>
                             </div>
-                        </div>
-                    </section>
-                </main>
+                        </section>
+                        <section>
+                            <h2 class="text-2xl font-bold mb-6 border-l-4 border-[var(--accent-color)] pl-4" data-translate-key="cvCoursesTitle">Courses & Training</h2>
+                             <div class="relative border-l-2 border-[var(--border-primary)] ml-3 pl-8 space-y-8">
+                                 <div class="timeline-item-cv">
+                                    <h3 class="font-bold" data-translate-key="exp2Title">Graphic Designer Course</h3>
+                                    <p class="text-sm text-gray-400" data-translate-key="exp2Meta">Jan 2021 – Feb 2022 | Adobe, Nasr City</p>
+                                </div>
+                                 <div class="timeline-item-cv">
+                                    <h3 class="font-bold" data-translate-key="exp3Title">Air Hostess Training</h3>
+                                    <p class="text-sm text-gray-400" data-translate-key="exp3Meta">2022 | Higher Institute of Tourism and Hotels, 6th of October</p>
+                                </div>
+                            </div>
+                        </section>
+                    </main>
+                </div>
             </div>
         </div>
     </div>
 
     <!-- Floating Contact Button -->
-    <button id="contact-fab-btn" class="fixed bottom-8 right-8 z-50 cta-btn group" aria-label="Get in touch" title="Get in touch" data-translate-title="tooltipFabContact">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-7 h-7 transition-transform duration-300 group-hover:scale-110">
-            <path fill-rule="evenodd" d="M4.848 2.771A49.144 49.144 0 0112 2.25c2.43 0 4.817.178 7.152.52 1.978.292 3.348 2.024 3.348 3.97v6.02c0 1.946-1.37 3.678-3.348 3.97a48.901 48.901 0 01-3.476.383.39.39 0 00-.297.15l-2.755 4.133a.75.75 0 01-1.248 0l-2.755-4.133a.39.39 0 00-.297-.15 48.9 48.9 0 01-3.476-.384c-1.978-.29-3.348-2.024-3.348-3.97V6.74c0-1.946 1.37-3.68 3.348-3.97z" clip-rule="evenodd" />
-        </svg>
+    <button id="contact-fab-btn" class="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-50 cta-btn group" aria-label="Get in touch" title="Get in touch" data-translate-title="tooltipFabContact">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7 transition-transform duration-300 group-hover:scale-110"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
     </button>
     
     <!-- Chatbot Widget -->
-    <button id="chat-fab-btn" class="fixed bottom-8 left-8 z-50 cta-btn group" aria-label="Open Chatbot" title="Open Chatbot" data-translate-title="tooltipChatbot">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7 transition-transform duration-300 group-hover:scale-110"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12c0 1.821.487 3.53 1.338 5L2.5 21.5l4.5-.838A9.955 9.955 0 0 0 12 22z"></path></svg>
+    <button id="chat-fab-btn" class="fixed bottom-6 left-6 md:bottom-8 md:left-8 z-50 cta-btn group" aria-label="Open Chatbot" title="Open Chatbot" data-translate-title="tooltipChatbot">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7 transition-transform duration-300 group-hover:scale-110"><path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2z"></path></svg>
     </button>
     <div id="chat-widget" class="glass-card">
         <div class="chat-header flex justify-between items-center border-b border-white/10">
@@ -2042,10 +2392,176 @@
             <div class="relative">
                 <input type="text" id="chat-input" placeholder="Ask about projects, skills..." class="form-input w-full">
                 <button type="submit" id="chat-send-btn">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24" fill="currentColor"><path d="M3.478 2.405a.75.75 0 00-.926.94l2.432 7.905H13.5a.75.75 0 010 1.5H4.984l-2.432 7.905a.75.75 0 00.926.94 60.519 60.519 0 0018.445-8.986.75.75 0 000-1.218A60.517 60.517 0 003.478 2.405z"></path></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M3.478 2.405a.75.75 0 00-.926.94l2.432 7.905H13.5a.75.75 0 010 1.5H4.984l-2.432 7.905a.75.75 0 00.926.94 60.519 60.519 0 0018.445-8.986.75.75 0 000-1.218A60.517 60.517 0 003.478 2.405z"></path></svg>
                 </button>
             </div>
         </form>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="modal-hidden fixed inset-0 z-[80] flex items-center justify-center p-4">
+        <!-- Modal Overlay -->
+        <div class="absolute inset-0 bg-black/70 backdrop-blur-sm login-modal-overlay-bg"></div>
+    
+        <!-- Modal Content -->
+        <div class="relative w-11/12 max-w-sm login-modal-content rounded-2xl p-6 sm:p-8 z-10">
+            <button id="close-login-modal-btn" class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors z-20" aria-label="Close" title="Close" data-translate-title="tooltipModalClose">
+                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+    
+            <div class="text-center relative z-10">
+                 <div class="flex justify-center mb-6">
+                    <div class="w-14 h-14 rounded-full flex items-center justify-center bg-white/5 ring-2 ring-white/10 overflow-hidden">
+                         <img src="https://i.ibb.co/QFtzp7t3/1172-copy.jpg" alt="Badr Ibraheem profile picture" class="w-full h-full object-cover" loading="lazy">
+                    </div>
+                 </div>
+                 <h3 class="text-3xl font-bold mb-2">Badr Ibrahee Mohamed</h3>
+                 <p class="text-gray-400 mb-8">Sign in to manage your portfolio.</p>
+            </div>
+            
+            <p id="login-error" class="text-red-400 text-sm text-center h-4 mb-4 relative z-10"></p>
+
+            <button id="google-signin-btn" class="relative z-10 w-full flex justify-center items-center gap-3 font-semibold py-3 px-4 rounded-full transition-all duration-300">
+                <svg class="w-5 h-5" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"></path><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"></path><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"></path><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"></path><path fill="none" d="M0 0h48v48H0z"></path></svg>
+                Sign in with Google
+            </button>
+
+        </div>
+    </div>
+    
+    <!-- Project Add/Edit Modal -->
+    <div id="project-modal" class="modal-hidden fixed inset-0 z-[70] flex items-center justify-center p-4">
+        <!-- Modal Overlay -->
+        <div class="absolute inset-0 bg-black/70 backdrop-blur-sm project-modal-overlay-bg"></div>
+    
+        <!-- Modal Content -->
+        <div class="relative w-11/12 max-w-2xl project-modal-content glass-card rounded-2xl p-6 md:p-8 z-10 max-h-[90vh] overflow-y-auto">
+            <button id="close-project-modal-btn" class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors" aria-label="Close" title="Close" data-translate-title="tooltipModalClose">
+                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+    
+            <div class="text-left mb-8 flex items-center gap-4">
+                <div class="w-12 h-12 rounded-lg bg-white/5 flex items-center justify-center">
+                    <svg class="w-7 h-7 text-gold-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><line x1="9" y1="15" x2="15" y2="15"></line></svg>
+                </div>
+                <div>
+                    <h3 id="project-modal-title" class="text-2xl font-bold">Add Project</h3>
+                    <p class="text-gray-400 text-sm">Fill in the details below to add a new project.</p>
+                </div>
+            </div>
+            
+            <form id="project-form" class="space-y-6">
+                <input type="hidden" id="project-id" name="id">
+                
+                <div>
+                    <label for="project-title" class="form-label">Project Title</label>
+                    <input type="text" id="project-title" name="title" placeholder="e.g., Modern Branding Redesign" required class="form-input">
+                </div>
+                
+                <div>
+                    <label for="project-description" class="form-label">Short Description (for card)</label>
+                    <textarea id="project-description" name="description" rows="3" placeholder="A brief, catchy description for the portfolio grid." required class="form-input"></textarea>
+                </div>
+
+                <div>
+                    <label for="project-coverImageUrl" class="form-label">Cover Image URL</label>
+                    <input type="url" id="project-coverImageUrl" name="coverImageUrl" placeholder="https://.../cover-image.jpg" required class="form-input">
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="project-url" class="form-label">Project Link (Behance, etc.)</label>
+                        <input type="url" id="project-url" name="url" placeholder="https://behance.net/..." class="form-input">
+                    </div>
+                    <div>
+                        <label for="project-downloadUrl" class="form-label">Download Link (Optional)</label>
+                        <input type="url" id="project-downloadUrl" name="downloadUrl" placeholder="https://.../download.zip" class="form-input">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="project-tools" class="form-label">Tools Used</label>
+                        <input type="text" id="project-tools" name="tools" placeholder="Photoshop, Illustrator, GSAP" class="form-input">
+                    </div>
+                    <div>
+                        <label for="project-tags" class="form-label">Tags / Categories</label>
+                        <input type="text" id="project-tags" name="tags" placeholder="Branding, 3D, Web Design" class="form-input">
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="project-date" class="form-label">Completion Date</label>
+                        <input type="date" id="project-date" name="date" class="form-input text-gray-400">
+                    </div>
+                     <div>
+                        <label for="project-status" class="form-label">Project Status</label>
+                        <select id="project-status" name="status" class="form-input">
+                            <option value="Completed">Completed</option>
+                            <option value="InProgress">In Progress</option>
+                            <option value="Idea">Idea</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div>
+                    <label for="project-additionalDetails" class="form-label">Full Project Details</label>
+                    <textarea id="project-additionalDetails" name="additionalDetails" rows="5" placeholder="Detailed description for the project page..." class="form-input"></textarea>
+                </div>
+
+                <div>
+                    <label for="project-gallery" class="form-label">Gallery Image URLs (one per line)</label>
+                    <textarea id="project-gallery" name="gallery" rows="4" placeholder="https://.../image1.jpg&#10;https://.../image2.jpg&#10;https://.../image3.jpg" class="form-input"></textarea>
+                </div>
+
+                <div class="flex items-center gap-3 text-gray-300 pt-2">
+                    <input type="checkbox" id="project-featured" name="featured" class="w-5 h-5 bg-transparent border-gray-600 rounded text-violet-500 focus:ring-violet-500">
+                    <label for="project-featured">Mark as a Featured Project</label>
+                </div>
+
+                <div class="text-center pt-4">
+                    <button type="submit" class="submit-btn group w-full sm:w-auto justify-center px-8 py-3">
+                        <span id="project-submit-btn-text">Save Project</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Article Add/Edit Modal -->
+    <div id="article-modal" class="modal-hidden fixed inset-0 z-[70] flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/70 backdrop-blur-sm article-modal-overlay-bg"></div>
+        <div class="relative w-11/12 max-w-3xl project-modal-content glass-card rounded-2xl p-6 md:p-8 z-10 max-h-[90vh] overflow-y-auto">
+            <button id="close-article-modal-btn" class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors" aria-label="Close" title="Close" data-translate-title="tooltipModalClose">
+                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+            <h3 id="article-modal-title" class="text-2xl font-bold mb-6">Write New Article</h3>
+            <form id="article-form" class="space-y-6">
+                <input type="hidden" id="article-id" name="id">
+                <div>
+                    <label for="article-title" class="form-label">Title</label>
+                    <input type="text" id="article-title" name="title" placeholder="A catchy title for your article" required class="form-input">
+                </div>
+                <div>
+                    <label for="article-coverImageUrl" class="form-label">Cover Image URL (Optional)</label>
+                    <input type="url" id="article-coverImageUrl" name="coverImageUrl" placeholder="https://.../cover-image.jpg" class="form-input">
+                </div>
+                 <div>
+                    <label for="article-tags" class="form-label">Tags / Categories</label>
+                    <input type="text" id="article-tags" name="tags" placeholder="Design, Tutorial, Tech" class="form-input">
+                </div>
+                <div>
+                    <label for="article-content" class="form-label">Content (Use new lines for paragraphs)</label>
+                    <textarea id="article-content" name="content" rows="12" placeholder="Write your article content here..." required class="form-input"></textarea>
+                </div>
+                <div class="text-center pt-4">
+                    <button type="submit" class="submit-btn group w-full sm:w-auto justify-center px-8 py-3">
+                        <span id="article-submit-btn-text">Publish Article</span>
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 
     <!-- Contact Modal -->
@@ -2054,52 +2570,57 @@
         <div class="absolute inset-0 bg-black/70 backdrop-blur-sm modal-overlay-bg"></div>
     
         <!-- Modal Content -->
-        <div class="relative w-11/12 max-w-4xl glass-card rounded-2xl z-10 overflow-hidden">
+        <div class="relative w-11/12 max-w-md md:max-w-3xl bg-transparent rounded-2xl z-10 max-h-[85vh] flex flex-col">
             <button id="close-modal-btn" class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors z-20" aria-label="Close" title="Close" data-translate-title="tooltipModalClose">
                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
             </button>
             
-            <div class="grid md:grid-cols-2">
+            <div class="grid md:grid-cols-5 glass-card rounded-2xl overflow-y-auto">
                 <!-- Left Side: Info -->
-                <div class="p-6 md:p-8 contact-info-panel">
-                    <h3 class="text-2xl sm:text-3xl font-bold mb-2 gradient-text" data-translate-key="contactTitle">Get In Touch</h3>
-                    <p class="text-gray-300 mb-8 text-sm sm:text-base" data-translate-key="contactDesc">Fill up the form and I will get back to you within 24 hours.</p>
+                <div class="md:col-span-2 p-4 md:p-8 text-white">
+                    <div class="flex items-center gap-3 mb-2">
+                        <div class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center flex-shrink-0">
+                            <svg class="w-6 h-6 text-gold-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" /></svg>
+                        </div>
+                        <h3 class="text-2xl md:text-3xl font-bold gradient-text" data-translate-key="contactTitle">Get In Touch</h3>
+                    </div>
+                    <p class="text-gray-300 mb-6 text-sm" data-translate-key="contactDesc">Fill up the form and I will get back to you within 24 hours.</p>
                     
-                    <div class="space-y-6">
-                        <div class="flex items-center gap-3 sm:gap-4">
-                            <div class="cta-btn !w-10 !h-10 sm:!w-12 sm:!h-12 text-xl sm:text-2xl">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-3 text-left">
+                            <div class="bg-white/5 p-2 rounded-full text-[#25D366] mt-1">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.894 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 4.316 1.905 6.03l-.419 1.533 1.519-.4zM9.5 14.5c-.042-.124-.125-.195-.27-.295-.145-.1-.315-.148-.43-.153s-.24-.008-.344.092c-.105.1-.33.34-.438.465-.108.125-.216.25-.324.375s-.24.165-.368.125c-.128-.04-.547-.21-1.046-.595s-.863-.835-1.19-1.16c-.27-.27-.504-.635-.504-.975s.25-.56.375-.75c.125-.19.25-.31.375-.435s.125-.24.062-.375c-.062-.125-.562-1.345-.75-1.845-.19-.5-.375-.435-.5-.435s-.24-.008-.344.092c-.105.1-.33.34-.438.465s-.33.375-.438.635c-.108.25-.165.56-.165.875s.125 1.19.25 1.435c.125.25.562.935 1.312 1.688s1.438 1.19 2.188 1.5s1.19.438 1.562.438c.312 0 .562-.062.75-.125s.562-.625.625-.75c.062-.125.062-.25.062-.31s-.062-.125-.125-.19c-.062-.062-.24-.125-.312-.19s-.125-.125-.125-.19c0-.062-.042-.125-.062-.165z"/></svg>
                             </div>
                             <div>
-                                <h4 class="font-bold text-base sm:text-lg" data-translate-key="emailTitle">Email</h4>
-                                <a href="mailto:badr.e.mohameed@gmail.com" class="text-gray-300 hover:text-violet-400 transition-colors text-sm sm:text-base">badr.e.mohameed@gmail.com</a>
+                                <h4 class="font-semibold text-base text-white" data-translate-key="phoneTitle">WhatsApp</h4>
+                                <a href="https://wa.me/201069913150" target="_blank" rel="noopener noreferrer" class="block text-sm text-gray-300 hover:text-white transition-colors">+20 106 991 3150</a>
+                                <a href="https://wa.me/201112162908" target="_blank" rel="noopener noreferrer" class="block text-sm text-gray-300 hover:text-white transition-colors mt-1">+20 111 216 2908</a>
                             </div>
                         </div>
-                         <div class="flex items-center gap-3 sm:gap-4">
-                            <div class="cta-btn !w-10 !h-10 sm:!w-12 sm:!h-12 text-xl sm:text-2xl">
-                               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                         <a href="mailto:badr.e.mohameed@gmail.com" class="flex items-start gap-3 group text-left">
+                            <div class="bg-white/5 p-2 rounded-full group-hover:bg-[var(--accent-color)] group-hover:text-[var(--background-dark)] transition-all duration-300 mt-1">
+                                <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                             </div>
                             <div>
-                                <h4 class="font-bold text-base sm:text-lg" data-translate-key="phoneTitle">Phone</h4>
-                                <a href="tel:+201069913150" class="block text-gray-300 hover:text-violet-400 transition-colors text-sm sm:text-base">+20 106 991 3150</a>
-                                <a href="tel:+201112162908" class="block text-gray-300 hover:text-violet-400 transition-colors text-sm sm:text-base">+20 111 216 2908</a>
+                                <h4 class="font-semibold text-base text-white" data-translate-key="emailTitle">Email</h4>
+                                <p class="text-sm text-gray-300 group-hover:text-white transition-colors break-all">badr.e.mohameed@gmail.com</p>
                             </div>
-                        </div>
+                        </a>
                     </div>
 
-                    <div class="mt-8 pt-6 border-t border-white/10">
-                         <h4 class="font-bold text-lg mb-4" data-translate-key="socialTitle">Follow Me</h4>
-                         <div class="flex items-center flex-wrap gap-x-2 sm:gap-x-4 gap-y-2">
-                             <a href="https://www.linkedin.com/in/bdremohameed" target="_blank" rel="noopener noreferrer" class="social-btn !p-2" aria-label="LinkedIn" title="LinkedIn"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"></path></svg></a>
-                             <a href="https://github.com/bdremohameed" target="_blank" rel="noopener noreferrer" class="social-btn !p-2" aria-label="GitHub" title="GitHub"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path></svg></a>
-                             <a href="https://x.com/bdr_e_mohameed" target="_blank" rel="noopener noreferrer" class="social-btn !p-2" aria-label="X" title="X (formerly Twitter)"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.931ZM17.61 20.644h2.039L6.486 3.24H4.298Z"></path></svg></a>
+                    <div class="mt-6 pt-4 border-t border-white/10">
+                         <h4 class="font-semibold text-base mb-3 text-white" data-translate-key="socialTitle">Follow Me</h4>
+                         <div class="flex items-center gap-2">
+                             <a href="https://www.linkedin.com/in/bdremohameed" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="LinkedIn" title="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
+                             <a href="https://github.com/bdremohameed" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="GitHub" title="GitHub"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>
+                             <a href="https://x.com/bdr_e_mohameed" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="X" title="X (formerly Twitter)"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></a>
                          </div>
                     </div>
                 </div>
 
                 <!-- Right Side: Form -->
-                <div class="p-6 md:p-8">
-                    <form id="contact-form" action="https://formspree.io/f/mzzayzwe" method="POST" class="space-y-6">
+                <div class="md:col-span-3 p-4 md:p-8">
+                    <form id="contact-form" action="https://formspree.io/f/mzzayzwe" method="POST" class="space-y-4">
                         <div>
                             <label for="contact-name" class="sr-only">Name</label>
                             <input type="text" id="contact-name" name="name" placeholder="Your Name" required class="form-input" data-translate-placeholder="formName">
@@ -2110,9 +2631,9 @@
                         </div>
                         <div>
                             <label for="contact-message" class="sr-only">Message</label>
-                            <textarea id="contact-message" name="message" rows="5" placeholder="Your Message" required class="form-input" data-translate-placeholder="formMessage"></textarea>
+                            <textarea id="contact-message" name="message" rows="4" placeholder="Your Message" required class="form-input" data-translate-placeholder="formMessage"></textarea>
                         </div>
-                        <div class="pt-2">
+                        <div class="pt-1">
                             <button type="submit" class="submit-btn group w-full justify-center">
                                 <span data-translate-key="sendMessageBtn">Send Message</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 ml-2 transition-transform duration-300 group-hover:translate-x-1"><path d="M3.478 2.405a.75.75 0 00-.926.94l2.432 7.905H13.5a.75.75 0 010 1.5H4.984l-2.432 7.905a.75.75 0 00.926.94 60.519 60.519 0 0018.445-8.986.75.75 0 000-1.218A60.517 60.517 0 003.478 2.405z"></path></svg>
@@ -2134,18 +2655,15 @@
         </button>
     </div>
 
-
     <footer class="mt-20 border-t border-white/10 pt-12 pb-40 sm:pb-24">
         <div class="container mx-auto px-6 text-center text-gray-500">
             <div class="mb-8 flex justify-center items-center flex-wrap gap-x-2 sm:gap-x-4 gap-y-4">
                 <!-- Updated Social Media Icons -->
-                <a href="https://www.linkedin.com/in/bdremohameed" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="LinkedIn" title="LinkedIn"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg></a>
-                <a href="https://github.com/bdremohameed" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="GitHub" title="GitHub"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
-                <a href="https://x.com/bdr_e_mohameed" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="X" title="X (formerly Twitter)"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.931ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg></a>
-                <a href="https://www.facebook.com/bdr.e.mohmed" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Facebook" title="Facebook"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M22.675 0H1.325C.593 0 0 .593 0 1.325v21.351C0 23.407.593 24 1.325 24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116c.732 0 1.325-.593 1.325-1.325V1.325C24 .593 23.407 0 22.675 0z"/></svg></a>
-                <a href="https://www.instagram.com/bdr_e_mohamed" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Instagram" title="Instagram"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.784.305-1.455.717-2.126 1.387C1.333 2.69 1.053 3.35 1.053 4.14c-.3.784-.5 1.65-.558 2.913-.058 1.28-.072 1.687-.072 4.947s.015 3.667.072 4.947c.058 1.26.258 2.13.558 2.913.3.784.717 1.455 1.387 2.126.67.67 1.342.972 2.126 1.272.784.3 1.65.5 2.913.558 1.28.058 1.687.072 4.947.072s3.667-.015 4.947-.072c1.26-.058 2.13-.258 2.913-.558.784-.3 1.455-.717 2.126-1.272.67-.67.972-1.342 1.272-2.126.3-.784.5-1.65.558-2.913.058-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.058-1.26-.258-2.13-.558-2.913-.3-.784-.717-1.455-1.272-2.126C21.31 1.333 20.65 1.053 19.86.753c-.784-.3-1.65-.5-2.913-.558C15.667.015 15.26 0 12 0zm0 2.16c3.203 0 3.585.012 4.85.07 1.17.055 1.805.242 2.227.415.562.222.96.477 1.382.896.419.42.673.817.896 1.382.173.422.36 1.057.413 2.227.058 1.265.07 1.646.07 4.85s-.012 3.585-.07 4.85c-.053 1.17-.24 1.805-.413 2.227-.222.562-.477.96-.896 1.382-.42.419-.817.673-1.382.896-.422.173-1.057.36-2.227.413-1.265.058-1.646.07-4.85.07s-3.585-.012-4.85-.07c-1.17-.053-1.805-.24-2.227-.413-.562-.222-.96-.477-1.382-.896-.419-.42-.673-.817-.896-1.382-.173-.422-.36-1.057-.413-2.227-.058-1.265-.07-1.646-.07-4.85s.012-3.585.07-4.85c.053-1.17.24-1.805.413-2.227.222-.562.477.96.896-1.382.42-.419.817.673 1.382-.896.422-.173 1.057.36 2.227-.413C8.415 2.172 8.797 2.16 12 2.16zm0 14.88c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5zm0-8.16c-1.74 0-3.16 1.42-3.16 3.16s1.42 3.16 3.16 3.16 3.16-1.42 3.16-3.16-1.42-3.16-3.16-3.16zm5.25-6.336c-.795 0-1.44.645-1.44 1.44s.645 1.44 1.44 1.44 1.44-.645 1.44-1.44-.645-1.44-1.44-1.44z"/></svg></a>
-                <a href="https.t.me/bdr_e_mohameed" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Telegram" title="Telegram"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.17.91-.494 1.202-.82 1.23-.696.06-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.04-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.287-.788.057-.383.315-.754.89-1.11C6.201 10.16 13.915 7.2 14.787 6.81c1.31-.59 2.292-.28 2.12.414z"/></svg></a>
-                <a href="https://copilot.microsoft.com/" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Microsoft Copilot" title="Microsoft Copilot"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M17.87,4.82,13.4,2.23a2.33,2.33,0,0,0-2.2,0L6.73,4.82a2.34,2.34,0,0,0-1.1,2V9.45l-2.1,1.21a1.15,1.15,0,0,0,0,2.08L5.63,14v2.7a2.34,2.34,0,0,0,1.1,2l4.47,2.59a2.33,2.33,0,0,0,2.2,0l4.47-2.59a2.34,2.34,0,0,0,1.1-2V14l2.1-1.21a1.15,1.15,0,0,0,0-2.08L18.97,9.45V6.8A2.34,2.34,0,0,0,17.87,4.82Zm-1.1,12a1.14,1.14,0,0,1-.55,1l-4.47,2.59a1.14,1.14,0,0,1-1.1,0L6.18,17.78a1.14,1.14,0,0,1-.55-1V14.07l2.1,1.21a2.34,2.34,0,0,0,2.2,0l4.47-2.59,2.1-1.21V16.8Zm0-8.12L12.3,11.27a1.14,1.14,0,0,1-1.1,0L6.73,8.68,5.63,8.09l1.1-0.63,4.47-2.59a1.14,1.14,0,0,1,1.1,0l4.47,2.59,1.1.63Z" /></svg></a>
+                <a href="https://www.linkedin.com/in/bdremohameed" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="LinkedIn" title="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
+                <a href="https://github.com/bdremohameed" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="GitHub" title="GitHub"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>
+                <a href="https://x.com/bdr_e_mohameed" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="X" title="X (formerly Twitter)"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></a>
+                <a href="https://www.facebook.com/bdr.e.mohmed" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Facebook" title="Facebook"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+                <a href="https://www.instagram.com/bdr_e_mohamed" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Instagram" title="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
             </div>
             <p data-translate-key="footerRights">&copy; 2025 Badr. All rights reserved.</p>
         </div>
@@ -2157,7 +2675,7 @@
     <script type="module">
         // --- Firebase SDK Imports ---
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getFirestore, collection, doc, onSnapshot, query, orderBy, increment, updateDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getFirestore, collection, doc, getDoc, onSnapshot, query, orderBy, increment, updateDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         // --- Firebase Configuration ---
         const firebaseConfig = {
@@ -2177,6 +2695,7 @@
         // --- Firestore Collection References ---
         const projectsCollection = collection(db, 'projects');
         const articlesCollection = collection(db, 'articles');
+        const siteStatusRef = doc(db, 'settings', 'site_status');
 
         // --- Translations ---
         const translations = {
@@ -2257,6 +2776,13 @@
                 cvContactTitle: "Contact",
                 cvLocation: "Faiyum, Egypt",
                 cvSkillsTitle: "Skills",
+                ctaSubtitle: "Let's start a conversation.",
+                cvTitle: "My CV",
+                cvName: "Badr Ibraheem",
+                cvJobTitle: "Graphic & Software Designer",
+                cvContactTitle: "Contact",
+                cvLocation: "Faiyum, Egypt",
+                cvSkillsTitle: "Skills",
                 cvSkillAdobe: "Adobe Suite",
                 cvSkill3D: "3D Design",
                 cvSkillUIUX: "UI/UX",
@@ -2272,6 +2798,7 @@
                 cvExp1Point2: "Assisted with market research and analysis to guide marketing strategies.",
                 cvEducationDate: "Graduated June 2025",
                 cvCoursesTitle: "Courses & Training",
+                phoneTitle: "WhatsApp",
             },
             ar: {
                 navAbout: 'عني', navServices: 'الخدمات', navSkills: 'المهارات', navExperience: 'الخبرة', navProjects: 'المشاريع', navBlog: 'المدونة',
@@ -2341,7 +2868,7 @@
                 contactTitle: 'تواصل معي',
                 contactDesc: 'املأ النموذج وسأعود إليك في غضون 24 ساعة.',
                 emailTitle: 'البريد الإلكتروني',
-                phoneTitle: 'الهاتف',
+                phoneTitle: 'واتساب',
                 socialTitle: 'تابعني',
                 sendMessageBtn: 'إرسال رسالة',
                 formName: 'اسمك',
@@ -2472,6 +2999,7 @@
             const projectDetailView = document.getElementById('project-detail-view');
             const projectsGrid = document.getElementById('projects-grid');
             const projectFiltersContainer = document.getElementById('project-filters');
+            const authContainer = document.getElementById('auth-container');
             const articlesGrid = document.getElementById('articles-grid');
             const articleDetailView = document.getElementById('article-detail-view');
             const themeToggleBtn = document.getElementById('theme-toggle-btn');
@@ -2485,6 +3013,7 @@
             const closeSearchBtn = document.getElementById('close-search-btn');
             const header = document.querySelector('header');
             const cvView = document.getElementById('cv-view');
+            const readingProgressBar = document.getElementById('reading-progress-bar');
             
             // --- THEME SWITCHER ---
             const body = document.body;
@@ -2497,10 +3026,12 @@
                 const videoEl = document.getElementById('background-video');
                 const sourceEl = videoEl ? videoEl.querySelector('source') : null;
                 const canvasEl = document.getElementById('bg-canvas');
+                const profilePic = document.getElementById('profile-picture-img');
 
                 if (theme === 'light') {
                     body.classList.add('light-mode');
                     if (articleContent) articleContent.classList.remove('prose-invert');
+                    if (profilePic) profilePic.src = profilePic.dataset.lightSrc;
                     
                     // Hide video, show canvas
                     if (videoContainer) videoContainer.style.display = 'none';
@@ -2516,6 +3047,7 @@
                 } else { // Dark mode
                     body.classList.remove('light-mode');
                     if (articleContent) articleContent.classList.add('prose-invert');
+                    if (profilePic) profilePic.src = profilePic.dataset.darkSrc;
                     
                     // Hide canvas, show video
                     if (canvasEl) canvasEl.style.display = 'none';
@@ -2557,7 +3089,8 @@
             } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
                 initialTheme = 'light';
             }
-            applyTheme(initialTheme);
+            // We call applyTheme inside onAuthStateChanged after fetching user-specific profile pics.
+            // But we set the localStorage here so it's ready.
             localStorage.setItem('theme', initialTheme);
 
 
@@ -2565,7 +3098,39 @@
                 const newTheme = body.classList.contains('light-mode') ? 'dark' : 'light';
                 applyTheme(newTheme);
                 localStorage.setItem('theme', newTheme);
-            });
+        });
+
+
+            // --- Load Public Data and Settings ---
+            async function loadPublicData() {
+                // Fetch public settings for profile pictures
+                try {
+                    const publicSettingsRef = doc(db, 'settings', 'main_profile');
+                    const settingsDoc = await getDoc(publicSettingsRef);
+                    if (settingsDoc.exists()) {
+                        const publicSettings = settingsDoc.data();
+                        const profilePic = document.getElementById('profile-picture-img');
+                        if (publicSettings.lightModeUrl) profilePic.dataset.lightSrc = publicSettings.lightModeUrl;
+                        if (publicSettings.darkModeUrl) profilePic.dataset.darkSrc = publicSettings.darkModeUrl;
+                    }
+                } catch (error) {
+                    console.error("Could not load public profile settings:", error);
+                }
+
+                // Check maintenance mode
+                try {
+                    const statusDoc = await getDoc(siteStatusRef);
+                    if (statusDoc.exists() && statusDoc.data().isMaintenanceMode) {
+                        document.getElementById('maintenance-overlay').classList.remove('hidden');
+                        return; // Stop further execution
+                    }
+                } catch (error) {
+                    console.error("Could not check maintenance status:", error);
+                }
+
+                // Apply theme for ALL users after settings have been potentially loaded
+                applyTheme(localStorage.getItem('theme') || 'dark');
+            }
 
 
             // --- PROJECTS DATA HANDLING (FIRESTORE) ---
@@ -2659,7 +3224,6 @@
 
             // --- Function to display projects (with filter) ---
             function displayProjects(filter = 'All') {
-                
                 if (!myProjects) {
                     projectsGrid.innerHTML = '<p class="text-center col-span-full text-gray-400">No projects to display yet.</p>';
                     return;
@@ -2689,7 +3253,6 @@
                 projectsGrid.innerHTML = '';
 
                 filteredProjects.forEach((project) => {
-
                     const featuredBadge = project.featured ? `
                         <div class="absolute top-4 left-4 bg-yellow-400 text-yellow-900 text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1.5 z-10 shadow-lg">
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
@@ -2706,7 +3269,6 @@
 
                     const projectCard = `
                         <article class="group relative rounded-2xl overflow-hidden shadow-lg project-card w-[280px] sm:w-[320px] h-[420px] flex-none snap-center">
-                            
                             ${featuredBadge}
                             ${statusBadge}
                             
@@ -2803,7 +3365,6 @@
 
                     const articleCard = `
                     <article class="relative article-card glass-card rounded-2xl overflow-hidden flex flex-col gsap-reveal">
-                        
                         ${imageOrPlaceholder}
                         <div class="p-6 flex flex-col flex-grow article-card-content">
                             <p class="text-sm text-gray-400 mb-2">${dateFormatted}</p>
@@ -2890,6 +3451,23 @@
                     // Swiped right, go to previous slide
                     changeCommentSlide(currentCommentSlide - 1);
                 }
+            }
+
+            // --- Reading Progress Logic ---
+            function updateReadingProgress() {
+                // Only calculate if the progress bar is visible
+                if (readingProgressBar.style.display !== 'block') return;
+
+                const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const scrollTop = window.scrollY;
+                
+                if (scrollableHeight <= 0) {
+                    readingProgressBar.style.width = '100%';
+                    return;
+                }
+
+                const progress = (scrollTop / scrollableHeight) * 100;
+                readingProgressBar.style.width = `${Math.min(progress, 100)}%`;
             }
 
 
@@ -3175,6 +3753,132 @@
                 setLikedProjects(likedProjects);
             }
             
+            // --- AI Project Recommendations ---
+            async function getProjectRecommendations(currentProject) {
+                const recommendationsContainer = document.getElementById('project-recommendations-container');
+                if (!recommendationsContainer) return;
+                
+                // Show loading state
+                recommendationsContainer.innerHTML = `
+                    <h4 class="text-xl font-bold text-white">You May Also Like</h4>
+                    <div class="text-center p-4">
+                        <div class="typing-indicator" style="opacity: 0.5;"><span></span><span></span><span></span></div>
+                        <p class="text-gray-400 mt-2 text-sm">Generating recommendations with Gemini AI...</p>
+                    </div>
+                `;
+
+                // 1. Prepare the data for the API
+                const otherProjects = myProjects
+                    .filter(p => p.id !== currentProject.id)
+                    .map(p => ({ title: p.title, description: p.description, tags: p.tags }));
+
+                if (otherProjects.length < 3) {
+                     recommendationsContainer.innerHTML = ''; // Not enough projects to recommend
+                     return;
+                }
+
+                const apiKey = "AIzaSyCfBd1hVbM0l18xlzkZHBjmUL8X4Gp53dw"; 
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+
+                const systemPrompt = `You are an expert portfolio curator. Your task is to recommend three relevant projects from a provided list based on a user's currently viewed project. Analyze the current project's title, description, and tags. Then, from the list of "other projects", select the three that are most similar in style, tools used, or theme.
+                
+                You MUST respond ONLY with a valid JSON array containing the exact titles of the three recommended projects. Do not include any other text, explanation, or formatting.
+                
+                Example response:
+                ["Project Title A", "Project Title B", "Project Title C"]`;
+                
+                const userQuery = `Current Project:
+                - Title: "${currentProject.title}"
+                - Description: "${currentProject.description}"
+                - Tags: "${currentProject.tags}"
+
+                List of other projects to choose from:
+                ${JSON.stringify(otherProjects, null, 2)}
+
+                Based on the "Current Project", what are the three most relevant projects from the list?`;
+
+                const payload = {
+                    systemInstruction: { parts: [{ text: systemPrompt }] },
+                    contents: [{ parts: [{ text: userQuery }] }],
+                    generationConfig: {
+                        responseMimeType: "application/json",
+                    }
+                };
+
+                // 2. Call the Gemini API
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`API Error: ${response.status}`);
+                    }
+
+                    const result = await response.json();
+                    const recommendedText = result.candidates?.[0]?.content?.parts?.[0]?.text;
+
+                    if (!recommendedText) {
+                        throw new Error("No recommendation text received from API.");
+                    }
+
+                    const recommendedTitles = JSON.parse(recommendedText);
+                    renderRecommendations(recommendedTitles);
+
+                } catch (error) {
+                    console.error("Error getting AI recommendations:", error);
+                    recommendationsContainer.innerHTML = `
+                        <h4 class="text-xl font-bold text-white">You May Also Like</h4>
+                        <p class="text-gray-400 text-sm">Could not load recommendations at this time.</p>
+                    `;
+                }
+            }
+
+            function renderRecommendations(titles) {
+                const recommendationsContainer = document.getElementById('project-recommendations-container');
+                if (!titles || titles.length === 0) {
+                    recommendationsContainer.innerHTML = ''; // Clear if no titles
+                    return;
+                }
+
+                const recommendedProjects = titles
+                    .map(title => myProjects.find(p => p.title === title))
+                    .filter(Boolean); // Filter out any nulls if a title wasn't found
+
+                if (recommendedProjects.length === 0) {
+                     recommendationsContainer.innerHTML = '';
+                     return;
+                }
+
+                const recommendationsHTML = recommendedProjects.map(project => `
+                    <a href="#" class="recommendation-card block glass-card rounded-lg overflow-hidden p-3 view-project-btn-from-recommendation" data-id="${project.id}">
+                        <img src="${project.coverImageUrl}" alt="${project.title}" class="w-full h-24 object-cover rounded-md mb-3">
+                        <h5 class="font-bold text-white truncate">${project.title}</h5>
+                        <p class="text-xs text-gray-400 truncate">${project.tags || ''}</p>
+                    </a>
+                `).join('');
+
+                recommendationsContainer.innerHTML = `
+                    <h4 class="text-xl font-bold text-white">You May Also Like</h4>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                        ${recommendationsHTML}
+                    </div>
+                `;
+
+                // Add event listeners to the new recommendation cards
+                document.querySelectorAll('.view-project-btn-from-recommendation').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const project = myProjects.find(p => p.id === btn.dataset.id);
+                        if (project) {
+                            showProjectDetailView(project);
+                        }
+                    });
+                });
+            }
+
             function attachProjectEventListeners() {
                 document.querySelectorAll('.view-project-btn').forEach(btn => {
                     btn.addEventListener('click', () => {
@@ -3264,6 +3968,9 @@
                                     ${project.additionalDetails ? project.additionalDetails.replace(/\n/g, '<br>') : 'No additional details provided.'}
                                 </div>
                             </div>
+                            
+                            <!-- AI Recommendations Section -->
+                            <div id="project-recommendations-container" class="mt-12"></div>
                         </div>
 
                         <!-- Sidebar -->
@@ -3319,6 +4026,9 @@
                 if (project.galleryImages && project.galleryImages.length > 0) {
                     initGallery(!project.mediaUrl); // Full gallery only if no video
                 }
+                
+                // Fetch and display AI-powered recommendations
+                getProjectRecommendations(project);
             }
             
             function hideProjectDetailView() {
@@ -3350,6 +4060,12 @@
                 articleDetailView.classList.remove('hidden');
                 window.scrollTo(0, 0);
 
+                // Show and listen for progress bar
+                readingProgressBar.style.display = 'block';
+                window.addEventListener('scroll', updateReadingProgress, { passive: true });
+                // Use a timeout to ensure the content is rendered and scrollHeight is calculated correctly
+                setTimeout(updateReadingProgress, 100); 
+
                 // --- SEO 2: Add Article Schema Markup ---
                 const articleSchema = {
                     "@context": "https://schema.org",
@@ -3369,6 +4085,7 @@
                 schemaScript.text = JSON.stringify(articleSchema);
                 document.head.appendChild(schemaScript);
 
+                // Add admin controls if logged in
                 articleDetailAdminControls.innerHTML = '';
 
 
@@ -3399,6 +4116,13 @@
                 mainContent.classList.remove('hidden');
                 articleDetailView.classList.add('hidden');
                 articleDetailContent.innerHTML = '';
+                articleDetailAdminControls.innerHTML = ''; // Clear admin controls
+
+                // Hide and stop listening for progress bar
+                readingProgressBar.style.display = 'none';
+                readingProgressBar.style.width = '0%';
+                window.removeEventListener('scroll', updateReadingProgress);
+
                  // --- SEO 2: Remove Article Schema Markup ---
                 const schemaScript = document.getElementById('article-schema');
                 if (schemaScript) {
@@ -3975,6 +4699,124 @@
             });
 
 
+            // --- Voice Navigation ---
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (SpeechRecognition) {
+                const voiceNavBtn = document.getElementById('voice-nav-btn');
+                const voiceNavOverlay = document.getElementById('voice-nav-overlay');
+                const closeVoiceNavBtn = document.getElementById('close-voice-nav-btn');
+                const voiceStatusText = document.getElementById('voice-status-text');
+                const voiceCommandText = document.getElementById('voice-command-text');
+                
+                let recognition = new SpeechRecognition();
+                recognition.continuous = false;
+                recognition.interimResults = false;
+                recognition.maxAlternatives = 1;
+
+                const commands = {
+                    'about': {
+                        keywords: ['about', 'who are you', 'tell me about yourself', 'عني', 'من أنت'],
+                        action: () => document.getElementById('about').scrollIntoView({ behavior: 'smooth' })
+                    },
+                    'services': {
+                        keywords: ['services', 'what you do', 'offer', 'خدمات', 'ماذا تقدم'],
+                        action: () => document.getElementById('services').scrollIntoView({ behavior: 'smooth' })
+                    },
+                    'skills': {
+                        keywords: ['skills', 'competencies', 'what are you good at', 'مهارات', 'خبرات'],
+                        action: () => document.getElementById('skills').scrollIntoView({ behavior: 'smooth' })
+                    },
+                    'experience': {
+                        keywords: ['experience', 'training', 'history', 'خبرة', 'تدريب'],
+                        action: () => document.getElementById('experience').scrollIntoView({ behavior: 'smooth' })
+                    },
+                    'projects': {
+                        keywords: ['projects', 'work', 'portfolio', 'مشاريع', 'أعمال'],
+                        action: () => document.getElementById('projects').scrollIntoView({ behavior: 'smooth' })
+                    },
+                    'testimonials': {
+                        keywords: ['testimonials', 'clients', 'reviews', 'آراء', 'عملاء'],
+                        action: () => document.getElementById('testimonials').scrollIntoView({ behavior: 'smooth' })
+                    },
+                    'blog': {
+                        keywords: ['blog', 'articles', 'writing', 'مدونة', 'مقالات'],
+                        action: () => document.getElementById('blog').scrollIntoView({ behavior: 'smooth' })
+                    },
+                    'contact': {
+                        keywords: ['contact', 'get in touch', 'talk', 'تواصل', 'اتصل'],
+                        action: () => showModal()
+                    }
+                };
+
+                function processCommand(transcript) {
+                    const lowerTranscript = transcript.toLowerCase();
+                    for (const commandKey in commands) {
+                        const command = commands[commandKey];
+                        if (command.keywords.some(keyword => lowerTranscript.includes(keyword))) {
+                            voiceStatusText.textContent = 'Command Recognized!';
+                            voiceNavOverlay.classList.add('processing');
+                            command.action();
+                            setTimeout(stopListening, 1500);
+                            return;
+                        }
+                    }
+                    voiceStatusText.textContent = 'Command Not Recognized';
+                    voiceNavOverlay.classList.add('error');
+                    setTimeout(stopListening, 2000);
+                }
+
+                recognition.onresult = (event) => {
+                    const transcript = event.results[0][0].transcript;
+                    voiceCommandText.textContent = `I heard: "${transcript}"`;
+                    processCommand(transcript);
+                };
+
+                recognition.onerror = (event) => {
+                    console.error('Speech recognition error:', event.error);
+                    let errorMessage = 'Sorry, I had trouble hearing.';
+                    if (event.error === 'not-allowed' || event.error === 'service-not-allowed') {
+                        errorMessage = 'Microphone access denied. Please allow it in your browser settings.';
+                    }
+                    voiceStatusText.textContent = errorMessage;
+                    voiceNavOverlay.classList.add('error');
+                    setTimeout(stopListening, 3000);
+                };
+
+                recognition.onspeechend = () => {
+                    recognition.stop();
+                };
+                
+                function startListening() {
+                    recognition.lang = getCookie('selected_language') === 'ar' ? 'ar-SA' : 'en-US';
+                    voiceNavOverlay.classList.remove('modal-hidden', 'processing', 'error');
+                    voiceStatusText.textContent = 'Listening...';
+                    voiceCommandText.textContent = '';
+                    try {
+                        recognition.start();
+                    } catch(e) {
+                        console.error("Recognition could not be started:", e);
+                         voiceStatusText.textContent = 'Could not start listening.';
+                         voiceNavOverlay.classList.add('error');
+                         setTimeout(stopListening, 2000);
+                    }
+                }
+
+                function stopListening() {
+                    voiceNavOverlay.classList.add('modal-hidden');
+                    if (recognition) {
+                        recognition.stop();
+                    }
+                }
+
+                voiceNavBtn.addEventListener('click', startListening);
+                closeVoiceNavBtn.addEventListener('click', stopListening);
+            } else {
+                console.warn("Speech Recognition not supported in this browser.");
+                const voiceNavBtn = document.getElementById('voice-nav-btn');
+                if(voiceNavBtn) voiceNavBtn.style.display = 'none';
+            }
+
+
             // --- GSAP SETUP & ANIMATIONS ---
             gsap.registerPlugin(ScrollTrigger);
             
@@ -4082,6 +4924,7 @@
             mobileMenuLinks.forEach(link => { link.addEventListener('click', toggleMenu); });
             
             // --- Initial Data Fetch & Page Setup ---
+            loadPublicData();
             listenForProjects();
             // fetchComments(); // This call is now handled by the Intersection Observer below
             listenForArticles();
@@ -4214,15 +5057,18 @@
                     performSearch(query);
                 }
             });
+
+            // --- Add Copyright on Copy ---
+            document.addEventListener('copy', (event) => {
+                const selection = document.getSelection();
+                const copyrightNotice = `\n\n© 2025 Badr Ibraheem. All rights reserved`;
+                const textToCopy = selection.toString() + copyrightNotice;
+                
+                event.clipboardData.setData('text/plain', textToCopy);
+                event.preventDefault();
+            });
         });
     </script>
 </body>
 
 </html>
-
-
-
-
-
-
-
