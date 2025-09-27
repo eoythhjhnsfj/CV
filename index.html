@@ -1049,6 +1049,44 @@
             transform: translateY(0);
         }
 
+        /* --- Admin Controls --- */
+        .admin-controls {
+            display: none; /* Hidden by default */
+            gap: 0.5rem;
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+            z-index: 20;
+        }
+        body.logged-in .project-card .admin-controls {
+            display: flex; /* Show when logged in */
+        }
+        #add-project-container {
+            display: none; /* Hidden by default */
+        }
+        body.logged-in #add-project-container {
+            display: block;
+        }
+        .admin-btn {
+            background-color: rgba(13, 13, 13, 0.7);
+            backdrop-filter: blur(10px);
+            color: white;
+            border-radius: 9999px;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-primary);
+        }
+        .admin-btn:hover {
+             background-color: rgba(139, 92, 246, 0.8);
+        }
+        .admin-btn.delete:hover {
+            background-color: rgba(239, 68, 68, 0.8);
+        }
+
         /* --- Responsive Iframe for Video --- */
         .video-container {
             position: relative;
@@ -2057,24 +2095,6 @@
             object-fit: cover;
         }
 
-        /* --- Voice Navigation Styles --- */
-        #voice-status-indicator {
-            animation: pulse-voice 2s infinite;
-        }
-        @keyframes pulse-voice {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.7); }
-            70% { transform: scale(1.1); box-shadow: 0 0 0 20px rgba(139, 92, 246, 0); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(139, 92, 246, 0); }
-        }
-        #voice-nav-overlay.processing #voice-status-indicator {
-            animation: none;
-            background-color: #10B981; /* Green for success */
-        }
-        #voice-nav-overlay.error #voice-status-indicator {
-            animation: none;
-            background-color: #EF4444; /* Red for error */
-        }
-
         /* --- Reading Progress Bar --- */
         #reading-progress-bar {
             position: fixed;
@@ -2094,6 +2114,15 @@
 
 <body>
     <div id="reading-progress-bar"></div>
+    <div id="maintenance-overlay" class="hidden fixed inset-0 z-[9999] flex items-center justify-center p-4">
+        <div class="maintenance-content text-center">
+            <svg class="mx-auto h-16 w-16 text-[var(--accent-color)] mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.472-2.472a3.375 3.375 0 00-4.773-4.773L6.23 5.73a3.375 3.375 0 00-4.773 4.773l2.472 2.472M11.42 15.17l-2.472 2.472a3.375 3.375 0 01-4.773-4.773L5.73 6.23a3.375 3.375 0 014.773-4.773l2.472 2.472" />
+            </svg>
+            <h1 class="text-4xl font-bold mb-2">Under Maintenance</h1>
+            <p class="text-gray-400">Our site is currently undergoing scheduled maintenance. We'll be back shortly. Thank you for your patience.</p>
+        </div>
+    </div>
     <canvas id="bg-canvas"></canvas>
     <!-- --- Preloader --- -->
     <div id="preloader">
@@ -2117,7 +2146,7 @@
     <header class="header-glass fixed top-4 left-1/2 -translate-x-1/2 w-[90%] sm:w-[95%] max-w-5xl z-50 rounded-full content-hidden">
         <div class="container mx-auto px-4 sm:px-6 py-3 flex justify-between items-center">
              <div id="auth-container" class="text-2xl font-bold">
-                <a href="#" class="gradient-text">Badr.</a>
+                <a href="#" id="auth-link" class="gradient-text">Badr.</a>
             </div>
             <div class="flex items-center gap-2 md:gap-4">
                 <nav class="hidden md:flex space-x-2 items-center">
@@ -2147,12 +2176,6 @@
                     </a>
                 </nav>
 
-                <!-- Voice Nav Button -->
-                <button id="voice-nav-btn" class="nav-link" title="Voice Navigation">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
-                    <span class="tooltip">Voice Nav</span>
-                </button>
-
                 <!-- Search Button -->
                 <button id="search-btn" class="nav-link" title="Search">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
@@ -2177,7 +2200,7 @@
                 </div>
 
                 <button id="mobile-menu-button" class="md:hidden p-2 rounded-md focus:outline-none text-gray-300">
-                    <svg width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="20" y2="12"></line><line x1="4" y1="6" x2="20" y2="6"></line><line x1="4" y1="18" x2="20" y2="18"></line></svg>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="20" y2="12"></line><line x1="4" y1="6" x2="20" y2="6"></line><line x1="4" y1="18" x2="20" y2="18"></line></svg>
                 </button>
             </div>
         </div>
@@ -2399,12 +2422,6 @@
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
                 </button>
             </div>
-            <div id="add-certificate-container" class="text-center mt-12 hidden">
-                 <button id="add-certificate-btn" class="submit-btn group">
-                    <span data-translate-key="addCertificateBtn">Add New Certificate</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 ml-2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                </button>
-            </div>
         </section>
 
         <section id="projects" class="py-20 sm:py-24 relative">
@@ -2431,13 +2448,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" /></svg>
                 </button>
                 <button id="next-slide" class="slider-btn right-2 md:-right-6" title="Next" data-translate-title="tooltipSliderNext" aria-label="Next Project">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-                </button>
-            </div>
-            <div id="add-project-container" class="text-center mt-8">
-                <button id="add-project-btn" class="submit-btn group">
-                    <span data-translate-key="addProjectBtn">Add New Project</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 ml-2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
                 </button>
             </div>
         </section>
@@ -2461,16 +2472,10 @@
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" /></svg>
                 </button>
                 <button id="next-article-slide" class="slider-btn right-2 md:-right-6" title="Next Article" aria-label="Next Article">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
                 </button>
             </div>
 
-            <div id="add-article-container" class="text-center mt-12 hidden">
-                <button id="add-article-btn" class="submit-btn group">
-                    <span data-translate-key="addArticleBtn">Write New Article</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 ml-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
-                </button>
-            </div>
         </section>
 
         <section id="testimonials" class="py-20 sm:py-24">
@@ -2601,12 +2606,6 @@
                 <div id="products-grid-store" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                     <!-- Products will be loaded here by JavaScript -->
                 </div>
-                 <div id="add-product-container" class="text-center mt-12">
-                    <button id="add-product-btn" class="submit-btn group">
-                        <span data-translate-key="addProductBtn">Add New Product</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 ml-2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                    </button>
-                </div>
             </div>
         </div>
     </section>
@@ -2616,21 +2615,10 @@
         <div class="container mx-auto px-6">
             <div class="flex justify-between items-center mb-8">
                 <button id="back-to-store-btn" class="secondary-btn inline-flex items-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
                     <span>Back to Store</span>
                 </button>
             </div>
-            <div id="product-detail-content" class="max-w-7xl mx-auto">
-                <!-- Product details will be injected here by JS -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Voice Navigation Overlay -->
-    <div id="voice-nav-overlay" class="modal-hidden fixed inset-0 z-[90] flex flex-col items-center justify-center p-4 bg-black/80 backdrop-blur-md">
-        <div id="voice-status-indicator" class="w-24 h-24 rounded-full bg-violet-500/50 flex items-center justify-center mb-6">
-            <svg class="w-12 h-12 text-white" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="22"></line></svg>
-        </div>
             <div id="product-detail-content" class="max-w-7xl mx-auto">
                 <!-- Product details will be injected here by JS -->
             </div>
@@ -2693,19 +2681,6 @@
                 </div>
             </form>
         </div>
-    </div>
-
-    <!-- Voice Navigation Overlay -->
-    <div id="voice-nav-overlay" class="modal-hidden fixed inset-0 z-[90] flex flex-col items-center justify-center p-4 bg-black/80 backdrop-blur-md">
-        <div id="voice-status-indicator" class="w-24 h-24 rounded-full bg-violet-500/50 flex items-center justify-center mb-6">
-            <svg class="w-12 h-12 text-white" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="22"></line></svg>
-        </div>
-        <p id="voice-status-text" class="text-2xl font-bold text-white mb-4">Listening...</p>
-        <p id="voice-command-text" class="text-lg text-gray-300 h-8"></p>
-        <p class="text-gray-400 mt-8 max-w-md text-center">Try saying: "Go to projects", "Show me the blog", "Scroll to about", or "Contact Badr".</p>
-        <button id="close-voice-nav-btn" class="absolute top-6 right-6 text-white hover:text-gray-300 transition-colors z-20" aria-label="Close">
-             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-        </button>
     </div>
 
     <!-- CV View -->
@@ -2841,137 +2816,6 @@
                 </button>
             </div>
         </form>
-    </div>
-
-    <!-- Login Modal -->
-    <div id="login-modal" class="modal-hidden fixed inset-0 z-[80] flex items-center justify-center p-4">
-        <!-- Modal Overlay -->
-        <div class="absolute inset-0 bg-black/70 backdrop-blur-sm login-modal-overlay-bg"></div>
-    
-        <!-- Modal Content -->
-        <div class="relative w-11/12 max-w-sm login-modal-content rounded-2xl p-6 sm:p-8 z-10">
-            <button id="close-login-modal-btn" class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors z-20" aria-label="Close" title="Close" data-translate-title="tooltipModalClose">
-                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-            </button>
-    
-            <div class="text-center relative z-10">
-                 <div class="flex justify-center mb-6">
-                    <div class="w-14 h-14 rounded-full flex items-center justify-center bg-white/5 ring-2 ring-white/10 overflow-hidden">
-                         <img src="https://i.ibb.co/QFtzp7t3/1172-copy.jpg" alt="Badr Ibraheem profile picture" class="w-full h-full object-cover" loading="lazy">
-                    </div>
-                 </div>
-                 <h3 class="text-3xl font-bold mb-2">Badr Ibrahee Mohamed</h3>
-                 <p class="text-gray-400 mb-8">Sign in to manage your portfolio.</p>
-            </div>
-            
-            <p id="login-error" class="text-red-400 text-sm text-center h-4 mb-4 relative z-10"></p>
-
-            <button id="google-signin-btn" class="relative z-10 w-full flex justify-center items-center gap-3 font-semibold py-3 px-4 rounded-full transition-all duration-300">
-                <svg class="w-5 h-5" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"></path><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"></path><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"></path><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"></path><path fill="none" d="M0 0h48v48H0z"></path></svg>
-                Sign in with Google
-            </button>
-
-        </div>
-    </div>
-    
-    <!-- Project Add/Edit Modal -->
-    <div id="project-modal" class="modal-hidden fixed inset-0 z-[70] flex items-center justify-center p-4">
-        <!-- Modal Overlay -->
-        <div class="absolute inset-0 bg-black/70 backdrop-blur-sm project-modal-overlay-bg"></div>
-    
-        <!-- Modal Content -->
-        <div class="relative w-11/12 max-w-2xl project-modal-content glass-card rounded-2xl p-6 md:p-8 z-10 max-h-[90vh] overflow-y-auto">
-            <button id="close-project-modal-btn" class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors" aria-label="Close" title="Close" data-translate-title="tooltipModalClose">
-                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-            </button>
-    
-            <div class="text-left mb-8 flex items-center gap-4">
-                <div class="w-12 h-12 rounded-lg bg-white/5 flex items-center justify-center">
-                    <svg class="w-7 h-7 text-gold-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><line x1="9" y1="15" x2="15" y2="15"></line></svg>
-                </div>
-                <div>
-                    <h3 id="project-modal-title" class="text-2xl font-bold">Add Project</h3>
-                    <p class="text-gray-400 text-sm">Fill in the details below to add a new project.</p>
-                </div>
-            </div>
-            
-            <form id="project-form" class="space-y-6">
-                <input type="hidden" id="project-id" name="id">
-                
-                <div>
-                    <label for="project-title" class="form-label">Project Title</label>
-                    <input type="text" id="project-title" name="title" placeholder="e.g., Modern Branding Redesign" required class="form-input">
-                </div>
-                
-                <div>
-                    <label for="project-description" class="form-label">Short Description (for card)</label>
-                    <textarea id="project-description" name="description" rows="3" placeholder="A brief, catchy description for the portfolio grid." required class="form-input"></textarea>
-                </div>
-
-                <div>
-                    <label for="project-coverImageUrl" class="form-label">Cover Image URL</label>
-                    <input type="url" id="project-coverImageUrl" name="coverImageUrl" placeholder="https://.../cover-image.jpg" required class="form-input">
-                </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <label for="project-url" class="form-label">Project Link (Behance, etc.)</label>
-                        <input type="url" id="project-url" name="url" placeholder="https://behance.net/..." class="form-input">
-                    </div>
-                    <div>
-                        <label for="project-downloadUrl" class="form-label">Download Link (Optional)</label>
-                        <input type="url" id="project-downloadUrl" name="downloadUrl" placeholder="https://.../download.zip" class="form-input">
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <label for="project-tools" class="form-label">Tools Used</label>
-                        <input type="text" id="project-tools" name="tools" placeholder="Photoshop, Illustrator, GSAP" class="form-input">
-                    </div>
-                    <div>
-                        <label for="project-tags" class="form-label">Tags / Categories</label>
-                        <input type="text" id="project-tags" name="tags" placeholder="Branding, 3D, Web Design" class="form-input">
-                    </div>
-                </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <label for="project-date" class="form-label">Completion Date</label>
-                        <input type="date" id="project-date" name="date" class="form-input text-gray-400">
-                    </div>
-                     <div>
-                        <label for="project-status" class="form-label">Project Status</label>
-                        <select id="project-status" name="status" class="form-input">
-                            <option value="Completed">Completed</option>
-                            <option value="InProgress">In Progress</option>
-                            <option value="Idea">Idea</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <div>
-                    <label for="project-additionalDetails" class="form-label">Full Project Details</label>
-                    <textarea id="project-additionalDetails" name="additionalDetails" rows="5" placeholder="Detailed description for the project page..." class="form-input"></textarea>
-                </div>
-
-                <div>
-                    <label for="project-gallery" class="form-label">Gallery Image URLs (one per line)</label>
-                    <textarea id="project-gallery" name="gallery" rows="4" placeholder="https://.../image1.jpg&#10;https://.../image2.jpg&#10;https://.../image3.jpg" class="form-input"></textarea>
-                </div>
-
-                <div class="flex items-center gap-3 text-gray-300 pt-2">
-                    <input type="checkbox" id="project-featured" name="featured" class="w-5 h-5 bg-transparent border-gray-600 rounded text-violet-500 focus:ring-violet-500">
-                    <label for="project-featured">Mark as a Featured Project</label>
-                </div>
-
-                <div class="text-center pt-4">
-                    <button type="submit" class="submit-btn group w-full sm:w-auto justify-center px-8 py-3">
-                        <span id="project-submit-btn-text">Save Project</span>
-                    </button>
-                </div>
-            </form>
-        </div>
     </div>
 
     <!-- Article Add/Edit Modal -->
@@ -3173,17 +3017,17 @@
                 </div>
                 <div>
                     <label for="certificate-imageUrl" class="form-label">Image URL</label>
-                <button id="close-certificate-gallery-btn" class="absolute top-6 right-6 text-white hover:text-gray-300 transition-colors z-20" aria-label="Close">
-                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-            </button>
-            <button id="certificate-gallery-prev" class="absolute left-4 top-1/2 -translate-y-1/2 gallery-nav button text-white">
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-            </button>
-            <button id="certificate-gallery-next" class="absolute right-4 top-1/2 -translate-y-1/2 gallery-nav button text-white">
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-            </button>
+                    <input type="url" id="certificate-imageUrl" name="imageUrl" placeholder="https://.../certificate.jpg" required class="form-input">
+                </div>
+                <div class="text-center pt-4">
+                    <button type="submit" class="submit-btn group w-full sm:w-auto justify-center px-8 py-3">
+                        <span id="certificate-submit-btn-text">Save Certificate</span>
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
+
 
     <footer class="mt-20 border-t border-white/10 pt-12 pb-40 sm:pb-24">
         <div class="container mx-auto px-6 text-center text-gray-500">
@@ -3205,8 +3049,8 @@
     <script type="module">
         // --- Firebase SDK Imports ---
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, collection, doc, getDoc, onSnapshot, query, orderBy, increment } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, doc, getDoc, addDoc, updateDoc, deleteDoc, onSnapshot, serverTimestamp, query, orderBy, increment, setDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         // --- Firebase Configuration ---
         const firebaseConfig = {
@@ -3227,7 +3071,7 @@
         // --- Firestore Collection References ---
         const projectsCollection = collection(db, 'projects');
         const articlesCollection = collection(db, 'articles');
-        const certificatesCollection = collection(db, 'certificates');
+            const certificatesCollection = collection(db, 'certificates');
         const productsCollection = collection(db, 'products');
         const siteStatusRef = doc(db, 'settings', 'site_status');
 
@@ -3556,10 +3400,6 @@
             let articlesData = [];
             let certificatesData = [];
             let productsData = [];
-            let editingProjectId = null;
-            let editingArticleId = null;
-            let editingCertificateId = null;
-            let editingProductId = null;
             
             // --- UI Elements ---
             const mainContent = document.querySelector('main');
@@ -3570,7 +3410,6 @@
             const articlesGrid = document.getElementById('articles-grid');
             const certificatesGrid = document.getElementById('certificates-grid');
             const articleDetailView = document.getElementById('article-detail-view');
-            const addArticleContainer = document.getElementById('add-article-container');
             const themeToggleBtn = document.getElementById('theme-toggle-btn');
             const searchBtn = document.getElementById('search-btn');
             const searchOverlay = document.getElementById('search-overlay');
@@ -3596,14 +3435,16 @@
                 const articleContent = document.querySelector('#article-detail-content .prose');
                 const canvasEl = document.getElementById('bg-canvas');
                 const profilePic = document.getElementById('profile-picture-img');
-                const cvProfilePic = document.getElementById('cv-profile-picture-img'); // <!-- 💡 Select CV profile picture -->
+                const cvProfilePic = document.getElementById('cv-profile-picture-img');
 
                 if (theme === 'light') {
                     body.classList.add('light-mode');
                     if (articleContent) articleContent.classList.remove('prose-invert');
-                    if (profilePic) {
+                    if (profilePic && profilePic.dataset.lightSrc) {
                         profilePic.src = profilePic.dataset.lightSrc;
-                        if (cvProfilePic) cvProfilePic.src = profilePic.dataset.lightSrc; // <!-- ✨ Sync CV picture -->
+                    }
+                    if (cvProfilePic && cvProfilePic.dataset.lightSrc) {
+                        cvProfilePic.src = cvProfilePic.dataset.lightSrc;
                     }
                     
                     if (canvasEl) canvasEl.style.display = 'block';
@@ -3616,9 +3457,11 @@
                 } else { // Dark mode
                     body.classList.remove('light-mode');
                     if (articleContent) articleContent.classList.add('prose-invert');
-                    if (profilePic) {
+                    if (profilePic && profilePic.dataset.darkSrc) {
                         profilePic.src = profilePic.dataset.darkSrc;
-                        if (cvProfilePic) cvProfilePic.src = profilePic.dataset.darkSrc; // <!-- ✨ Sync CV picture -->
+                    }
+                    if (cvProfilePic && cvProfilePic.dataset.darkSrc) {
+                        cvProfilePic.src = cvProfilePic.dataset.darkSrc;
                     }
                     
                     if (canvasEl) canvasEl.style.display = 'none';
@@ -3627,27 +3470,7 @@
                 }
             }
 
-            let initialTheme = 'dark';
-            if (currentTheme) {
-                initialTheme = currentTheme;
-            } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
-                initialTheme = 'light';
-            }
-            // We call applyTheme inside onAuthStateChanged after fetching user-specific profile pics.
-            // But we set the localStorage here so it's ready.
-            localStorage.setItem('theme', initialTheme);
-
-
-            themeToggleBtn.addEventListener('click', () => {
-                const newTheme = body.classList.contains('light-mode') ? 'dark' : 'light';
-                applyTheme(newTheme);
-                localStorage.setItem('theme', newTheme);
-        });
-
-
-            // --- AUTHENTICATION ---
-            onAuthStateChanged(auth, async (user) => {
-                // Public version - no login functionality
+            async function loadThemeAndSettings() {
                 try {
                     const publicSettingsRef = doc(db, 'settings', 'main_profile');
                     const settingsDoc = await getDoc(publicSettingsRef);
@@ -3655,47 +3478,34 @@
                     if (settingsDoc.exists()) {
                         const publicSettings = settingsDoc.data();
                         const profilePic = document.getElementById('profile-picture-img');
+                        const cvProfilePic = document.getElementById('cv-profile-picture-img');
 
                         if (publicSettings.lightModeUrl) {
-                            profilePic.dataset.lightSrc = publicSettings.lightModeUrl;
+                            if(profilePic) profilePic.dataset.lightSrc = publicSettings.lightModeUrl;
+                            if(cvProfilePic) cvProfilePic.dataset.lightSrc = publicSettings.lightModeUrl;
                         }
                         if (publicSettings.darkModeUrl) {
-                            profilePic.dataset.darkSrc = publicSettings.darkModeUrl;
+                            if(profilePic) profilePic.dataset.darkSrc = publicSettings.darkModeUrl;
+                            if(cvProfilePic) cvProfilePic.dataset.darkSrc = publicSettings.darkModeUrl;
                         }
                     }
                 } catch (error) {
-                    console.error("Could not load public admin settings:", error);
-                }
-                
-                // Check maintenance mode for everyone AFTER determining admin status
-                try {
-                    const statusDoc = await getDoc(siteStatusRef);
-                    if (statusDoc.exists() && statusDoc.data().isMaintenanceMode) {
-                        document.body.innerHTML = `
-                            <div class="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-[#0D0D0D]">
-                                <div class="text-center">
-                                    <svg class="mx-auto h-16 w-16 text-[#D4AF37] mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.472-2.472a3.375 3.375 0 00-4.773-4.773L6.23 5.73a3.375 3.375 0 00-4.773 4.773l2.472 2.472M11.42 15.17l-2.472 2.472a3.375 3.375 0 01-4.773-4.773L5.73 6.23a3.375 3.375 0 014.773-4.773l2.472 2.472" />
-                                    </svg>
-                                    <h1 class="text-4xl font-bold mb-2 text-white">Under Maintenance</h1>
-                                    <p class="text-gray-400">Our site is currently undergoing scheduled maintenance. We'll be back shortly. Thank you for your patience.</p>
-                                </div>
-                            </div>
-                        `;
-                        return; // Stop further execution
+                    console.error("Could not load public profile settings:", error);
+                } finally {
+                    // Determine and apply the theme after fetching settings
+                    let initialTheme = localStorage.getItem('theme') || 'dark';
+                    if (!localStorage.getItem('theme') && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+                        initialTheme = 'light';
                     }
-                } catch (error) {
-                    console.error("Could not check maintenance status:", error);
+                    localStorage.setItem('theme', initialTheme);
+                    applyTheme(initialTheme);
                 }
+            }
 
-                // Apply theme for ALL users after settings have been potentially loaded
-                applyTheme(localStorage.getItem('theme') || 'dark');
-                    // Re-render projects to show/hide admin controls correctly
-                displayProjects(projectFiltersContainer.querySelector('.active')?.dataset.filter || 'All');
-                // Re-render articles as well
-                displayArticles();
-                displayCertificates();
-                displayProductsInStore();
+            themeToggleBtn.addEventListener('click', () => {
+                const newTheme = body.classList.contains('light-mode') ? 'dark' : 'light';
+                applyTheme(newTheme);
+                localStorage.setItem('theme', newTheme);
             });
 
 
@@ -3788,6 +3598,7 @@
             function displayProductsInStore() {
                 const productsGridStore = document.getElementById('products-grid-store');
                 if (!productsGridStore) return;
+                const isLoggedIn = document.body.classList.contains('logged-in');
                 productsGridStore.innerHTML = '';
 
                 if (productsData.length === 0) {
@@ -3796,12 +3607,13 @@
                 }
 
                 productsData.forEach(product => {
+                    const adminControls = '';
                     
                     const coverImage = (product.media && product.media.length > 0) ? product.media.find(m => m.type === 'image')?.url || product.media[0].url : 'https://placehold.co/400x400/0D0D0D/FFD700?text=No+Image';
 
                     const cardHTML = `
                         <div class="store-product-card">
-                            
+                            ${adminControls}
                             <div class="product-card-image">
                                 <img src="${coverImage}" alt="${product.name}" class="w-full h-full object-cover">
                             </div>
@@ -3827,6 +3639,7 @@
             function displayCertificates() {
                 const sliderContainer = document.getElementById('certificates-slider-container');
                 if (!sliderContainer) return;
+                const isLoggedIn = document.body.classList.contains('logged-in');
                 sliderContainer.innerHTML = '';
 
                 if (certificatesData.length === 0) {
@@ -3836,9 +3649,11 @@
                 }
 
                 certificatesData.forEach((cert, index) => {
+                    const adminControls = '';
+
                     const cardHTML = `
                         <div class="certificate-card-slider" data-index="${index}">
-                            
+                            ${adminControls}
                             <img src="${cert.imageUrl}" alt="${cert.title}" loading="lazy">
                             <div class="overlay">
                                 <h5>${cert.title}</h5>
@@ -3913,6 +3728,8 @@
                 projectsGrid.innerHTML = '';
 
                 filteredProjects.forEach((project) => {
+                    const adminControls = '';
+
                     const featuredBadge = project.featured ? `
                         <div class="absolute top-4 left-4 bg-yellow-400 text-yellow-900 text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1.5 z-10 shadow-lg">
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
@@ -3929,7 +3746,7 @@
 
                     const projectCard = `
                         <article class="group relative rounded-2xl overflow-hidden shadow-lg project-card w-[280px] sm:w-[320px] h-[420px] flex-none snap-center">
-                            
+                            ${adminControls}
                             ${featuredBadge}
                             ${statusBadge}
                             
@@ -4035,6 +3852,7 @@
             // --- RENDER ARTICLES ---
             function displayArticles() {
                 if (!articlesGrid) return;
+                
                 articlesGrid.innerHTML = '';
 
                 if (articlesData.length === 0) {
@@ -4043,6 +3861,7 @@
                 }
 
                 articlesData.forEach(article => {
+                    const adminControls = '';
                     const dateFormatted = article.createdAt?.toDate ? new Date(article.createdAt.toDate()).toLocaleDateString('en-US', { year: 'numeric', month: 'long' }) : 'Just now';
 
                     const imageOrPlaceholder = article.coverImageUrl 
@@ -4053,7 +3872,7 @@
 
                     const articleCard = `
                     <article class="relative article-card glass-card rounded-2xl overflow-hidden flex flex-col gsap-reveal w-[280px] sm:w-[320px] flex-none snap-center">
-                        
+                        ${adminControls}
                         ${imageOrPlaceholder}
                         <div class="p-6 flex flex-col flex-grow article-card-content">
                             <p class="text-sm text-gray-400 mb-2">${dateFormatted}</p>
@@ -4217,6 +4036,250 @@
             const form = document.getElementById('contact-form');
             const formStatus = document.getElementById('form-status');
             async function handleSubmit(event) {
+                event.preventDefault();
+                const data = new FormData(event.target);
+                formStatus.innerHTML = '<p class="text-gray-400">Sending...</p>';
+                try {
+                    const response = await fetch(event.target.action, {
+                        method: form.method,
+                        body: data,
+                        headers: { 'Accept': 'application/json' }
+                    });
+                    if (response.ok) {
+                        formStatus.innerHTML = '<p class="text-green-400">Thank you for your message!</p>';
+                        form.reset();
+                    } else {
+                        const responseData = await response.json();
+                        if (Object.hasOwn(responseData, 'errors')) {
+                            formStatus.innerHTML = `<p class="text-red-400">${responseData["errors"].map(error => error["message"]).join(", ")}</p>`;
+                        } else {
+                            formStatus.innerHTML = '<p class="text-red-400">Oops! There was a problem.</p>';
+                        }
+                    }
+                } catch (error) {
+                    formStatus.innerHTML = '<p class="text-red-400">Oops! There was a problem.</p>';
+                }
+            }
+                if(form) form.addEventListener("submit", handleSubmit);
+
+
+            // --- Comments Section Logic (Google Apps Script) ---
+            const commentForm = document.getElementById('comment-form');
+            const commentStatus = document.getElementById('comment-status');
+            const submitCommentBtn = document.getElementById('submit-comment-btn');
+            // IMPORTANT: Replace this URL with your own Google Apps Script Web App URL
+            const appsScriptUrl = 'https://script.google.com/macros/s/AKfycbyC2AWInSgXhayqy5H2tXB3Rt-lsmZEaqD0qVNHWXUzG5idiTHiGD9g7OIsdTMW7Fkd/exec'; 
+
+            async function fetchComments() {
+                if (commentsLoaded) return; // Don't fetch if already loaded
+                testimonialSlider.innerHTML = `<div class="text-center w-full"><div class="typing-indicator" style="opacity: 0.5; margin-bottom: 1rem;"><span></span><span></span><span></span></div><p class="text-gray-400">Loading comments...</p></div>`;
+
+                try {
+                    // Add a parameter to tell the script we are GETTING data
+                    const response = await fetch(`${appsScriptUrl}?action=read`);
+                    if (!response.ok) throw new Error('Network response was not ok');
+                    const comments = await response.json();
+                    if (!Array.isArray(comments)) throw new Error("Received invalid data from API.");
+
+                    if (comments.length > 0) {
+                        comments.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+                        commentsData = comments;
+                    } else {
+                        commentsData = [];
+                    }
+                    commentsLoaded = true; // Set flag to true after successful fetch
+                } catch (error) {
+                    console.error("Failed to fetch comments:", error);
+                    testimonialSlider.innerHTML = `<div class="text-center w-full"><p class="text-red-400">Failed to load comments. Please try refreshing.</p></div>`;
+                } finally {
+                    displayCommentsSlider();
+                }
+            }
+            
+            function displayCommentsSlider() {
+                const slider = document.getElementById('testimonial-slider');
+                const dotsContainer = document.getElementById('testimonial-dots');
+                if (!slider || !dotsContainer) return;
+
+                slider.innerHTML = '';
+                dotsContainer.innerHTML = '';
+
+                if (commentsData.length === 0) {
+                    slider.innerHTML = `<p class="text-gray-400 text-center w-full">No testimonials have been added yet.</p>`;
+                    return;
+                }
+
+                commentsData.forEach((comment, index) => {
+                    const card = document.createElement('div');
+                    card.className = 'testimonial-card';
+                    card.dataset.index = index;
+                    card.innerHTML = `
+                        <div class="max-w-3xl mx-auto">
+                             <p class="text-xl md:text-2xl font-medium text-gray-300 mb-6 leading-relaxed">“${escapeHTML(comment.message)}”</p>
+                             <p class="font-bold text-white text-lg">${escapeHTML(comment.name)}</p>
+                             <p class="text-sm text-gray-500 mt-1">${new Date(comment.timestamp).toLocaleDateString()}</p>
+                        </div>
+                    `;
+                    slider.appendChild(card);
+
+                    const dot = document.createElement('button');
+                    dot.className = 'w-2 h-2 rounded-full bg-white/20 transition-colors duration-300';
+                    dot.dataset.index = index;
+                    dot.addEventListener('click', () => {
+                        changeTestimonialSlide(index, true);
+                    });
+                    dotsContainer.appendChild(dot);
+                });
+
+                changeTestimonialSlide(0, false); // Set initial slide
+                startTestimonialAutoSlide(); // Start the auto-sliding
+            }
+
+            function startTestimonialAutoSlide() {
+                if (testimonialInterval) clearInterval(testimonialInterval);
+                testimonialInterval = setInterval(() => {
+                    changeTestimonialSlide(currentTestimonialIndex + 1, false);
+                }, 4000);
+            }
+
+            function changeTestimonialSlide(newIndex, isManual = false) {
+                 if (isManual && testimonialInterval) {
+                    clearInterval(testimonialInterval);
+                }
+
+                const cards = document.querySelectorAll('#testimonial-slider .testimonial-card');
+                if (cards.length === 0) return;
+                if (newIndex < 0) {
+                    newIndex = cards.length - 1;
+                } else if (newIndex >= cards.length) {
+                    newIndex = 0;
+                }
+                currentTestimonialIndex = newIndex;
+                updateTestimonialPositions();
+            }
+
+            function escapeHTML(str) {
+                const p = document.createElement('p');
+                if (str) {
+                    p.textContent = str;
+                }
+                return p.innerHTML;
+            }
+
+            // --- Offensive Comment Filter ---
+            const offensiveWords = [
+                // English - Basic examples
+                'fuck', 'shit', 'bitch', 'cunt', 'asshole', 'dick',
+                // Arabic - Basic examples
+                'كلب', 'حيوان', 'خرا', 'كس', 'عاهرة'
+            ];
+
+            function isOffensive(text) {
+                const lowerCaseText = text.toLowerCase();
+                // Simple check, can be improved with regex for word boundaries (\b)
+                return offensiveWords.some(word => lowerCaseText.includes(word));
+            }
+
+            async function addComment(name, message) {
+                submitCommentBtn.disabled = true;
+                commentStatus.innerHTML = `<p class="text-gray-400">Adding comment...</p>`;
+                const newComment = { timestamp: new Date().toISOString(), name, message };
+
+                // Optimistic UI Update: Add the comment to the UI immediately.
+                commentsData.unshift(newComment);
+                currentTestimonialIndex = 0; // Go to the new comment
+                displayCommentsSlider();
+                commentForm.reset();
+                commentStatus.innerHTML = `<p class="text-green-400">Your comment has been posted!</p>`;
+
+
+                try {
+                    // Send the data to the server in the background
+                    const postResponse = await fetch(appsScriptUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                        body: JSON.stringify({ action: 'create', data: newComment })
+                    });
+
+                    const result = await postResponse.json();
+                    
+                    if (!postResponse.ok || result.status !== "success") {
+                        // Log the error but don't disrupt the user's experience.
+                        console.error("Failed to save comment to server:", result.message || 'Unknown error');
+                        // Optionally, update the status to inform the user of the sync failure.
+                        commentStatus.innerHTML = `<p class="text-amber-400">Your comment is visible but failed to sync with the server.</p>`;
+                    }
+                    
+                } catch (error) {
+                     console.error("Failed to save comment:", error);
+                     commentStatus.innerHTML = `<p class="text-amber-400">Your comment is visible but failed to sync with the server.</p>`;
+                } finally {
+                    submitCommentBtn.disabled = false;
+                    setTimeout(() => { commentStatus.innerHTML = ''; }, 5000);
+                }
+            }
+
+            // --- Collapsible Comment Form Logic ---
+            if(commentForm) {
+                const commentWrapper = document.getElementById('comment-section-wrapper');
+                const commentMessage = document.getElementById('comment-message');
+                const collapsibleSection = document.getElementById('comment-form-collapsible');
+                const cancelBtn = document.getElementById('cancel-comment-btn');
+                const commentNameInput = document.getElementById('comment-name');
+
+                const expandCommentForm = () => {
+                    commentMessage.rows = 4;
+                    collapsibleSection.style.maxHeight = '300px';
+                    collapsibleSection.style.opacity = '1';
+                };
+
+                const collapseCommentForm = () => {
+                    commentMessage.rows = 1;
+                    collapsibleSection.style.maxHeight = '0px';
+                    collapsibleSection.style.opacity = '0';
+                    commentMessage.blur(); // Remove focus to hide keyboard on mobile
+                };
+
+                commentMessage.addEventListener('focus', expandCommentForm);
+
+                cancelBtn.addEventListener('click', () => {
+                    commentForm.reset();
+                    collapseCommentForm();
+                });
+
+                // New: Click outside to collapse
+                document.addEventListener('click', (e) => {
+                    const isExpanded = collapsibleSection.style.maxHeight !== '0px';
+                    if (isExpanded && !commentWrapper.contains(e.target)) {
+                        collapseCommentForm();
+                    }
+                });
+
+                commentForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    const name = commentNameInput.value.trim();
+                    const message = commentMessage.value.trim();
+
+                    if (isOffensive(name) || isOffensive(message)) {
+                        commentStatus.innerHTML = `<p class="text-red-400">Please use respectful language. Your comment was not posted.</p>`;
+                        setTimeout(() => { commentStatus.innerHTML = ''; }, 4000);
+                        return;
+                    }
+
+                    if (name && message) {
+                        await addComment(name, message);
+                        // After submitting, reset and collapse the form
+                        setTimeout(() => {
+                            commentForm.reset();
+                            collapseCommentForm();
+                        }, 500); // Small delay to let user see success message
+                    }
+                });
+            }
+
+            const prevTestimonialBtn = document.getElementById('prev-testimonial');
+            const nextTestimonialBtn = document.getElementById('next-testimonial');
+            if (prevTestimonialBtn && nextTestimonialBtn) {
                 prevTestimonialBtn.addEventListener('click', () => changeTestimonialSlide(currentTestimonialIndex - 1, true));
                 nextTestimonialBtn.addEventListener('click', () => changeTestimonialSlide(currentTestimonialIndex + 1, true));
             }
@@ -4308,117 +4371,188 @@
             function getLikedProjects() {
                 return JSON.parse(localStorage.getItem('likedProjects')) || [];
             }
+
+            function setLikedProjects(liked) {
+                localStorage.setItem('likedProjects', JSON.stringify(liked));
+            }
+
+            function getViewedProjects() {
+                return JSON.parse(sessionStorage.getItem('viewedProjects')) || [];
+            }
+
+            function setViewedProjects(viewed) {
+                sessionStorage.setItem('viewedProjects', JSON.stringify(viewed));
+            }
+
+            async function incrementProjectView(projectId) {
+                const viewedProjects = getViewedProjects();
+                if (!viewedProjects.includes(projectId)) {
+                    viewedProjects.push(projectId);
+                    setViewedProjects(viewedProjects);
+
+                    const projectRef = doc(db, 'projects', projectId);
+                    try {
+                        await updateDoc(projectRef, { views: increment(1) });
+                    } catch(e) {
+                        console.error("Error incrementing view:", e);
+                    }
+                }
+            }
+
+            async function toggleLike(projectId) {
+                const likeButton = document.getElementById('like-btn');
+                const likeCountSpan = document.getElementById('like-count');
+                if (!likeButton || !likeCountSpan) return;
+
+                let likedProjects = getLikedProjects();
+                const projectRef = doc(db, 'projects', projectId);
+                let currentLikes = parseInt(likeCountSpan.textContent, 10);
+
+                if (likedProjects.includes(projectId)) {
+                    // Unlike
+                    likedProjects = likedProjects.filter(id => id !== projectId);
+                    await updateDoc(projectRef, { likes: increment(-1) });
+                    likeButton.classList.remove('liked');
+                    likeCountSpan.textContent = currentLikes - 1;
+
+                } else {
+                    // Like
+                    likedProjects.push(projectId);
+                    await updateDoc(projectRef, { likes: increment(1) });
+                    likeButton.classList.add('liked');
+                    likeCountSpan.textContent = currentLikes + 1;
+                }
+                setLikedProjects(likedProjects);
+            }
             
-            // --- Project Add/Edit Modal Logic ---
-            const projectModal = document.getElementById('project-modal');
-            const projectForm = document.getElementById('project-form');
-            const closeProjectModalBtn = document.getElementById('close-project-modal-btn');
-            const projectModalOverlay = projectModal.querySelector('.project-modal-overlay-bg');
-            const addProjectBtn = document.getElementById('add-project-btn');
+            // --- AI Project Recommendations ---
+            async function getProjectRecommendations(currentProject) {
+                const recommendationsContainer = document.getElementById('project-recommendations-container');
+                if (!recommendationsContainer) return;
+                
+                // Show loading state
+                recommendationsContainer.innerHTML = `
+                    <h4 class="text-xl font-bold text-white">You May Also Like</h4>
+                    <div class="text-center p-4">
+                        <div class="typing-indicator" style="opacity: 0.5;"><span></span><span></span><span></span></div>
+                        <p class="text-gray-400 mt-2 text-sm">Generating recommendations with Gemini AI...</p>
+                    </div>
+                `;
 
-            function showProjectModal() { projectModal.classList.remove('modal-hidden'); }
-            function hideProjectModal() { projectModal.classList.add('modal-hidden'); }
+                // 1. Prepare the data for the API
+                const otherProjects = myProjects
+                    .filter(p => p.id !== currentProject.id)
+                    .map(p => ({ title: p.title, description: p.description, tags: p.tags }));
 
-            addProjectBtn.addEventListener('click', () => {
-                editingProjectId = null;
-                projectForm.reset();
-                document.getElementById('project-id').value = '';
-                document.getElementById('project-modal-title').textContent = 'Add New Project';
-                document.getElementById('project-submit-btn-text').textContent = 'Add Project';
-                showProjectModal();
-            });
+                if (otherProjects.length < 3) {
+                     recommendationsContainer.innerHTML = ''; // Not enough projects to recommend
+                     return;
+                }
 
-            closeProjectModalBtn.addEventListener('click', hideProjectModal);
-            projectModalOverlay.addEventListener('click', hideProjectModal);
+                const apiKey = "AIzaSyCfBd1hVbM0l18xlzkZHBjmUL8X4Gp53dw"; 
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
 
-            projectForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const galleryImages = document.getElementById('project-gallery').value
-                    .split('\n')
-                    .map(url => url.trim())
-                    .filter(url => url);
+                const systemPrompt = `You are an expert portfolio curator. Your task is to recommend three relevant projects from a provided list based on a user's currently viewed project. Analyze the current project's title, description, and tags. Then, from the list of "other projects", select the three that are most similar in style, tools used, or theme.
+                
+                You MUST respond ONLY with a valid JSON array containing the exact titles of the three recommended projects. Do not include any other text, explanation, or formatting.
+                
+                Example response:
+                ["Project Title A", "Project Title B", "Project Title C"]`;
+                
+                const userQuery = `Current Project:
+                - Title: "${currentProject.title}"
+                - Description: "${currentProject.description}"
+                - Tags: "${currentProject.tags}"
 
-                const projectData = {
-                    title: document.getElementById('project-title').value,
-                    description: document.getElementById('project-description').value,
-                    coverImageUrl: document.getElementById('project-coverImageUrl').value,
-                    galleryImages: galleryImages,
-                    additionalDetails: document.getElementById('project-additionalDetails').value,
-                    url: document.getElementById('project-url').value,
-                    downloadUrl: document.getElementById('project-downloadUrl').value,
-                    tools: document.getElementById('project-tools').value,
-                    tags: document.getElementById('project-tags').value,
-                    date: document.getElementById('project-date').value,
-                    featured: document.getElementById('project-featured').checked,
-                    status: document.getElementById('project-status').value,
+                List of other projects to choose from:
+                ${JSON.stringify(otherProjects, null, 2)}
+
+                Based on the "Current Project", what are the three most relevant projects from the list?`;
+
+                const payload = {
+                    systemInstruction: { parts: [{ text: systemPrompt }] },
+                    contents: [{ parts: [{ text: userQuery }] }],
+                    generationConfig: {
+                        responseMimeType: "application/json",
+                    }
                 };
 
+                // 2. Call the Gemini API
                 try {
-                    if (editingProjectId) {
-                        const projectRef = doc(db, 'projects', editingProjectId);
-                        await updateDoc(projectRef, projectData);
-                    } else {
-                        await addDoc(projectsCollection, {...projectData, views: 0, likes: 0, createdAt: serverTimestamp()});
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`API Error: ${response.status}`);
                     }
-                    hideProjectModal();
+
+                    const result = await response.json();
+                    const recommendedText = result.candidates?.[0]?.content?.parts?.[0]?.text;
+
+                    if (!recommendedText) {
+                        throw new Error("No recommendation text received from API.");
+                    }
+
+                    const recommendedTitles = JSON.parse(recommendedText);
+                    renderRecommendations(recommendedTitles);
+
                 } catch (error) {
-                    console.error("Error saving project:", error);
-                    alert("Could not save project. See console for details.");
+                    console.error("Error getting AI recommendations:", error);
+                    recommendationsContainer.innerHTML = `
+                        <h4 class="text-xl font-bold text-white">You May Also Like</h4>
+                        <p class="text-gray-400 text-sm">Could not load recommendations at this time.</p>
+                    `;
                 }
-            });
+            }
 
-            // --- Article Add/Edit Modal Logic ---
-            const articleModal = document.getElementById('article-modal');
-            const articleForm = document.getElementById('article-form');
-            const closeArticleModalBtn = document.getElementById('close-article-modal-btn');
-            const articleModalOverlay = articleModal.querySelector('.article-modal-overlay-bg');
-            const addArticleBtn = document.getElementById('add-article-btn');
+            function renderRecommendations(titles) {
+                const recommendationsContainer = document.getElementById('project-recommendations-container');
+                if (!titles || titles.length === 0) {
+                    recommendationsContainer.innerHTML = ''; // Clear if no titles
+                    return;
+                }
 
-            function showArticleModal() { articleModal.classList.remove('modal-hidden'); }
-            function hideArticleModal() { articleModal.classList.add('modal-hidden'); }
+                const recommendedProjects = titles
+                    .map(title => myProjects.find(p => p.title === title))
+                    .filter(Boolean); // Filter out any nulls if a title wasn't found
 
-            if (addArticleBtn) {
-                addArticleBtn.addEventListener('click', () => {
-                    editingArticleId = null;
-                    articleForm.reset();
-                    document.getElementById('article-id').value = '';
-                    document.getElementById('article-modal-title').textContent = 'Write New Article';
-                    document.getElementById('article-submit-btn-text').textContent = 'Publish Article';
-                    showArticleModal();
+                if (recommendedProjects.length === 0) {
+                     recommendationsContainer.innerHTML = '';
+                     return;
+                }
+
+                const recommendationsHTML = recommendedProjects.map(project => `
+                    <a href="#" class="recommendation-card block glass-card rounded-lg overflow-hidden p-3 view-project-btn-from-recommendation" data-id="${project.id}">
+                        <img src="${project.coverImageUrl}" alt="${project.title}" class="w-full h-24 object-cover rounded-md mb-3">
+                        <h5 class="font-bold text-white truncate">${project.title}</h5>
+                        <p class="text-xs text-gray-400 truncate">${project.tags || ''}</p>
+                    </a>
+                `).join('');
+
+                recommendationsContainer.innerHTML = `
+                    <h4 class="text-xl font-bold text-white">You May Also Like</h4>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                        ${recommendationsHTML}
+                    </div>
+                `;
+
+                // Add event listeners to the new recommendation cards
+                document.querySelectorAll('.view-project-btn-from-recommendation').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const project = myProjects.find(p => p.id === btn.dataset.id);
+                        if (project) {
+                            showProjectDetailView(project);
+                        }
+                    });
                 });
             }
             
-            if (closeArticleModalBtn && articleModalOverlay) {
-                closeArticleModalBtn.addEventListener('click', hideArticleModal);
-                articleModalOverlay.addEventListener('click', hideArticleModal);
-            }
-
-            if (articleForm) {
-                articleForm.addEventListener('submit', async (e) => {
-                    e.preventDefault();
-                    const articleData = {
-                        title: document.getElementById('article-title').value,
-                        coverImageUrl: document.getElementById('article-coverImageUrl').value,
-                        tags: document.getElementById('article-tags').value,
-                        content: document.getElementById('article-content').value,
-                    };
-
-                    try {
-                        if (editingArticleId) {
-                            const articleRef = doc(db, 'articles', editingArticleId);
-                            await updateDoc(articleRef, articleData);
-                        } else {
-                            await addDoc(articlesCollection, {...articleData, createdAt: serverTimestamp()});
-                        }
-                        hideArticleModal();
-                    } catch (error) {
-                        console.error("Error saving article:", error);
-                        alert("Could not save article. See console for details.");
-                    }
-                });
-            }
-
             function attachProjectEventListeners() {
+                
                 document.querySelectorAll('.view-project-btn').forEach(btn => {
                     btn.addEventListener('click', (e) => {
                         e.preventDefault();
@@ -4428,6 +4562,7 @@
             }
 
             function attachArticleEventListeners() {
+
                 document.querySelectorAll('.view-article-btn').forEach(btn => {
                     btn.addEventListener('click', (e) => {
                         e.preventDefault();
@@ -4450,12 +4585,13 @@
                 // View certificate in gallery
                 document.querySelectorAll('.certificate-card-slider').forEach(card => {
                     card.addEventListener('click', (event) => {
-                         if (card.classList.contains('active')) {
+                         if (!event.target.closest('.admin-controls') && card.classList.contains('active')) {
                             const index = parseInt(card.dataset.index, 10);
                             showCertificateGallery(index);
                         }
                     });
                 });
+
             }
 
             // --- Project Detail View Logic ---
@@ -5742,124 +5878,6 @@
             });
 
 
-            // --- Voice Navigation ---
-            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-            if (SpeechRecognition) {
-                const voiceNavBtn = document.getElementById('voice-nav-btn');
-                const voiceNavOverlay = document.getElementById('voice-nav-overlay');
-                const closeVoiceNavBtn = document.getElementById('close-voice-nav-btn');
-                const voiceStatusText = document.getElementById('voice-status-text');
-                const voiceCommandText = document.getElementById('voice-command-text');
-                
-                let recognition = new SpeechRecognition();
-                recognition.continuous = false;
-                recognition.interimResults = false;
-                recognition.maxAlternatives = 1;
-
-                const commands = {
-                    'about': {
-                        keywords: ['about', 'who are you', 'tell me about yourself', 'عني', 'من أنت'],
-                        action: () => document.getElementById('about').scrollIntoView({ behavior: 'smooth' })
-                    },
-                    'services': {
-                        keywords: ['services', 'what you do', 'offer', 'خدمات', 'ماذا تقدم'],
-                        action: () => document.getElementById('services').scrollIntoView({ behavior: 'smooth' })
-                    },
-                    'skills': {
-                        keywords: ['skills', 'competencies', 'what are you good at', 'مهارات', 'خبرات'],
-                        action: () => document.getElementById('skills').scrollIntoView({ behavior: 'smooth' })
-                    },
-                    'experience': {
-                        keywords: ['experience', 'training', 'history', 'خبرة', 'تدريب'],
-                        action: () => document.getElementById('experience').scrollIntoView({ behavior: 'smooth' })
-                    },
-                    'projects': {
-                        keywords: ['projects', 'work', 'portfolio', 'مشاريع', 'أعمال'],
-                        action: () => document.getElementById('projects').scrollIntoView({ behavior: 'smooth' })
-                    },
-                    'testimonials': {
-                        keywords: ['testimonials', 'clients', 'reviews', 'آراء', 'عملاء'],
-                        action: () => document.getElementById('testimonials').scrollIntoView({ behavior: 'smooth' })
-                    },
-                    'blog': {
-                        keywords: ['blog', 'articles', 'writing', 'مدونة', 'مقالات'],
-                        action: () => document.getElementById('blog').scrollIntoView({ behavior: 'smooth' })
-                    },
-                    'contact': {
-                        keywords: ['contact', 'get in touch', 'talk', 'تواصل', 'اتصل'],
-                        action: () => showModal()
-                    }
-                };
-
-                function processCommand(transcript) {
-                    const lowerTranscript = transcript.toLowerCase();
-                    for (const commandKey in commands) {
-                        const command = commands[commandKey];
-                        if (command.keywords.some(keyword => lowerTranscript.includes(keyword))) {
-                            voiceStatusText.textContent = 'Command Recognized!';
-                            voiceNavOverlay.classList.add('processing');
-                            command.action();
-                            setTimeout(stopListening, 1500);
-                            return;
-                        }
-                    }
-                    voiceStatusText.textContent = 'Command Not Recognized';
-                    voiceNavOverlay.classList.add('error');
-                    setTimeout(stopListening, 2000);
-                }
-
-                recognition.onresult = (event) => {
-                    const transcript = event.results[0][0].transcript;
-                    voiceCommandText.textContent = `I heard: "${transcript}"`;
-                    processCommand(transcript);
-                };
-
-                recognition.onerror = (event) => {
-                    console.error('Speech recognition error:', event.error);
-                    let errorMessage = 'Sorry, I had trouble hearing.';
-                    if (event.error === 'not-allowed' || event.error === 'service-not-allowed') {
-                        errorMessage = 'Microphone access denied. Please allow it in your browser settings.';
-                    }
-                    voiceStatusText.textContent = errorMessage;
-                    voiceNavOverlay.classList.add('error');
-                    setTimeout(stopListening, 3000);
-                };
-
-                recognition.onspeechend = () => {
-                    recognition.stop();
-                };
-                
-                function startListening() {
-                    recognition.lang = getCookie('selected_language') === 'ar' ? 'ar-SA' : 'en-US';
-                    voiceNavOverlay.classList.remove('modal-hidden', 'processing', 'error');
-                    voiceStatusText.textContent = 'Listening...';
-                    voiceCommandText.textContent = '';
-                    try {
-                        recognition.start();
-                    } catch(e) {
-                        console.error("Recognition could not be started:", e);
-                         voiceStatusText.textContent = 'Could not start listening.';
-                         voiceNavOverlay.classList.add('error');
-                         setTimeout(stopListening, 2000);
-                    }
-                }
-
-                function stopListening() {
-                    voiceNavOverlay.classList.add('modal-hidden');
-                    if (recognition) {
-                        recognition.stop();
-                    }
-                }
-
-                voiceNavBtn.addEventListener('click', startListening);
-                closeVoiceNavBtn.addEventListener('click', stopListening);
-            } else {
-                console.warn("Speech Recognition not supported in this browser.");
-                const voiceNavBtn = document.getElementById('voice-nav-btn');
-                if(voiceNavBtn) voiceNavBtn.style.display = 'none';
-            }
-
-
             // --- GSAP SETUP & ANIMATIONS ---
             gsap.registerPlugin(ScrollTrigger);
             
@@ -5996,6 +6014,7 @@
             });
             
             // --- Initial Data Fetch & Page Setup ---
+            loadThemeAndSettings();
             listenForProjects();
             // fetchComments(); // This call is now handled by the Intersection Observer below
             listenForArticles();
@@ -6206,6 +6225,25 @@
                     document.title = "Store | Badr Ibraheem";
                     storeView.classList.remove('hidden');
                     window.scrollTo(0, 0);
+
+                    // Animate the entire store view container first
+                    gsap.fromTo(storeView, 
+                        { opacity: 0 }, 
+                        { opacity: 1, duration: 0.4, ease: 'power2.inOut' }
+                    );
+
+                    // Set initial state for product card animation
+                    gsap.set(".store-product-card", { opacity: 0, y: 30 });
+
+                    // Animate the store product cards with a staggered fade-in after a short delay
+                    gsap.to(".store-product-card", {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.6,
+                        ease: "power3.out",
+                        stagger: 0.1,
+                        delay: 0.2 // Delay to let the container appear first
+                    });
                 } else if (state.view === 'product') {
                     const productId = state.id;
                     const product = productsData.find(p => p.id == productId);
