@@ -102,15 +102,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
 
-    <!-- Clarity tracking code for https://badre.site/ -->
-<script>
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "ta79zsgnwz");
-</script>
-
     <style>
         /* --- Smooth Theme Transition --- */
         *, *::before, *::after {
@@ -3394,6 +3385,77 @@
             const originalTitle = document.title;
             let lastScrollPosition = 0;
             
+            // --- Disable Right-Click Context Menu ---
+            document.addEventListener('contextmenu', event => event.preventDefault());
+
+            // --- DevTools Protection ---
+            function detectDevTools() {
+                const devtools = {
+                    isOpen: false,
+                    orientation: null
+                };
+
+                const threshold = 160;
+
+                const emitEvent = (isOpen, orientation) => {
+                    window.dispatchEvent(new CustomEvent('devtoolschange', {
+                        detail: {
+                            isOpen,
+                            orientation
+                        }
+                    }));
+                };
+
+                setInterval(() => {
+                    const widthThreshold = window.outerWidth - window.innerWidth > threshold;
+                    const heightThreshold = window.outerHeight - window.innerHeight > threshold;
+                    const orientation = widthThreshold ? 'vertical' : 'horizontal';
+
+                    if (
+                        !(heightThreshold && widthThreshold) &&
+                        ((window.Firebug && window.Firebug.chrome && window.Firebug.chrome.isInitialized) || widthThreshold || heightThreshold)
+                    ) {
+                        if (!devtools.isOpen || devtools.orientation !== orientation) {
+                            emitEvent(true, orientation);
+                        }
+
+                        devtools.isOpen = true;
+                        devtools.orientation = orientation;
+                    } else {
+                        if (devtools.isOpen) {
+                            emitEvent(false, null);
+                        }
+
+                        devtools.isOpen = false;
+                        devtools.orientation = null;
+                    }
+                }, 500);
+
+                let isDevToolsOpen = false;
+                window.addEventListener('devtoolschange', event => {
+                    isDevToolsOpen = event.detail.isOpen;
+                });
+                
+                // Anti-debugging function
+                (function() {
+                    function block() {
+                        // When DevTools are open, this debugger statement will be hit repeatedly, 
+                        // making it difficult to inspect or debug the code.
+                        if (isDevToolsOpen) {
+                             // Clearing the console makes it harder to see logs.
+                            console.clear();
+                            // Logging a message can be a deterrent.
+                            console.log('%cStop!', 'color: red; font-size: 48px; font-weight: bold; -webkit-text-stroke: 1px black;');
+                            console.log('This area is intended for developers. Please close this window.');
+                            debugger;
+                        }
+                    }
+                    // Run the check frequently.
+                    setInterval(block, 1000);
+                }());
+            }
+            detectDevTools();
+
             // --- 3D Background Setup ---
             let scene, camera, renderer, particles, animationFrameId;
             let mouseX = 0, mouseY = 0;
@@ -6303,3 +6365,4 @@
 </body>
 
 </html>
+
