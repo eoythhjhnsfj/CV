@@ -33,7 +33,7 @@
     <meta name="twitter:image" content="https://i.ibb.co/QFtzp7t3/1172-copy.jpg">
 
     <!-- Favicon -->
-    <link rel="icon" href="https://i.ibb.co/mS3p8fV/favicon-B.png" type="image/png">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='15' fill='%232B2729'/><text x='50%' y='55%' dominant-baseline='middle' text-anchor='middle' font-family='Manrope' font-size='80' font-weight='bold' fill='%23988381'>B</text></svg>">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -105,10 +105,8 @@
       "sameAs": [
         "https://www.linkedin.com/in/bdremohameed",
         "https://github.com/bdremohameed",
-        "https://x.com/bdr_e_mohameed",
         "https://www.facebook.com/bdr.e.mohmed",
-        "https://www.instagram.com/bdr_e_mohamed",
-        "https://www.behance.net/bdremohameed"
+        "https://www.instagram.com/bdr_e_mohamed"
       ],
       "skills": [
         "Branding & Visual Identity",
@@ -1131,19 +1129,72 @@
             padding-right: 2.5rem;
         }
         
-        /* --- Search Styles --- */
-        #search-container {
+        /* --- Modern Search Modal Styles --- */
+        #search-modal {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 70;
+            inset: 0;
+            z-index: 80;
+            background-color: var(--bg-overlay);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             padding: 1rem;
-            transform: translateY(-100%);
-            transition: transform 0.3s ease-in-out;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
         }
-        #search-container.visible {
+        #search-modal.visible {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+        #search-modal .search-content {
+            width: 100%;
+            max-width: 600px;
+            margin-top: 20vh;
+            transform: translateY(20px);
+            transition: transform 0.4s ease 0.1s;
+        }
+        #search-modal.visible .search-content {
             transform: translateY(0);
+        }
+        #search-modal #search-input {
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid var(--border-primary);
+            font-size: 2.5rem; /* Larger font */
+            font-weight: 700;
+            color: var(--text-primary-color);
+            padding: 0.75rem 0;
+            outline: none;
+            text-align: center;
+            transition: border-color 0.3s ease;
+        }
+        .light-mode #search-modal #search-input {
+            border-bottom-color: rgba(0,0,0,0.2);
+        }
+        #search-modal #search-input:focus {
+            border-bottom-color: var(--accent-color);
+        }
+        #search-modal #search-input::placeholder {
+            color: var(--text-secondary-color);
+            opacity: 0.5;
+        }
+        #search-close-btn {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            color: var(--text-secondary-color);
+            transition: color 0.3s ease, transform 0.3s ease;
+            cursor: pointer;
+        }
+        #search-close-btn:hover {
+            color: var(--text-primary-color);
+            transform: rotate(90deg) scale(1.1);
         }
 
         /* --- Admin Controls --- */
@@ -2216,6 +2267,46 @@
             background-color: rgba(255, 255, 255, 0.1);
             border-bottom-left-radius: 0.25rem;
             align-self: flex-start;
+            /* Allow content inside to align to top */
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .bot-suggestion-card {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem; /* 12px */
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 0.5rem; /* 8px */
+            border-radius: 0.75rem; /* 12px */
+            transition: background-color 0.2s ease;
+            text-decoration: none;
+            color: var(--text-primary-color);
+        }
+        .bot-suggestion-card:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        .bot-suggestion-card img {
+            width: 48px; /* 3rem */
+            height: 48px; /* 3rem */
+            border-radius: 0.5rem; /* 8px */
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+         .bot-suggestion-card .suggestion-info {
+            flex-grow: 1;
+            min-width: 0; /* Prevents text from overflowing */
+        }
+        .bot-suggestion-card .suggestion-title {
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+         .bot-suggestion-card .suggestion-type {
+            font-size: 0.75rem; /* 12px */
+            color: var(--text-secondary-color);
+            text-transform: uppercase;
         }
         .light-mode .chat-message.bot {
             background-color: #e5e7eb; /* gray-200 */
@@ -2295,7 +2386,102 @@
             display: none; /* Hidden by default */
         }
 
+        /* --- Search Result Card --- */
+        .search-result-card {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+            background: var(--glass-bg);
+            padding: 1rem;
+            border-radius: 1rem;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-primary);
+            margin-bottom: 1.5rem;
+            text-decoration: none;
+        }
+        .search-result-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--glass-border-hover);
+            background: var(--glass-hover-bg);
+        }
+        .search-result-image {
+            width: 120px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 0.5rem;
+            flex-shrink: 0;
+            background-color: rgba(0,0,0,0.2);
+        }
+        .search-result-content {
+            flex-grow: 1;
+        }
+        .search-result-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .search-result-description {
+            color: var(--text-secondary-color);
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+
     </style>
+    <script>
+        // --- Console Protection ---
+        // This script provides a basic layer of protection to deter users from opening developer tools.
+        
+        // 1. Disable Right-Click Context Menu
+        document.addEventListener('contextmenu', function(e) {
+            // Allow context menu only if user is logged in as admin
+            if (!document.body.classList.contains('logged-in')) {
+                e.preventDefault();
+            }
+        });
+
+        // 2. Disable Common Developer Keyboard Shortcuts
+        document.addEventListener('keydown', function(e) {
+            // Allow shortcuts only if user is logged in as admin
+            if (!document.body.classList.contains('logged-in')) {
+                if (
+                    e.keyCode === 123 || // F12
+                    (e.ctrlKey && e.shiftKey && e.keyCode === 'I'.charCodeAt(0)) || // Ctrl+Shift+I
+                    (e.ctrlKey && e.shiftKey && e.keyCode === 'J'.charCodeAt(0)) || // Ctrl+Shift+J
+                    (e.ctrlKey && e.keyCode === 'U'.charCodeAt(0)) // Ctrl+U
+                ) {
+                    e.preventDefault();
+                }
+            }
+        });
+
+        // 3. Detect if DevTools is open and clear the page
+        const detectDevTools = () => {
+            // Don't run detection if user is logged in
+            if (document.body.classList.contains('logged-in')) {
+                return;
+            }
+
+            const threshold = 160;
+            const start = new Date().getTime();
+            
+            debugger;
+            
+            const end = new Date().getTime();
+            
+            if (end - start > threshold) {
+                document.body.innerHTML = `
+                    <div style="background:black; color:white; display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; font-family: sans-serif; text-align:center;">
+                        <h1 style="font-size: 2rem; margin-bottom: 1rem;">غير مسموح بفتح أدوات المطورين.</h1>
+                        <p>This functionality is disabled on this website.</p>
+                    </div>`;
+            }
+        };
+
+        // Periodically check for DevTools
+        setInterval(detectDevTools, 1000);
+    </script>
 </head>
 
 <body>
@@ -2340,10 +2526,6 @@
                      <a href="#certificates" class="nav-link" data-nav-link="certificates" title="Certificates" data-translate-title="navCertificates">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg>
                         <span class="tooltip" data-translate-key="navCertificates">Certificates</span>
-                    </a>
-                    <a href="#store" class="nav-link" data-nav-link="store" title="Store" data-translate-title="navStore">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
-                        <span class="tooltip" data-translate-key="navStore">Store</span>
                     </a>
                      <a href="#" id="cv-nav-btn" class="nav-link" title="View CV">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg>
@@ -2391,20 +2573,20 @@
              <a href="#projects" class="mobile-menu-link" data-translate-key="navProjects">Projects</a>
              <a href="#blog" class="mobile-menu-link" data-translate-key="navBlog">Blog</a>
              <a href="#certificates" class="mobile-menu-link" data-translate-key="navCertificates">Certificates</a>
-             <a href="#store" class="mobile-menu-link" data-translate-key="navStore">Store</a>
              <a href="#" class="mobile-menu-link contact-modal-trigger" data-translate-key="heroCtaContact">Contact Me</a>
         </div>
     </div>
 
-    <!-- Search Overlay -->
-    <div id="search-overlay" class="fixed inset-0 z-[60] bg-black/70 backdrop-blur-sm hidden"></div>
-    <div id="search-container" class="fixed top-0 left-0 w-full z-[70] p-4 transform -translate-y-full transition-transform duration-300 ease-in-out">
-        <div class="max-w-2xl mx-auto">
-            <form id="search-form" class="relative">
-                <input type="search" id="search-input" placeholder="Search projects, articles, skills..." class="form-input w-full !text-lg !py-3 !pl-5 !pr-12" autocomplete="off">
-                <button type="submit" class="absolute top-1/2 right-4 -translate-y-1/2 text-gray-400 hover:text-white">
-                     <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                </button>
+    <!-- Search Modal -->
+    <div id="search-modal">
+        <button id="search-close-btn" title="Close Search" data-translate-title="tooltipModalClose">
+            <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+        <div class="search-content">
+            <form id="search-form">
+                <input type="search" id="search-input" placeholder="اكتب للبحث..." autocomplete="off" data-translate-placeholder="searchPlaceholder">
             </form>
         </div>
     </div>
@@ -2430,7 +2612,8 @@
                     <div class="mt-8 flex justify-center md:justify-start items-center gap-x-1 sm:gap-x-2" id="hero-socials">
                         <a href="https://www.linkedin.com/in/bdremohameed" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="LinkedIn" title="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
                         <a href="https://github.com/bdremohameed" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="GitHub" title="GitHub"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>
-                        <a href="https://x.com/bdr_e_mohameed" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="X" title="X (formerly Twitter)"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></a>
+                        <a href="https://www.facebook.com/bdr.e.mohmed" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Facebook" title="Facebook"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+                        <a href="https://www.instagram.com/bdr_e_mohamed" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Instagram" title="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
                     </div>
 
                     <!-- CTA Buttons -->
@@ -2447,6 +2630,14 @@
                              <svg class="mr-2 w-5 h-5 transition-transform duration-300 group-hover:scale-110" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
                             <span data-translate-key="navStore">Store</span>
                         </a>
+                    </div>
+                     <!-- Visitor Counter -->
+                    <div class="mt-8 flex justify-center md:justify-start items-center gap-2 text-gray-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                            <circle cx="12" cy="12" r="3"></circle>
+                        </svg>
+                        <span class="text-sm font-medium"><span id="visitor-count">...</span>&nbsp;<span data-translate-key="visitorsText">Website visitors</span></span>
                     </div>
                 </div>
 
@@ -2466,6 +2657,8 @@
             </div>
         </section>
 
+        <!-- Visitor Counter Section -->
+        
         <section id="skills" class="py-20 sm:py-24">
             <h3 class="text-3xl sm:text-4xl font-bold text-center mb-12 gsap-reveal gradient-text" data-translate-key="skillsTitle">Core Competencies</h3>
             <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
@@ -2765,7 +2958,10 @@
                 </button>
             </div>
             <div id="search-results-content" class="max-w-4xl mx-auto">
-                <!-- Search results will be injected here -->
+                <!-- AI Search Answer will be injected here -->
+                <div id="ai-search-answer" class="mb-12"></div>
+                <!-- Keyword search results will be injected here -->
+                <div id="keyword-search-results"></div>
             </div>
         </div>
     </section>
@@ -3223,9 +3419,8 @@
                     <div class="mt-6 pt-4 border-t border-white/10">
                          <h4 class="font-semibold text-base mb-3 text-white" data-translate-key="socialTitle">Follow Me</h4>
                          <div class="flex items-center gap-2">
-                             <a href="https://www.linkedin.com/in/bdremohameed" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="LinkedIn" title="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
-                             <a href="https://github.com/bdremohameed" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="GitHub" title="GitHub"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>
-                             <a href="https://x.com/bdr_e_mohameed" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="X" title="X (formerly Twitter)"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></a>
+                             <a href="https://www.linkedin.com/in/bdremohameed" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="LinkedIn" title="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
+                             <a href="https://github.com/bdremohameed" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="GitHub" title="GitHub"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>
                          </div>
                     </div>
                 </div>
@@ -3358,7 +3553,6 @@
                 <!-- Updated Social Media Icons -->
                 <a href="https://www.linkedin.com/in/bdremohameed" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="LinkedIn" title="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
                 <a href="https://github.com/bdremohameed" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="GitHub" title="GitHub"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>
-                <a href="https://x.com/bdr_e_mohameed" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="X" title="X (formerly Twitter)"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></a>
                 <a href="https://www.facebook.com/bdr.e.mohmed" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Facebook" title="Facebook"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
                 <a href="https://www.instagram.com/bdr_e_mohamed" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Instagram" title="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
             </div>
@@ -3397,11 +3591,12 @@
         const certificatesCollection = collection(db, 'certificates');
         const productsCollection = collection(db, 'products');
         const siteStatusRef = doc(db, 'settings', 'site_status');
+        const visitsRef = doc(db, 'settings', 'visits');
 
         // --- Translations ---
         const translations = {
             en: {
-                navHome: 'Home', navServices: 'Services', navSkills: 'Skills', navExperience: 'Experience', navProjects: 'Projects', navBlog: 'Blog', navCertificates: 'Certificates', navStore: 'Store',
+                navHome: 'Home', navServices: 'Services', navSkills: 'Skills', navExperience: 'Experience', navProjects: 'Projects', navBlog: 'Blog', navCertificates: 'Certificates',
                 heroLine1: 'Badr', heroLine2: 'Ibraheem Mohameed', heroLine3: 'Digital Experience Designer',
                 heroGreeting: "Hello, I'm",
                 heroBio: "I combine design and code to build engaging digital experiences. Specializing in creating unique visual identities and interactive websites that captivate users.",
@@ -3528,9 +3723,17 @@
                 productDescriptionTitle: "Description",
                 productTagsTitle: "Tags",
                 orderViaWhatsApp: "Order via WhatsApp",
+                visitorsText: "Website visitors",
+                searchPlaceholder: "Type to search...",
+                searchProjectsTitle: "Projects",
+                searchArticlesTitle: "Blog Articles",
+                searchNoResultsTitle: "No Results Found",
+                searchNoResultsDesc: "Sorry, we couldn't find anything for your search. Please try a different term or check your spelling.",
+                searchResultTypeProject: "Project",
+                searchResultTypeArticle: "Article",
             },
             ar: {
-                navHome: 'الرئيسية', navServices: 'الخدمات', navSkills: 'المهارات', navExperience: 'الخبرة', navProjects: 'المشاريع', navBlog: 'المدونة', navCertificates: 'الشهادات', navStore: 'المتجر',
+                navHome: 'الرئيسية', navServices: 'الخدمات', navSkills: 'المهارات', navExperience: 'الخبرة', navProjects: 'المشاريع', navBlog: 'المدونة', navCertificates: 'الشهادات',
                 heroLine1: 'بدر', heroLine2: 'ابراهيم محمد', heroLine3: 'مصمم تجارب رقمية',
                 heroGreeting: 'مرحباً، أنا',
                 heroBio: 'أدمج التصميم والبرمجة لبناء تجارب رقمية تفاعلية. متخصص في إنشاء هويات بصرية فريدة ومواقع ويب تفاعلية تأسر المستخدمين.',
@@ -3665,6 +3868,14 @@
                 productDescriptionTitle: "الوصف",
                 productTagsTitle: "الوسوم",
                 orderViaWhatsApp: "اطلب عبر واتساب",
+                visitorsText: "زوار الموقع",
+                searchPlaceholder: "اكتب للبحث...",
+                searchProjectsTitle: "المشاريع",
+                searchArticlesTitle: "المقالات",
+                searchNoResultsTitle: "لم يتم العثور على نتائج",
+                searchNoResultsDesc: "عذراً، لم نتمكن من العثور على أي شيء لبحثك. يرجى تجربة مصطلح مختلف أو التحقق من التهجئة.",
+                searchResultTypeProject: "مشروع",
+                searchResultTypeArticle: "مقال",
             }
         };
 
@@ -3760,12 +3971,14 @@
             const addArticleContainer = document.getElementById('add-article-container');
             const themeToggleBtn = document.getElementById('theme-toggle-btn');
             const searchBtn = document.getElementById('search-btn');
-            const searchOverlay = document.getElementById('search-overlay');
-            const searchContainer = document.getElementById('search-container');
+            const searchModal = document.getElementById('search-modal');
+            const searchCloseBtn = document.getElementById('search-close-btn');
             const searchForm = document.getElementById('search-form');
             const searchInput = document.getElementById('search-input');
             const searchResultsView = document.getElementById('search-results-view');
             const searchResultsContent = document.getElementById('search-results-content');
+            const aiSearchAnswerContainer = document.getElementById('ai-search-answer');
+            const keywordSearchResultsContainer = document.getElementById('keyword-search-results');
             const closeSearchBtn = document.getElementById('close-search-btn');
             const header = document.querySelector('header');
             const cvView = document.getElementById('cv-view');
@@ -3775,6 +3988,22 @@
             const productDetailView = document.getElementById('product-detail-view');
             const backToStoreBtn = document.getElementById('back-to-store-btn');
             
+            const cvNavBtn = document.getElementById('cv-nav-btn');
+            if (cvNavBtn) {
+                cvNavBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    renderPage({ view: 'cv' });
+                });
+            }
+
+            const closeCvBtn = document.getElementById('close-cv-btn');
+            if (closeCvBtn) {
+                closeCvBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    cvView.classList.remove('visible');
+                });
+            }
+
             // --- Right-click context menu control ---
             document.addEventListener('contextmenu', (event) => {
                 // Check if the user is NOT logged in by looking for a specific class on the body
@@ -3914,7 +4143,7 @@
                         if(loginError) {
                             loginError.innerHTML = `Authentication failed.<br>UID checked: ${user.uid}`; // Display UID in the modal
                         }
-                        showLoginModal(); // Re-show the modal so the user sees the error
+                        // showLoginModal(); // Re-show the modal so the user sees the error
                         await signOut(auth); // Sign them out immediately
                     }
                 } else {
@@ -3939,7 +4168,11 @@
                     }
                     document.body.classList.remove('logged-in');
                     addArticleContainer.style.display = 'none'; // Hide add article button
-                    authContainer.innerHTML = `<a href="#hero" id="auth-link" class="gradient-text text-2xl font-bold">Badr.</a>`;
+                    authContainer.innerHTML = `<a href="#" id="auth-link" class="gradient-text text-2xl font-bold">Badr.</a>`;
+                    document.getElementById('auth-link').addEventListener('click', (e) => {
+                        e.preventDefault();
+                        window.location.hash = '';
+                    });
                 }
                 
                 // Check maintenance mode for everyone AFTER determining admin status
@@ -4503,6 +4736,42 @@
                 }
             }
 
+            // --- Visitor Counter Logic ---
+            async function updateAndDisplayVisitorCount() {
+                const countElement = document.getElementById('visitor-count');
+                if (!countElement) return;
+
+                // Increments on every page load, not just once per session
+                try {
+                    // Attempt to increment the count
+                    await updateDoc(visitsRef, { count: increment(1) });
+                } catch (error) {
+                    // If the document doesn't exist, create it. This will run on the very first visit.
+                    if (error.code === 'not-found') {
+                        try {
+                            await setDoc(visitsRef, { count: 1 });
+                        } catch (set_error) {
+                             console.error("Firebase permission error: Could not create 'visits' document. Please check your Firestore security rules to allow creation.", set_error);
+                        }
+                    } else {
+                        console.error("Firebase permission error: Could not update 'visits' document. Please check your Firestore security rules to allow updates.", error);
+                    }
+                }
+
+                // Listen for real-time updates to the count and display it
+                onSnapshot(visitsRef, (doc) => {
+                    if (doc.exists()) {
+                        const count = doc.data().count;
+                        countElement.textContent = new Intl.NumberFormat().format(count);
+                    } else {
+                        countElement.textContent = '1'; // Show 1 while the doc is being created
+                    }
+                }, (error) => {
+                    console.error("Error fetching visit count:", error);
+                    countElement.textContent = 'N/A';
+                });
+            }
+
             // --- Reading Progress Logic ---
             function updateReadingProgress() {
                 // Only calculate if the progress bar is visible
@@ -4862,26 +5131,12 @@
                 localStorage.setItem('likedProjects', JSON.stringify(liked));
             }
 
-            function getViewedProjects() {
-                return JSON.parse(sessionStorage.getItem('viewedProjects')) || [];
-            }
-
-            function setViewedProjects(viewed) {
-                sessionStorage.setItem('viewedProjects', JSON.stringify(viewed));
-            }
-
             async function incrementProjectView(projectId) {
-                const viewedProjects = getViewedProjects();
-                if (!viewedProjects.includes(projectId)) {
-                    viewedProjects.push(projectId);
-                    setViewedProjects(viewedProjects);
-
-                    const projectRef = doc(db, 'projects', projectId);
-                    try {
-                        await updateDoc(projectRef, { views: increment(1) });
-                    } catch(e) {
-                        console.error("Error incrementing view:", e);
-                    }
+                const projectRef = doc(db, 'projects', projectId);
+                try {
+                    await updateDoc(projectRef, { views: increment(1) });
+                } catch(e) {
+                    console.error("Error incrementing view:", e);
                 }
             }
 
@@ -4935,7 +5190,7 @@
                      return;
                 }
 
-                const apiKey = "AIzaSyCfBd1hVbM0l18xlzkZHBjmUL8X4Gp53dw"; 
+                const apiKey = ""; 
                 const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
 
                 const systemPrompt = `You are an expert portfolio curator. Your task is to recommend three relevant projects from a provided list based on a user's currently viewed project. Analyze the current project's title, description, and tags. Then, from the list of "other projects", select the three that are most similar in style, tools used, or theme.
@@ -6050,14 +6305,13 @@
 
             // --- Search Logic ---
             function showSearchUI() {
-                searchOverlay.classList.remove('hidden');
-                searchContainer.classList.add('visible');
-                searchInput.focus();
+                searchModal.classList.add('visible');
+                // Use a short timeout to allow the transition to start before focusing
+                setTimeout(() => searchInput.focus(), 50);
             }
 
             function hideSearchUI() {
-                searchOverlay.classList.add('hidden');
-                searchContainer.classList.remove('visible');
+                searchModal.classList.remove('visible');
                 searchInput.blur();
             }
 
@@ -6075,12 +6329,110 @@
                 searchInput.value = '';
             }
 
-            function performSearch(query) {
-                if (!query || query.length < 2) {
-                    searchResultsContent.innerHTML = '';
+            async function getAiSummaryAndSuggestions(query) {
+                aiSearchAnswerContainer.innerHTML = `
+                    <div class="text-center p-4 glass-card rounded-lg">
+                        <div class="typing-indicator" style="opacity: 0.5;"><span></span><span></span><span></span></div>
+                        <p class="text-gray-400 mt-2 text-sm">Generating AI summary for "${escapeHTML(query)}"...</p>
+                    </div>
+                `;
+
+                const projectsContext = myProjects.map(p => ({ title: p.title, description: p.description, tags: p.tags })).slice(0, 15);
+                const articlesContext = articlesData.map(a => ({ title: a.title, tags: a.tags })).slice(0, 15);
+
+                const apiKey = "";
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+
+                const systemPrompt = `You are a helpful AI assistant for Badr Ibraheem's portfolio website. Your task is to provide a comprehensive response to a user's search query based on the provided website content (projects and articles).
+                Your response MUST be in JSON format and adhere to the provided schema.
+                1.  **Analyze the User's Query:** Understand the user's intent (are they asking a question, looking for a specific project, or exploring a topic?).
+                2.  **Generate a 'summary':** Write a concise, conversational answer to the user's query using the provided content. If you find directly relevant projects or articles, mention their titles within the summary. If no relevant information is found, state that you couldn't find a match on the site.
+                3.  **Generate 'suggestions':** Create an array of 3 to 4 follow-up search queries that the user might find interesting. These suggestions should guide the user to explore other relevant areas of the portfolio.
+                Respond in the language of the user's query. The user's query is: "${query}"`;
+                
+                const userQuery = `Website Content:\n- Projects: ${JSON.stringify(projectsContext)}\n- Articles: ${JSON.stringify(articlesContext)}\n\nBased on the content above, answer the search query: "${query}"`;
+
+                const payload = {
+                    systemInstruction: { parts: [{ text: systemPrompt }] },
+                    contents: [{ parts: [{ text: userQuery }] }],
+                    generationConfig: {
+                        responseMimeType: "application/json",
+                        responseSchema: {
+                            type: "OBJECT",
+                            properties: {
+                                summary: { type: "STRING" },
+                                suggestions: {
+                                    type: "ARRAY",
+                                    items: { type: "STRING" }
+                                }
+                            },
+                            required: ["summary", "suggestions"]
+                        }
+                    }
+                };
+
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (!response.ok) throw new Error(`API Error: ${response.status}`);
+                    
+                    const result = await response.json();
+                    const jsonText = result.candidates?.[0]?.content?.parts?.[0]?.text;
+                    if (!jsonText) throw new Error("No response text from AI.");
+                    
+                    const aiResponse = JSON.parse(jsonText);
+
+                    let formattedSummary = escapeHTML(aiResponse.summary)
+                        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                        .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                        .replace(/\n/g, '<br>');
+
+                    const suggestionsHTML = aiResponse.suggestions.map(suggestion => 
+                        `<button class="suggested-search-btn text-sm font-semibold bg-white/5 hover:bg-white/10 text-gray-300 py-2 px-4 rounded-full transition-colors">${suggestion}</button>`
+                    ).join('');
+
+                    aiSearchAnswerContainer.innerHTML = `
+                        <div class="glass-card p-6 rounded-2xl">
+                            <h3 class="text-xl font-bold gradient-text mb-4 flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2z"></path></svg>
+                                AI Answer & Suggestions
+                            </h3>
+                            <div class="prose prose-invert max-w-none text-gray-300 mb-6">${formattedSummary}</div>
+                            <div class="flex flex-wrap gap-2">
+                                ${suggestionsHTML}
+                            </div>
+                        </div>`;
+                    
+                    document.querySelectorAll('.suggested-search-btn').forEach(btn => {
+                        btn.addEventListener('click', () => {
+                            const newQuery = btn.textContent;
+                            searchInput.value = newQuery;
+                            handleSearch(newQuery);
+                        });
+                    });
+
+                } catch (error) {
+                    console.error("AI Search Error:", error);
+                    aiSearchAnswerContainer.innerHTML = `
+                        <div class="text-center p-4 glass-card rounded-lg border border-red-500/30">
+                            <p class="text-red-400">Sorry, the AI search is currently unavailable. Please try again later.</p>
+                        </div>
+                    `;
+                }
+            }
+
+
+            function performKeywordSearch(query) {
+                if (!query || query.length < 1) {
+                    keywordSearchResultsContainer.innerHTML = '';
                     return;
                 };
 
+                const currentLang = getCookie('selected_language') || 'en';
                 const lowerCaseQuery = query.toLowerCase();
                 let resultsHTML = '';
                 let resultCount = 0;
@@ -6094,14 +6446,24 @@
                 );
                 
                 if (projectResults.length > 0) {
-                    resultsHTML += '<h3 class="text-2xl font-bold text-white mb-6 border-b border-white/10 pb-3">Projects</h3>';
+                    resultsHTML += `<h3 class="text-2xl font-bold text-white mb-6 border-b border-white/10 pb-3">${translations[currentLang].searchProjectsTitle}</h3>`;
                     projectResults.forEach(project => {
                         resultCount++;
                         resultsHTML += `
-                            <div class="mb-6 gsap-reveal">
-                                <a href="#" class="view-project-btn-from-search text-xl font-bold gradient-text hover:brightness-125 transition" data-id="${project.id}">${project.title}</a>
-                                <p class="text-gray-400 mt-2 text-sm">${project.description}</p>
-                            </div>`;
+                            <a href="#" class="search-result-card view-project-btn-from-search gsap-reveal" data-id="${project.id}">
+                                <div class="search-result-image-container">
+                                    <img src="${project.coverImageUrl}" alt="${project.title}" class="search-result-image">
+                                    <div class="search-result-type">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+                                        <span>${translations[currentLang].searchResultTypeProject}</span>
+                                    </div>
+                                </div>
+                                <div class="search-result-content">
+                                    <h4 class="search-result-title">${project.title}</h4>
+                                    <p class="search-result-description">${project.description}</p>
+                                </div>
+                            </a>
+                        `;
                     });
                 }
 
@@ -6113,14 +6475,25 @@
                 );
 
                 if (articleResults.length > 0) {
-                    resultsHTML += '<h3 class="text-2xl font-bold text-white mb-6 mt-10 border-b border-white/10 pb-3">Blog Articles</h3>';
+                    resultsHTML += `<h3 class="text-2xl font-bold text-white mb-6 mt-10 border-b border-white/10 pb-3">${translations[currentLang].searchArticlesTitle}</h3>`;
                     articleResults.forEach(article => {
                          resultCount++;
+                         const articleImage = article.coverImageUrl || 'https://placehold.co/400x180/2B2729/988381?text=Blog';
                         resultsHTML += `
-                            <div class="mb-6 gsap-reveal">
-                                <a href="#" class="view-article-btn-from-search text-xl font-bold gradient-text hover:brightness-125 transition" data-id="${article.id}">${article.title}</a>
-                                <p class="text-gray-400 mt-2 text-sm">${article.content.substring(0, 150)}...</p>
-                            </div>`;
+                            <a href="#" class="search-result-card view-article-btn-from-search gsap-reveal" data-id="${article.id}">
+                                <div class="search-result-image-container">
+                                    <img src="${articleImage}" alt="${article.title}" class="search-result-image">
+                                    <div class="search-result-type">
+                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                                        <span>${translations[currentLang].searchResultTypeArticle}</span>
+                                    </div>
+                                </div>
+                                <div class="search-result-content">
+                                    <h4 class="search-result-title">${article.title}</h4>
+                                    <p class="search-result-description">${article.content.substring(0, 150)}...</p>
+                                </div>
+                            </a>
+                        `;
                     });
                 }
 
@@ -6130,14 +6503,13 @@
                             <svg class="w-16 h-16 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
                             </svg>
-                            <h4 class="text-2xl font-bold text-white">No Results Found</h4>
-                            <p class="text-gray-400 max-w-sm">Sorry, we couldn't find anything for your search. Please try a different term or check your spelling.</p>
+                            <h4 class="text-2xl font-bold text-white">${translations[currentLang].searchNoResultsTitle}</h4>
+                            <p class="text-gray-400 max-w-sm">${translations[currentLang].searchNoResultsDesc}</p>
                         </div>
                     `;
                 }
 
-                searchResultsContent.innerHTML = resultsHTML;
-                // The router will now call showSearchResultsView
+                keywordSearchResultsContainer.innerHTML = resultsHTML;
                 
                 // Re-attach listeners for the new result links
                 document.querySelectorAll('.view-project-btn-from-search').forEach(btn => {
@@ -6195,8 +6567,55 @@
                 chatMessagesContainer.innerHTML = '';
                 chatHistory.forEach(msg => {
                     const messageEl = document.createElement('div');
-                    messageEl.classList.add('chat-message', msg.role); // msg.role is 'user' or 'bot'
-                    messageEl.textContent = msg.text;
+                    messageEl.classList.add('chat-message', msg.role);
+                    
+                    const textEl = document.createElement('p');
+                    textEl.innerHTML = msg.text.replace(/\n/g, '<br>'); // Support newlines in bot answer
+                    messageEl.appendChild(textEl);
+
+                    if (msg.role === 'bot' && msg.suggestions && msg.suggestions.length > 0) {
+                        const suggestionsContainer = document.createElement('div');
+                        suggestionsContainer.className = 'flex flex-col gap-2 mt-3'; // Changed to flex-col
+                        msg.suggestions.forEach(suggestion => {
+                            // Check if suggestion is a valid object
+                            if (typeof suggestion === 'object' && suggestion.title && suggestion.id && suggestion.type) {
+                                const link = document.createElement('a');
+                                link.href = `#${suggestion.type}/${suggestion.id}`;
+                                link.className = 'bot-suggestion-card';
+                                
+                                const placeholderImg = 'https://placehold.co/48x48/2B2729/988381?text=?';
+                                
+                                link.innerHTML = `
+                                    <img src="${suggestion.coverImageUrl || placeholderImg}" alt="${suggestion.title}" onerror="this.src='${placeholderImg}'">
+                                    <div class="suggestion-info">
+                                        <div class="suggestion-type">${suggestion.type}</div>
+                                        <div class="suggestion-title">${suggestion.title}</div>
+                                    </div>
+                                `;
+
+                                link.onclick = (e) => {
+                                    e.preventDefault();
+                                    renderPage({ view: suggestion.type, id: suggestion.id });
+                                    chatWidget.classList.remove('visible'); // Close chat on click
+                                };
+                                suggestionsContainer.appendChild(link);
+                            } else if (typeof suggestion === 'string') {
+                                // Fallback for old string-based suggestions
+                                const button = document.createElement('button');
+                                button.textContent = suggestion;
+                                button.className = 'text-xs sm:text-sm bg-white/10 hover:bg-white/20 text-gray-200 py-1.5 px-3 rounded-full transition-colors';
+                                if (document.body.classList.contains('light-mode')) {
+                                    button.className = 'text-xs sm:text-sm bg-black/5 hover:bg-black/10 text-gray-700 py-1.5 px-3 rounded-full transition-colors';
+                                }
+                                button.onclick = () => {
+                                    getBotResponse(suggestion);
+                                };
+                                suggestionsContainer.appendChild(button);
+                            }
+                        });
+                        messageEl.appendChild(suggestionsContainer);
+                    }
+
                     chatMessagesContainer.appendChild(messageEl);
                 });
                 chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
@@ -6225,21 +6644,60 @@
                 const apiKey = "AIzaSyCfBd1hVbM0l18xlzkZHBjmUL8X4Gp53dw"; 
                 const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
 
-                const systemPrompt = `You are a friendly, professional chatbot assistant for Badr Ibraheem Mohameed's portfolio website. 
-                Your primary goal is to answer questions about Badr, his skills, and his projects.
-                - Badr's Skills: Graphic Design, Software Development, 3D Design, UI/UX, Branding, Adobe Creative Suite, Microsoft Office.
-                - Badr's Background: He has over 3 years of experience and is a creative professional based in Egypt. He is a graduate of the Higher Institute of Tourism and Hotels.
-                - Be concise and helpful. If you don't know an answer from the context, say you can only provide information found on the portfolio.
-                - If asked about personal contact details other than the email (badr.e.mohameed@gmail.com), politely direct the user to the contact form.
-                - If a question is outside the scope of Badr's portfolio, politely state that you can only assist with portfolio-related inquiries.
-                - Your language should match the user's language. The current user is likely speaking English or Arabic.`;
+                const projectsContext = myProjects.map(p => ({ id: p.id, title: p.title, description: p.description, tags: p.tags, coverImageUrl: p.coverImageUrl })).slice(0, 10);
+                const articlesContext = articlesData.map(a => ({ id: a.id, title: a.title, tags: a.tags, coverImageUrl: a.coverImageUrl })).slice(0, 10);
+
+                const systemPrompt = `You are a helpful and friendly AI assistant for Badr Ibraheem's portfolio website. Your goal is to answer user questions and suggest relevant content.
+- **Analyze the User's Query:** Understand their intent.
+- **Formulate an Answer:** Based on the provided JSON data for projects and articles, create a concise, conversational answer.
+- **Provide Suggestions:** From the provided content, select 2-3 of the MOST relevant projects or articles related to the user's query. If no content is relevant, return an empty array.
+- **Language:** Respond in the same language as the user's query.
+- **JSON Output:** Your entire response MUST be a valid JSON object following this schema: 
+{
+  "answer": "Your conversational answer here.", 
+  "suggestions": [
+    {
+      "type": "project" | "article",
+      "id": "The unique ID of the item",
+      "title": "The title of the item",
+      "coverImageUrl": "The cover image URL of the item"
+    }
+  ]
+}`;
+
+                const userQueryForApi = `WEBSITE CONTENT:
+- Projects: ${JSON.stringify(projectsContext)}
+- Articles: ${JSON.stringify(articlesContext)}
+
+USER QUERY: "${userMessage}"`;
+
 
                 const payload = {
                     systemInstruction: { parts: [{ text: systemPrompt }] },
-                    contents: chatHistory.map(msg => ({
-                        role: msg.role === 'bot' ? 'model' : 'user',
-                        parts: [{ text: msg.text }]
-                    }))
+                    contents: [{ parts: [{ text: userQueryForApi }] }],
+                    generationConfig: {
+                        responseMimeType: "application/json",
+                        responseSchema: {
+                            type: "OBJECT",
+                            properties: {
+                                answer: { type: "STRING" },
+                                suggestions: {
+                                    type: "ARRAY",
+                                    items: {
+                                        type: "OBJECT",
+                                        properties: {
+                                            type: { type: "STRING" },
+                                            id: { type: "STRING" },
+                                            title: { type: "STRING" },
+                                            coverImageUrl: { type: "STRING" }
+                                        },
+                                        required: ["type", "id", "title"]
+                                    }
+                                }
+                            },
+                            required: ["answer", "suggestions"]
+                        }
+                    }
                 };
 
                 try {
@@ -6254,12 +6712,15 @@
                     }
 
                     const result = await response.json();
-                    const botMessage = result.candidates?.[0]?.content?.parts?.[0]?.text || "Sorry, I couldn't process that. Please try again.";
+                    const jsonText = result.candidates?.[0]?.content?.parts?.[0]?.text;
+                    if (!jsonText) throw new Error("No valid JSON response from AI.");
+
+                    const aiResponse = JSON.parse(jsonText);
                     
-                    chatHistory.push({ role: 'bot', text: botMessage });
+                    chatHistory.push({ role: 'bot', text: aiResponse.answer, suggestions: aiResponse.suggestions });
                 } catch (error) {
                     console.error("Chatbot API Error:", error);
-                    chatHistory.push({ role: 'bot', text: "Apologies, I'm having trouble connecting right now. Please try again in a moment." });
+                    chatHistory.push({ role: 'bot', text: "Apologies, I'm having trouble connecting right now. Please try again in a moment.", suggestions: [] });
                 } finally {
                     removeTypingIndicator();
                     renderMessages();
@@ -6717,6 +7178,12 @@
             
             mobileMenuLinks.forEach(link => {
                 link.addEventListener('click', (e) => {
+                    // Special handling for the store link
+                    if (link.getAttribute('href') === '#store') {
+                        e.preventDefault();
+                        renderPage({ view: 'store' });
+                    }
+
                     // Check if it's a contact trigger before closing
                     if (!e.currentTarget.classList.contains('contact-modal-trigger')) {
                         closeMobileMenu();
@@ -6741,6 +7208,7 @@
             listenForArticles();
             listenForCertificates();
             listenForProducts();
+            updateAndDisplayVisitorCount();
 
             // Lazy load comments when the testimonials section is visible
             const testimonialsSection = document.getElementById('testimonials');
@@ -6791,83 +7259,20 @@
                 observer.observe(section);
             });
 
-            // Add mouse move listener for service cards
-            document.querySelectorAll('.service-card').forEach(card => {
-                card.addEventListener('mousemove', e => {
-                    const rect = card.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    card.style.setProperty('--x', `${x}px`);
-                    card.style.setProperty('--y', `${y}px`);
-                });
-            });
-
-            // --- Interactive Skills Logic ---
-            document.querySelectorAll('.skill-item[data-filter-target]').forEach(skillItem => {
-                skillItem.addEventListener('click', () => {
-                    const filter = skillItem.dataset.filterTarget;
-                    const filterButton = document.querySelector(`#project-filters .filter-btn[data-filter="${filter}"]`);
-                    
-                    if (filterButton) {
-                        // Programmatically click the button to trigger filtering
-                        filterButton.click();
-                        
-                        // Scroll to the projects section
-                        const projectsSection = document.getElementById('projects');
-                        projectsSection.scrollIntoView({ behavior: 'smooth' });
-                    } else {
-                        console.warn(`No project filter button found for skill: ${filter}`);
-                    }
-                });
-            });
-
-            // Handle URL search parameter on load
-            const urlParams = new URLSearchParams(window.location.search);
-            const searchQuery = urlParams.get('s');
-            if (searchQuery) {
-                // We need to wait for projects/articles to load before searching
-                const checkDataLoaded = setInterval(() => {
-                    if ((myProjects && myProjects.length > 0) || (articlesData && articlesData.length > 0)) {
-                        clearInterval(checkDataLoaded);
-                        searchInput.value = searchQuery;
-                        performSearch(searchQuery);
-                    }
-                }, 100);
-                // Timeout to prevent infinite loop if data fails to load
-                setTimeout(() => clearInterval(checkDataLoaded), 5000);
-            }
-
-            // --- CV View Logic ---
-            const storeNavBtn = document.querySelector('.nav-link[data-nav-link="store"]');
-            if (storeNavBtn) {
-                storeNavBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    renderPage({ view: 'store' });
-                });
-            }
-            const cvNavBtn = document.getElementById('cv-nav-btn');
-            const closeCvBtn = document.getElementById('close-cv-btn');
-            
-            if (cvNavBtn) {
-                cvNavBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    renderPage({ view: 'cv' });
-                });
-            }
-            if (closeCvBtn) {
-                closeCvBtn.addEventListener('click', () => {
-                    renderPage({ view: 'home' });
-                });
-            }
-
-
             // --- Search Event Listeners ---
             searchBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
                 showSearchUI();
             });
 
-            searchOverlay.addEventListener('click', hideSearchUI);
+            searchCloseBtn.addEventListener('click', hideSearchUI);
+            // Close when clicking on the modal backdrop (but not the content)
+            searchModal.addEventListener('click', (e) => {
+                if(e.target === searchModal) {
+                    hideSearchUI();
+                }
+            });
+
             closeSearchBtn.addEventListener('click', () => {
                 renderPage({ view: 'home' });
             });
@@ -6879,9 +7284,16 @@
                 e.preventDefault();
                 const query = searchInput.value.trim();
                 if (query) {
+                    hideSearchUI();
                     renderPage({ view: 'search', query: query });
                 }
             });
+
+            function handleSearch(query) {
+                showSearchResultsView(query);
+                performKeywordSearch(query);
+                getAiSummaryAndSuggestions(query);
+            }
 
             // --- Add Copyright on Copy ---
             document.addEventListener('copy', (event) => {
@@ -6939,9 +7351,7 @@
                     }
                 } else if (state.view === 'search') {
                     const query = state.query;
-                    searchResultsView.classList.remove('hidden');
-                    performSearch(query);
-                    showSearchResultsView(query);
+                    handleSearch(query);
                 } else if (state.view === 'store') {
                     document.title = "Store | Badr Ibraheem";
                     storeView.classList.remove('hidden');
@@ -6998,10 +7408,41 @@
                 });
             }
 
-            // window.addEventListener('hashchange', router); // Removed hash change listener
-            renderPage(); // Handle initial page load
+            // --- Router Logic ---
+            function router() {
+                const hash = window.location.hash.substring(1);
+                if (!hash) {
+                    renderPage({ view: 'home' });
+                    return;
+                }
+
+                const [view, ...params] = hash.split('/');
+                const id = params[0] || null;
+
+                if (view === 'project' && id) {
+                    renderPage({ view: 'project', id: id });
+                } else if (view === 'article' && id) {
+                    renderPage({ view: 'article', id: id });
+                } else if (view === 'search' && id) {
+                    renderPage({ view: 'search', query: decodeURIComponent(id) });
+                } else if (view === 'store') {
+                    renderPage({ view: 'store' });
+                } else if (view === 'product' && id) {
+                    renderPage({ view: 'product', id: id });
+                } else if (view === 'cv') {
+                    renderPage({ view: 'cv' });
+                } else {
+                    renderPage({ view: 'home' });
+                }
+            }
+            
+            window.addEventListener('hashchange', router);
+            router(); // Handle initial page load with hash
         });
     </script>
 </body>
 
 </html>
+
+
+
