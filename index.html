@@ -7,7 +7,7 @@
     
     <!-- Primary SEO Meta Tags -->
     <title>Badr Ibraheem - Graphic Designer</title>
-    <meta name="description" content="CV and contact information for Badr Ibraheem Mohammed (badr ibraheem mohameed), a professional graphic designer and software developer in Faiyum, Egypt. Email: badr.e.mohameed@gmail.com, Phone: +201069913150. | السيرة الذاتية ومعلومات التواصل للمصمم بدر ابراهيم محمد، مصمم جرافيك ومطور برامج في الفيوم.">
+    <meta name="description" content="Portfolio and contact information for Badr Ibraheem Mohammed (Badr Ibrahim), a professional graphic designer and software developer in Faiyum, Egypt. Email: badr.e.mohameed@gmail.com, Phone: +201069913150. | السيرة الذاتية ومعلومات التواصل للمصمم بدر ابراهيم محمد (بدر إبراهيم)، مصمم جرافيك ومطور برامج في الفيوم.">
     <meta name="keywords" content="Badr Ibrahim, Badr Ibraheem Mohammed, Digital Experience Designer, Graphic Designer, Software Developer, Programmer, Portfolio, Faiyum, Egypt, bdr.e.mohameed, بدر ابراهيم, بدر ابراهيم محمد, مصمم جرافيك, مطور برامج, مبرمج, المصمم بدر, بدر مصمم الجرافيك, بدر مطور البرامج, بدر المبرمج, بدر ابراهيم المصمم, بدر ابراهيم مصمم جرافيك">
     <meta name="author" content="Badr Ibraheem Mohameed">
     <link rel="canonical" href="https://badre.site/" />
@@ -51,7 +51,7 @@
         "@type": "SearchAction",
         "target": {
           "@type": "EntryPoint",
-          "urlTemplate": "https://badre.site/?s={search_term_string}"
+          "urlTemplate": "https://badre.site/#search/{search_term_string}"
         },
         "query-input": "required name=search_term_string"
       }
@@ -64,6 +64,7 @@
       "name": "Badr Ibraheem Mohameed",
       "alternateName": [
         "bdr.e.mohameed",
+        "Badr Ibrahim",
         "badr Ibraheem mohamed",
         "Badr Ibrahim Mohammed",
         "Badr the graphic designer",
@@ -2428,6 +2429,11 @@
             margin-top: 0.25rem;
         }
 
+        /* Hide Login Functionality */
+        #login-modal {
+            display: none !important;
+        }
+
     </style>
     <script>
         // --- Console Protection ---
@@ -4074,123 +4080,57 @@
 
             // --- AUTHENTICATION ---
             onAuthStateChanged(auth, async (user) => {
-                let isUserAdmin = false;
+                // If a user is somehow logged in, sign them out. Login is disabled.
                 if (user) {
-                    // User is signed in, now verify if they are an admin.
-                    const adminRef = doc(db, 'admins', user.uid);
-                    const adminDoc = await getDoc(adminRef);
-
-                    if (adminDoc.exists()) {
-                        isUserAdmin = true;
-                        // This user is an authorized admin
-                        document.body.classList.add('logged-in');
-                        addArticleContainer.style.display = 'block'; // Show add article button
-                        
-                        // Fetch admin settings for profile pictures
-                        const adminSettings = adminDoc.data();
-                        const profilePic = document.getElementById('profile-picture-img');
-                        if (adminSettings.lightModeUrl) {
-                            profilePic.dataset.lightSrc = adminSettings.lightModeUrl;
-                        }
-                        if (adminSettings.darkModeUrl) {
-                            profilePic.dataset.darkSrc = adminSettings.darkModeUrl;
-                        }
-
-                        authContainer.innerHTML = `
-                            <div class="relative" id="user-menu">
-                                <button id="user-menu-btn" class="flex items-center gap-2 text-lg font-semibold text-white hover:text-gray-200 transition-colors">
-                                    <span>Hello, Bader</span>
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                                </button>
-                                <div id="user-dropdown" class="glass-card absolute top-full right-0 mt-3 w-48 rounded-xl overflow-hidden shadow-lg z-10">
-                                    <a href="#" id="settings-btn" class="flex items-center gap-3 px-4 py-3 text-sm text-white hover:bg-white/5 transition-colors">
-                                        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 0 2l-.15.08a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.38a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1 0-2l.15-.08a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-                                        <span>Settings</span>
-                                    </a>
-                                    <a href="#" id="logout-btn" class="flex items-center gap-3 px-4 py-3 text-sm text-red-400 hover:bg-white/5 transition-colors">
-                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4"></path></svg>
-                                        <span>Log Out</span>
-                                    </a>
-                                </div>
-                            </div>
-                        `;
-                        
-                        // Add event listeners for the new dropdown
-                        const userMenuBtn = document.getElementById('user-menu-btn');
-                        const userDropdown = document.getElementById('user-dropdown');
-                        
-                        userMenuBtn.addEventListener('click', (e) => {
-                            e.stopPropagation();
-                            userDropdown.classList.toggle('show');
-                            userMenuBtn.classList.toggle('open');
-                        });
-
-                        document.getElementById('logout-btn').addEventListener('click', (e) => {
-                            e.preventDefault();
-                            signOut(auth);
-                        });
-
-                        document.getElementById('settings-btn').addEventListener('click', (e) => {
-                            e.preventDefault();
-                            showSettingsModal();
-                        });
-
-                    } else {
-                        // This user is authenticated but not an authorized admin
-                        console.log("Unauthorized user signed in:", user.email);
-                        console.log("UID Check Failed. The UID we checked for was:", user.uid); // More direct message
-                        const loginError = document.getElementById('login-error');
-                        if(loginError) {
-                            loginError.innerHTML = `Authentication failed.<br>UID checked: ${user.uid}`; // Display UID in the modal
-                        }
-                        // showLoginModal(); // Re-show the modal so the user sees the error
-                        await signOut(auth); // Sign them out immediately
-                    }
-                } else {
-                    // User is signed out, fetch public settings
-                    try {
-                        const publicSettingsRef = doc(db, 'settings', 'main_profile');
-                        const settingsDoc = await getDoc(publicSettingsRef);
-                        
-                        if (settingsDoc.exists()) {
-                            const publicSettings = settingsDoc.data();
-                            const profilePic = document.getElementById('profile-picture-img');
-
-                            if (publicSettings.lightModeUrl) {
-                                profilePic.dataset.lightSrc = publicSettings.lightModeUrl;
-                            }
-                            if (publicSettings.darkModeUrl) {
-                                profilePic.dataset.darkSrc = publicSettings.darkModeUrl;
-                            }
-                        }
-                    } catch (error) {
-                        console.error("Could not load public admin settings:", error);
-                    }
-                    document.body.classList.remove('logged-in');
-                    addArticleContainer.style.display = 'none'; // Hide add article button
-                    authContainer.innerHTML = `<a href="#" id="auth-link" class="gradient-text text-2xl font-bold">Badr.</a>`;
-                    document.getElementById('auth-link').addEventListener('click', (e) => {
-                        e.preventDefault();
-                        window.location.hash = '';
-                    });
+                    signOut(auth);
+                    return; // The sign-out will re-trigger this function.
                 }
+
+                // Always treat user as logged out
+                let isUserAdmin = false;
                 
-                // Check maintenance mode for everyone AFTER determining admin status
+                // Fetch public settings for profile pictures
+                try {
+                    const publicSettingsRef = doc(db, 'settings', 'main_profile');
+                    const settingsDoc = await getDoc(publicSettingsRef);
+                    
+                    if (settingsDoc.exists()) {
+                        const publicSettings = settingsDoc.data();
+                        const profilePic = document.getElementById('profile-picture-img');
+
+                        if (publicSettings.lightModeUrl) {
+                            profilePic.dataset.lightSrc = publicSettings.lightModeUrl;
+                        }
+                        if (publicSettings.darkModeUrl) {
+                            profilePic.dataset.darkSrc = publicSettings.darkModeUrl;
+                        }
+                    }
+                } catch (error) {
+                    console.error("Could not load public admin settings:", error);
+                }
+
+                document.body.classList.remove('logged-in');
+                if(addArticleContainer) addArticleContainer.style.display = 'none';
+                
+                authContainer.innerHTML = `<a href="#" id="auth-link" class="gradient-text text-2xl font-bold">Badr.</a>`;
+                document.getElementById('auth-link').addEventListener('click', (e) => {
+                    e.preventDefault(); // Do nothing on click, as login is disabled
+                });
+                
+                // Check maintenance mode
                 try {
                     const statusDoc = await getDoc(siteStatusRef);
                     if (statusDoc.exists() && statusDoc.data().isMaintenanceMode && !isUserAdmin) {
                         document.getElementById('maintenance-overlay').classList.remove('hidden');
-                        return; // Stop further execution for non-admins
+                        return; // Stop further execution
                     }
                 } catch (error) {
                     console.error("Could not check maintenance status:", error);
                 }
 
-                // Apply theme for ALL users after settings have been potentially loaded
+                // Apply theme and render content for a public visitor
                 applyTheme(localStorage.getItem('theme') || 'dark');
-                    // Re-render projects to show/hide admin controls correctly
                 displayProjects(projectFiltersContainer.querySelector('.active')?.dataset.filter || 'All');
-                // Re-render articles as well
                 displayArticles();
                 displayCertificates();
                 displayProductsInStore();
@@ -4223,6 +4163,7 @@
 
                     generateFilterButtons();
                     displayProjects();
+                    updateAllStructuredData();
                 }, (error) => {
                     console.error("Error fetching projects: ", error);
                     projectsGrid.innerHTML = `
@@ -4243,6 +4184,7 @@
                     articlesData = snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
 
                     displayArticles();
+                    updateAllStructuredData();
                 }, (error) => {
                     console.error("Error fetching articles: ", error);
                     if (articlesGrid) articlesGrid.innerHTML = `
@@ -4265,6 +4207,7 @@
                 onSnapshot(query(productsCollection, orderBy('createdAt', 'desc')), (snapshot) => {
                     productsData = snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
                     displayProductsInStore();
+                    updateAllStructuredData();
                 }, (error) => {
                     console.error("Error fetching products:", error);
                     productsGridStore.innerHTML = `<p class="text-red-400 col-span-full text-center">Failed to load products.</p>`;
@@ -4276,6 +4219,7 @@
                 onSnapshot(query(certificatesCollection, orderBy('createdAt', 'desc')), (snapshot) => {
                     certificatesData = snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
                     displayCertificates();
+                    updateAllStructuredData();
                 }, (error) => {
                     console.error("Error fetching certificates: ", error);
                     const sliderContainer = document.getElementById('certificates-slider-container');
@@ -5622,6 +5566,38 @@
 
                 window.scrollTo(0, 0);
 
+                // --- Add Project Schema.org JSON-LD ---
+                const oldSchema = document.getElementById('dynamic-schema-script');
+                if(oldSchema) oldSchema.remove();
+
+                // Combine cover image and gallery images for the schema
+                const allImages = [project.coverImageUrl];
+                if (project.galleryImages && Array.isArray(project.galleryImages)) {
+                    allImages.push(...project.galleryImages);
+                }
+
+                const projectSchema = {
+                    "@context": "https://schema.org",
+                    "@type": "CreativeWork",
+                    "name": project.title,
+                    "description": project.description,
+                    "image": allImages,
+                    "author": {
+                        "@type": "Person",
+                        "name": "Badr Ibraheem Mohameed",
+                        "url": "https://badre.site/"
+                    },
+                    "datePublished": project.date,
+                    "url": `https://badre.site/#project/${project.id}`
+                };
+
+                const schemaScript = document.createElement('script');
+                schemaScript.type = 'application/ld+json';
+                schemaScript.id = 'dynamic-schema-script';
+                schemaScript.text = JSON.stringify(projectSchema);
+                document.head.appendChild(schemaScript);
+
+
                 let mediaHTML = '';
                 // Display video if it exists
                 if (project.mediaUrl) {
@@ -5775,6 +5751,9 @@
                 setTimeout(updateReadingProgress, 100); 
 
                 // --- SEO 2: Add Article Schema Markup ---
+                const oldSchema = document.getElementById('dynamic-schema-script');
+                if(oldSchema) oldSchema.remove();
+                
                 const articleSchema = {
                     "@context": "https://schema.org",
                     "@type": "Article",
@@ -5789,7 +5768,7 @@
                 };
                 const schemaScript = document.createElement('script');
                 schemaScript.type = 'application/ld+json';
-                schemaScript.id = 'article-schema';
+                schemaScript.id = 'dynamic-schema-script';
                 schemaScript.text = JSON.stringify(articleSchema);
                 document.head.appendChild(schemaScript);
 
@@ -7314,7 +7293,7 @@ USER QUERY: "${userMessage}"`;
                     document.removeEventListener('keydown', galleryKeydownListener);
                     galleryKeydownListener = null;
                 }
-                const schemaScript = document.getElementById('article-schema');
+                const schemaScript = document.getElementById('dynamic-schema-script');
                 if (schemaScript) schemaScript.remove();
                 
                 const isLeavingHome = !mainContent.classList.contains('hidden');
@@ -7408,6 +7387,86 @@ USER QUERY: "${userMessage}"`;
                 });
             }
 
+            // --- NEW: Site-wide Structured Data ---
+            function updateAllStructuredData() {
+                // Don't run if no data has loaded yet.
+                if (myProjects.length === 0 && articlesData.length === 0 && certificatesData.length === 0 && productsData.length === 0) {
+                    return;
+                }
+
+                const oldSchema = document.getElementById('site-wide-schema-script');
+                if(oldSchema) oldSchema.remove();
+
+                const siteData = {
+                    "@context": "https://schema.org",
+                    "@type": "WebSite",
+                    "url": "https://badre.site/",
+                    "name": "Badr Ibraheem - Portfolio",
+                    "author": {
+                        "@type": "Person",
+                        "name": "Badr Ibraheem Mohameed",
+                        "url": "https://badre.site/"
+                    },
+                    "hasPart": []
+                };
+
+                // Add Projects
+                myProjects.forEach(project => {
+                    siteData.hasPart.push({
+                        "@type": "CreativeWork",
+                        "name": project.title,
+                        "description": project.description,
+                        "url": `https://badre.site/#project/${project.id}`,
+                        "image": project.coverImageUrl
+                    });
+                });
+
+                // Add Articles
+                articlesData.forEach(article => {
+                    siteData.hasPart.push({
+                        "@type": "Article",
+                        "headline": article.title,
+                        "url": `https://badre.site/#article/${article.id}`,
+                        "image": article.coverImageUrl,
+                         "author": {
+                            "@type": "Person",
+                            "name": "Badr Ibraheem Mohameed"
+                        }
+                    });
+                });
+
+                // Add Products
+                productsData.forEach(product => {
+                    const coverImage = (product.media && product.media.length > 0) ? product.media.find(m => m.type === 'image')?.url || product.media[0].url : undefined;
+                    siteData.hasPart.push({
+                        "@type": "Product",
+                        "name": product.name,
+                        "description": product.description,
+                        "image": coverImage,
+                        "offers": {
+                            "@type": "Offer",
+                            "price": product.price,
+                            "priceCurrency": product.currency || "EGP"
+                        }
+                    });
+                });
+
+                // Add Certificates (as CreativeWork)
+                certificatesData.forEach(cert => {
+                    siteData.hasPart.push({
+                        "@type": "CreativeWork",
+                        "name": cert.title,
+                        "image": cert.imageUrl
+                    });
+                });
+
+                const schemaScript = document.createElement('script');
+                schemaScript.type = 'application/ld+json';
+                schemaScript.id = 'site-wide-schema-script';
+                schemaScript.text = JSON.stringify(siteData);
+                document.head.appendChild(schemaScript);
+            }
+
             // --- Router Logic ---
             function router() {
                 const hash = window.location.hash.substring(1);
@@ -7443,6 +7502,4 @@ USER QUERY: "${userMessage}"`;
 </body>
 
 </html>
-
-
 
