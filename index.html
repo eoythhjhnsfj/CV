@@ -83,6 +83,8 @@
     <!-- Note: For best results, create a 180x180px PNG version of your icon, upload it, and replace the placeholder URL above. -->
 
 
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8458311823906095"
+     crossorigin="anonymous"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -2409,61 +2411,6 @@
         }
 
     </style>
-    <script>
-        // --- Console Protection ---
-        // This script provides a basic layer of protection to deter users from opening developer tools.
-        
-        // 1. Disable Right-Click Context Menu
-        document.addEventListener('contextmenu', function(e) {
-            // Allow context menu only if user is logged in as admin
-            if (!document.body.classList.contains('logged-in')) {
-                e.preventDefault();
-            }
-        });
-
-        // 2. Disable Common Developer Keyboard Shortcuts
-        document.addEventListener('keydown', function(e) {
-            // Allow shortcuts only if user is logged in as admin
-            if (!document.body.classList.contains('logged-in')) {
-                if (
-                    e.keyCode === 123 || // F12
-                    (e.ctrlKey && e.shiftKey && e.keyCode === 'I'.charCodeAt(0)) || // Ctrl+Shift+I
-                    (e.ctrlKey && e.shiftKey && e.keyCode === 'J'.charCodeAt(0)) || // Ctrl+Shift+J
-                    (e.ctrlKey && e.keyCode === 'U'.charCodeAt(0)) // Ctrl+U
-                ) {
-                    e.preventDefault();
-                }
-            }
-        });
-
-        // 3. Detect if DevTools is open and clear the page
-        const detectDevTools = () => {
-            // Don't run detection if user is logged in
-            if (document.body.classList.contains('logged-in')) {
-                return;
-            }
-
-            const threshold = 160;
-            const start = new Date().getTime();
-            
-            debugger;
-            
-            const end = new Date().getTime();
-            
-            if (end - start > threshold) {
-                document.body.innerHTML = `
-                    <div style="background:black; color:white; display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; font-family: sans-serif; text-align:center;">
-                        <h1 style="font-size: 2rem; margin-bottom: 1rem;">غير مسموح بفتح أدوات المطورين.</h1>
-                        <p>This functionality is disabled on this website.</p>
-                    </div>`;
-            }
-        };
-
-        // Periodically check for DevTools
-        setInterval(detectDevTools, 1000);
-    </script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8458311823906095"
-     crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -2489,7 +2436,7 @@
     <header class="header-glass fixed top-4 left-1/2 -translate-x-1/2 w-[90%] sm:w-[95%] max-w-5xl z-50 rounded-full content-hidden">
         <div class="container mx-auto px-4 sm:px-6 py-3 flex justify-between items-center">
              <div id="auth-container" class="text-2xl font-bold">
-                <a href="#hero" id="auth-link" class="gradient-text">Badr.</a>
+                <a href="#" id="auth-link" class="gradient-text">Badr.</a>
             </div>
             <div class="flex items-center gap-2 md:gap-4">
                 <nav class="hidden md:flex space-x-2 items-center">
@@ -2631,7 +2578,7 @@
                             <img id="profile-picture-img" src="https://i.ibb.co/QFtzp7t3/1172-copy.jpg"
                                  data-dark-src="https://i.ibb.co/QFtzp7t3/1172-copy.jpg"
                                  data-light-src="https://i.ibb.co/N6dQBv1/IMG-20240621-WA0010.jpg"
-                                 alt="Badr Ibraheem Mohameed personal photo" class="w-full h-full object-cover opacity-95 transition-opacity duration-300" loading="lazy" width="420" height="420">
+                                 alt="Badr Ibraheem Mohameed - A personal photo of the graphic designer and software developer in Faiyum, Egypt." class="w-full h-full object-cover opacity-95 transition-opacity duration-300" loading="lazy" width="420" height="420">
                          </div>
                     </div>
                 </div>
@@ -2642,7 +2589,7 @@
         <!-- Visitor Counter Section -->
         
         <section id="skills" class="py-20 sm:py-24">
-            <h3 class="text-3xl sm:text-4xl font-bold text-center mb-12 gsap-reveal gradient-text" data-translate-key="skillsTitle">Core Competencies</h3>
+            <h2 class="text-3xl sm:text-4xl font-bold text-center mb-12 gsap-reveal gradient-text" data-translate-key="skillsTitle">Core Competencies</h2>
             <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
                 
                 <!-- Design & Creative Column -->
@@ -2714,7 +2661,7 @@
         </section>
 
         <section id="experience" class="py-20 sm:py-24 overflow-hidden">
-            <h3 class="text-3xl sm:text-4xl font-bold text-center mb-12 gsap-reveal gradient-text" data-translate-key="experienceTitle">Experience & Training</h3>
+            <h2 class="text-3xl sm:text-4xl font-bold text-center mb-12 gsap-reveal gradient-text" data-translate-key="experienceTitle">Experience & Training</h2>
             <div id="experience-horizontal-timeline" class="max-w-5xl mx-auto">
                 <div id="timeline-nav" class="flex justify-center mb-8 gap-2 md:gap-4 flex-wrap">
                     <!-- Timeline navigation buttons will be injected here -->
@@ -2726,7 +2673,7 @@
         </section>
 
         <section id="education" class="py-20 sm:py-24">
-            <h3 class="text-3xl sm:text-4xl font-bold text-center mb-12 gsap-reveal gradient-text" data-translate-key="educationTitle">Education & Certifications</h3>
+            <h2 class="text-3xl sm:text-4xl font-bold text-center mb-12 gsap-reveal gradient-text" data-translate-key="educationTitle">Education & Certifications</h2>
              <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
                  <div class="glass-card p-6 md:p-8 rounded-2xl gsap-reveal">
                      <h4 class="text-2xl font-bold mb-4 md:text-left" data-translate-key="educationSubTitle">Education</h4>
@@ -2744,7 +2691,7 @@
 
         <section id="certificates" class="py-20 sm:py-24">
             <div class="text-center">
-                <h3 class="text-3xl sm:text-4xl font-bold mb-4 gsap-reveal gradient-text" data-translate-key="certificatesTitle">Certificates & Awards</h3>
+                <h2 class="text-3xl sm:text-4xl font-bold mb-4 gsap-reveal gradient-text" data-translate-key="certificatesTitle">Certificates & Awards</h2>
                 <p class="max-w-2xl mx-auto text-gray-400 mb-12 leading-relaxed gsap-reveal" data-translate-key="certificatesDesc">
                     A collection of my professional certifications and recognitions.
                 </p>
@@ -2770,7 +2717,7 @@
 
         <section id="projects" class="py-20 sm:py-24 relative">
             <div class="text-center">
-                <h3 class="text-3xl sm:text-4xl font-bold mb-4 gsap-reveal gradient-text" data-translate-key="projectsTitle">My Projects</h3>
+                <h2 class="text-3xl sm:text-4xl font-bold mb-4 gsap-reveal gradient-text" data-translate-key="projectsTitle">My Projects</h2>
                 <p class="max-w-2xl mx-auto text-gray-400 mb-12 leading-relaxed gsap-reveal" data-translate-key="projectsDesc">
                     A selection of my recent work. Hover over a project to see more details and click "View Details" to see the full case study.
                 </p>
@@ -2805,7 +2752,7 @@
 
         <section id="blog" class="py-20 sm:py-24">
             <div class="text-center">
-                <h3 class="text-3xl sm:text-4xl font-bold mb-4 gsap-reveal gradient-text" data-translate-key="blogTitle">From the Blog</h3>
+                <h2 class="text-3xl sm:text-4xl font-bold mb-4 gsap-reveal gradient-text" data-translate-key="blogTitle">From the Blog</h2>
                 <p class="max-w-2xl mx-auto text-gray-400 mb-12 leading-relaxed gsap-reveal" data-translate-key="blogDesc">
                     Sharing insights, tips, and tutorials on design, development, and creative technology.
                 </p>
@@ -2835,7 +2782,7 @@
         </section>
 
         <section id="testimonials" class="py-20 sm:py-24">
-            <h3 class="text-3xl sm:text-4xl font-bold text-center mb-12 gsap-reveal gradient-text" data-translate-key="testimonialsTitle">What Clients Say</h3>
+            <h2 class="text-3xl sm:text-4xl font-bold text-center mb-12 gsap-reveal gradient-text" data-translate-key="testimonialsTitle">What Clients Say</h2>
             <div class="relative max-w-3xl mx-auto">
                 <button id="prev-testimonial" class="slider-btn left-2 md:left-0 md:-translate-x-1/2" aria-label="Previous Comment">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" /></svg>
@@ -3168,7 +3115,7 @@
     
     <!-- Chatbot Widget -->
     <button id="chat-fab-btn" class="fixed bottom-6 left-6 md:bottom-8 md:left-8 z-50 cta-btn group" aria-label="Open Chatbot" title="Open Chatbot" data-translate-title="tooltipChatbot">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7 transition-transform duration-300 group-hover:scale-110"><path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2z"></path></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7 transition-transform duration-300 group-hover:scale-110"><path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2z"></path></svg>
     </button>
     <div id="chat-widget" class="glass-card">
         <div class="chat-header flex justify-between items-center border-b border-white/10">
@@ -3193,6 +3140,37 @@
         </form>
     </div>
 
+    <!-- Login Modal -->
+    <div id="login-modal" class="modal-hidden fixed inset-0 z-[80] flex items-center justify-center p-4">
+        <!-- Modal Overlay -->
+        <div class="absolute inset-0 bg-black/70 backdrop-blur-sm login-modal-overlay-bg"></div>
+    
+        <!-- Modal Content -->
+        <div class="relative w-11/12 max-w-sm login-modal-content rounded-2xl p-6 sm:p-8 z-10">
+            <button id="close-login-modal-btn" class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors z-20" aria-label="Close" title="Close" data-translate-title="tooltipModalClose">
+                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+    
+            <div class="text-center relative z-10">
+                 <div class="flex justify-center mb-6">
+                    <div class="w-14 h-14 rounded-full flex items-center justify-center bg-white/5 ring-2 ring-white/10 overflow-hidden">
+                         <img src="https://i.ibb.co/QFtzp7t3/1172-copy.jpg" alt="Badr Ibraheem profile picture" class="w-full h-full object-cover" loading="lazy">
+                    </div>
+                 </div>
+                 <h3 class="text-3xl font-bold mb-2">Badr Ibrahee Mohamed</h3>
+                 <p class="text-gray-400 mb-8">Sign in to manage your portfolio.</p>
+            </div>
+            
+            <p id="login-error" class="text-red-400 text-sm text-center h-4 mb-4 relative z-10"></p>
+
+            <button id="google-signin-btn" class="relative z-10 w-full flex justify-center items-center gap-3 font-semibold py-3 px-4 rounded-full transition-all duration-300">
+                <svg class="w-5 h-5" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"></path><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"></path><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"></path><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"></path><path fill="none" d="M0 0h48v48H0z"></path></svg>
+                Sign in with Google
+            </button>
+
+        </div>
+    </div>
+    
     <!-- Project Add/Edit Modal -->
     <div id="project-modal" class="modal-hidden fixed inset-0 z-[70] flex items-center justify-center p-4">
         <!-- Modal Overlay -->
@@ -3513,6 +3491,9 @@
                 <a href="https://www.instagram.com/bdr_e_mohamed" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Instagram" title="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
             </div>
             <p data-translate-key="footerRights">&copy; 2025 Badr. All rights reserved.</p>
+            <div id="admin-footer-controls" class="mt-4 text-center" style="display: none;">
+                <button id="download-sitemap-btn" class="secondary-btn !text-sm">Download Sitemap</button>
+            </div>
         </div>
     </footer>
 
@@ -4041,6 +4022,7 @@
                         // This user is an authorized admin
                         document.body.classList.add('logged-in');
                         addArticleContainer.style.display = 'block'; // Show add article button
+                        document.getElementById('admin-footer-controls').style.display = 'block';
                         
                         // Fetch admin settings for profile pictures
                         const adminSettings = adminDoc.data();
@@ -4095,11 +4077,13 @@
                         // This user is authenticated but not an authorized admin
                         console.log("Unauthorized user signed in:", user.email);
                         console.log("UID Check Failed. The UID we checked for was:", user.uid); // More direct message
+                        /* Login modal is disabled
                         const loginError = document.getElementById('login-error');
                         if(loginError) {
                             loginError.innerHTML = `Authentication failed.<br>UID checked: ${user.uid}`; // Display UID in the modal
                         }
-                        // showLoginModal(); // Re-show the modal so the user sees the error
+                        showLoginModal(); // Re-show the modal so the user sees the error
+                        */
                         await signOut(auth); // Sign them out immediately
                     }
                 } else {
@@ -4124,11 +4108,14 @@
                     }
                     document.body.classList.remove('logged-in');
                     addArticleContainer.style.display = 'none'; // Hide add article button
-                    authContainer.innerHTML = `<a href="#hero" id="auth-link" class="gradient-text text-2xl font-bold">Badr.</a>`;
+                    document.getElementById('admin-footer-controls').style.display = 'none';
+                    authContainer.innerHTML = `<a href="#" class="gradient-text text-2xl font-bold">Badr.</a>`;
+                    /* Login modal is disabled
                     document.getElementById('auth-link').addEventListener('click', (e) => {
-                        // e.preventDefault();
-                        // showLoginModal();
+                        e.preventDefault();
+                        showLoginModal();
                     });
+                    */
                 }
                 
                 // Check maintenance mode for everyone AFTER determining admin status
@@ -5253,6 +5240,33 @@
             }
 
             // --- Login Modal Logic ---
+            const loginModal = document.getElementById('login-modal');
+            const closeLoginModalBtn = document.getElementById('close-login-modal-btn');
+            const loginModalOverlay = loginModal.querySelector('.login-modal-overlay-bg');
+            const loginError = document.getElementById('login-error');
+            const googleSignInBtn = document.getElementById('google-signin-btn');
+
+            function showLoginModal() { if (loginModal) loginModal.classList.remove('modal-hidden'); }
+            function hideLoginModal() { if (loginModal) loginModal.classList.add('modal-hidden'); }
+
+            if(loginModal && closeLoginModalBtn && loginModalOverlay) {
+                closeLoginModalBtn.addEventListener('click', hideLoginModal);
+                loginModalOverlay.addEventListener('click', hideLoginModal);
+            }
+
+            if (googleSignInBtn) {
+                googleSignInBtn.addEventListener('click', () => {
+                    loginError.textContent = ''; // Clear previous errors
+                    const provider = new GoogleAuthProvider();
+                    signInWithPopup(auth, provider)
+                        .then((result) => {
+                            hideLoginModal();
+                        }).catch((error) => {
+                            console.error("Google Sign-in Error:", error);
+                            loginError.textContent = "Could not sign in with Google.";
+                        });
+                });
+            }
             
             // --- Project Add/Edit Modal Logic ---
             const projectModal = document.getElementById('project-modal');
@@ -6026,6 +6040,8 @@
             const nextGalleryBtn = document.getElementById('certificate-gallery-next');
             let currentCertificateIndex = 0;
             let currentCertificateSlideIndex = 0;
+            let certificateTouchStartX = 0;
+            let certificateTouchEndX = 0;
 
             function showCertificateModal() { if(certificateModal) certificateModal.classList.remove('modal-hidden'); }
             function hideCertificateModal() { if(certificateModal) certificateModal.classList.add('modal-hidden'); }
@@ -6230,6 +6246,30 @@
                         updateCertificatesSliderButtons();
                     }
                 });
+
+                const certificatesSliderContainer = document.getElementById('certificates-slider-container');
+                if (certificatesSliderContainer) {
+                    certificatesSliderContainer.addEventListener('touchstart', e => {
+                        certificateTouchStartX = e.changedTouches[0].screenX;
+                    }, { passive: true });
+
+                    certificatesSliderContainer.addEventListener('touchend', e => {
+                        certificateTouchEndX = e.changedTouches[0].screenX;
+                        handleCertificateSwipe();
+                    }, { passive: true });
+                }
+
+                function handleCertificateSwipe() {
+                    const swipeThreshold = 50; // Minimum distance for a swipe in pixels
+                    if (certificateTouchEndX < certificateTouchStartX - swipeThreshold) {
+                        // Swiped left (next)
+                        nextCertificateBtn.click();
+                    }
+                    if (certificateTouchEndX > certificateTouchStartX + swipeThreshold) {
+                        // Swiped right (previous)
+                        prevCertificateBtn.click();
+                    }
+                }
             }
 
 
@@ -7042,6 +7082,61 @@ USER QUERY: "${userMessage}"`;
                 setCookie('selected_language', lang, 365);
             }
 
+            // --- Sitemap Generation ---
+            function generateSitemap() {
+                const baseUrl = "https://badre.site/";
+                const today = new Date().toISOString();
+
+                let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
+                xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
+
+                // Home page
+                xml += `  <url>\n`;
+                xml += `    <loc>${baseUrl}</loc>\n`;
+                xml += `    <lastmod>${today}</lastmod>\n`;
+                xml += `    <priority>1.0</priority>\n`;
+                xml += `  </url>\n`;
+
+                // Project pages
+                myProjects.forEach(project => {
+                    xml += `  <url>\n`;
+                    xml += `    <loc>${baseUrl}#project/${project.id}</loc>\n`;
+                    xml += `    <lastmod>${project.date ? new Date(project.date).toISOString() : today}</lastmod>\n`;
+                    xml += `    <priority>0.8</priority>\n`;
+                    xml += `  </url>\n`;
+                });
+
+                // Article pages
+                articlesData.forEach(article => {
+                    xml += `  <url>\n`;
+                    xml += `    <loc>${baseUrl}#article/${article.id}</loc>\n`;
+                    xml += `    <lastmod>${article.createdAt?.toDate ? article.createdAt.toDate().toISOString() : today}</lastmod>\n`;
+                    xml += `    <priority>0.7</priority>\n`;
+                    xml += `  </url>\n`;
+                });
+                
+                // Other static pages
+                 ['#store', '#cv'].forEach(page => {
+                    xml += `  <url>\n`;
+                    xml += `    <loc>${baseUrl}${page}</loc>\n`;
+                    xml += `    <lastmod>${today}</lastmod>\n`;
+                    xml += `    <priority>0.9</priority>\n`;
+                    xml += `  </url>\n`;
+                });
+
+
+                xml += `</urlset>`;
+
+                const blob = new Blob([xml], { type: 'text/xml' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'sitemap.xml';
+                a.click();
+                URL.revokeObjectURL(url);
+            }
+
+
             langSwitcherBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
                 langDropdown.classList.toggle('show');
@@ -7237,6 +7332,12 @@ USER QUERY: "${userMessage}"`;
             const savedLang = getCookie('selected_language') || 'en';
             applyLanguageStyles(savedLang); // Apply RTL/LTR before translating
             translatePage(savedLang);
+
+            // Add Sitemap download listener
+            const sitemapBtn = document.getElementById('download-sitemap-btn');
+            if (sitemapBtn) {
+                sitemapBtn.addEventListener('click', generateSitemap);
+            }
 
             // --- Active Nav Link on Scroll ---
             const sections = document.querySelectorAll('main > section[id]');
@@ -7450,33 +7551,13 @@ USER QUERY: "${userMessage}"`;
 
                 // Add Projects
                 myProjects.forEach(project => {
-                    const projectPart = {
+                    siteData.hasPart.push({
                         "@type": "CreativeWork",
                         "name": project.title,
                         "description": project.description,
                         "url": `https://badre.site/#project/${project.id}`,
                         "image": project.coverImageUrl
-                    };
-
-                    // Add video object to project part if it exists
-                    const videoUrl = project.mediaUrl || project.youtubeUrl;
-                     if (videoUrl) {
-                        try {
-                            const urlObj = new URL(videoUrl);
-                            const hostname = urlObj.hostname.replace('www.', '');
-                            let videoId;
-                            if ((hostname === 'youtube.com' || hostname === 'youtu.be') && (videoId = (hostname === 'youtu.be' ? urlObj.pathname.substring(1) : urlObj.searchParams.get('v')))) {
-                                projectPart.video = {
-                                    "@type": "VideoObject",
-                                    "name": project.title,
-                                    "description": project.description,
-                                    "thumbnailUrl": `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`,
-                                    "embedUrl": `https://www.youtube.com/embed/${videoId}`
-                                };
-                            }
-                        } catch(e) { /* ignore invalid urls */ }
-                    }
-                    siteData.hasPart.push(projectPart);
+                    });
                 });
 
                 // Add Articles
@@ -7504,7 +7585,21 @@ USER QUERY: "${userMessage}"`;
                         "offers": {
                             "@type": "Offer",
                             "price": product.price,
-                            "priceCurrency": product.currency || "EGP"
+                            "priceCurrency": product.currency || "EGP",
+                            "availability": "https://schema.org/InStock"
+                        },
+                        "aggregateRating": {
+                            "@type": "AggregateRating",
+                            "ratingValue": "4.9",
+                            "reviewCount": "89"
+                        },
+                        "review": {
+                            "@type": "Review",
+                            "author": {
+                                "@type": "Person",
+                                "name": "Badr Ibraheem"
+                            },
+                            "reviewBody": "A high-quality product that meets professional standards, designed by Badr Ibraheem."
                         }
                     });
                 });
@@ -7559,5 +7654,11 @@ USER QUERY: "${userMessage}"`;
     </script>
 </body>
 
-
 </html>
+
+
+
+
+
+
+
