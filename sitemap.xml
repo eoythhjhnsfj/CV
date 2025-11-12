@@ -2,8 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://badre.site/</loc>
-    <lastmod>2025-11-11T15:10:25.491Z</lastmod>
+    <lastmod>2025-11-12T12:50:08.945Z</lastmod>
     <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://badre.site/#project/aaRysXQ5sSX3Mfax2QvU</loc>
+    <lastmod>2025-11-11T00:00:00.000Z</lastmod>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://badre.site/#project/ij01boMlgrB8cNKeT12B</loc>
@@ -14,6 +19,26 @@
     <loc>https://badre.site/#project/c2kvFCgrVlLxqZMqw0iY</loc>
     <lastmod>2024-03-10T00:00:00.000Z</lastmod>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://badre.site/#article/7AWdOrc6S47zobj05S68</loc>
+    <lastmod>2025-11-12T11:54:09.472Z</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://badre.site/#article/0cSDJfkHi12tz5h32QqH</loc>
+    <lastmod>2025-11-12T11:51:14.469Z</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://badre.site/#article/7DcHswKEl0v2SUa5bcGA</loc>
+    <lastmod>2025-11-12T11:49:33.605Z</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://badre.site/#article/uRUBhw9X28Yar4pJJaZ3</loc>
+    <lastmod>2025-11-12T11:35:18.865Z</lastmod>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://badre.site/#article/OBrp9r5ULhlUkJJIqg2G</loc>
@@ -37,12 +62,12 @@
   </url>
   <url>
     <loc>https://badre.site/#store</loc>
-    <lastmod>2025-11-11T15:10:25.491Z</lastmod>
+    <lastmod>2025-11-12T12:50:08.945Z</lastmod>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://badre.site/#cv</loc>
-    <lastmod>2025-11-11T15:10:25.491Z</lastmod>
+    <lastmod>2025-11-12T12:50:08.945Z</lastmod>
     <priority>0.9</priority>
   </url>
 </urlset>
