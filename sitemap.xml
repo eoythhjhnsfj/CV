@@ -3,7 +3,7 @@
                         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://badre.site/</loc>
-    <lastmod>2025-11-12T20:28:48.090Z</lastmod>
+    <lastmod>2025-11-13T08:50:55.176Z</lastmod>
     <priority>1.0</priority>
     <image:image>
       <image:loc>https://badre.site/images/50.webp</image:loc>
@@ -339,12 +339,12 @@
   </url>
   <url>
     <loc>https://badre.site/#store</loc>
-    <lastmod>2025-11-12T20:28:48.090Z</lastmod>
+    <lastmod>2025-11-13T08:50:55.176Z</lastmod>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://badre.site/#cv</loc>
-    <lastmod>2025-11-12T20:28:48.090Z</lastmod>
+    <lastmod>2025-11-13T08:50:55.176Z</lastmod>
     <priority>0.9</priority>
   </url>
 </urlset>
