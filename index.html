@@ -5227,7 +5227,7 @@
                      return;
                 }
 
-                const apiKey = "AIzaSyCyuyuxLEWbcl8XIxZRqTDV4kKVc1xY_H8"; 
+                const apiKey = "AIzaSyAbPyXoqxoc03BIaAipmbcXRWxOdS9AJl4"; 
                 const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
 
                 const systemPrompt = `You are an expert portfolio curator. Your task is to recommend three relevant projects from a provided list based on a user's currently viewed project. Analyze the current project's title, description, and tags. Then, from the list of "other projects", select the three that are most similar in style, tools used, or theme.
@@ -5934,7 +5934,7 @@
                      return;
                 }
 
-                const apiKey = "AIzaSyCyuyuxLEWbcl8XIxZRqTDV4kKVc1xY_H8"; 
+                const apiKey = "AIzaSyAbPyXoqxoc03BIaAipmbcXRWxOdS9AJl4"; 
                 const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
 
                 const systemPrompt = `You are an expert blog editor. Your task is to recommend three relevant articles from a provided list based on a user's currently viewed article.
@@ -6822,7 +6822,7 @@ Based on the "Current Article", select the three most relevant from "Other Artic
                 const projectsContext = myProjects.map(p => ({ title: p.title, description: p.description, tags: p.tags })).slice(0, 15);
                 const articlesContext = articlesData.map(a => ({ title: a.title, tags: a.tags })).slice(0, 15);
 
-                const apiKey = "AIzaSyCyuyuxLEWbcl8XIxZRqTDV4kKVc1xY_H8";
+                const apiKey = "AIzaSyAbPyXoqxoc03BIaAipmbcXRWxOdS9AJl4";
                 const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
 
                 const systemPrompt = `You are a helpful AI assistant for Badr Ibraheem's portfolio website. Your task is to provide a comprehensive response to a user's search query based on the provided website content (projects and articles).
@@ -7116,7 +7116,7 @@ Based on the "Current Article", select the three most relevant from "Other Artic
                 renderMessages();
                 showTypingIndicator();
 
-                const apiKey = "AIzaSyCyuyuxLEWbcl8XIxZRqTDV4kKVc1xY_H8"; 
+                const apiKey = "AIzaSyAbPyXoqxoc03BIaAipmbcXRWxOdS9AJl4"; 
                 const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
 
                 const projectsContext = myProjects.map(p => ({ id: p.id, title: p.title, description: p.description, tags: p.tags, coverImageUrl: p.coverImageUrl })).slice(0, 10);
@@ -8286,4 +8286,5 @@ USER QUERY: "${userMessage}"`;
 
 
 </html>
+
 
