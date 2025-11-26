@@ -197,20 +197,20 @@
         }
 
         html.light-mode {
-            --bg-primary: #F0EBE3; 
-            --bg-overlay: rgba(240, 235, 227, 0.9);
-            --text-primary-color: #29352A; 
-            --text-secondary-color: #667063; 
-            --border-primary: rgba(41, 53, 42, 0.15);
-            --glass-bg: rgba(255, 255, 255, 0.6); 
-            --glass-hover-bg: rgba(255, 255, 255, 0.8);
-            --glass-border-hover: rgba(102, 112, 99, 0.4); 
+            --bg-primary: #fdfcfb; 
+            --bg-overlay: rgba(253, 252, 251, 0.9);
+            --text-primary-color: #5b4837; 
+            --text-secondary-color: #93806f; 
+            --border-primary: rgba(147, 128, 111, 0.15);
+            --glass-bg: rgba(222, 212, 202, 0.4); 
+            --glass-hover-bg: rgba(222, 212, 202, 0.6);
+            --glass-border-hover: rgba(147, 128, 111, 0.4); 
             --text-on-accent: #FFFFFF;
-            --shadow-sm: 0 1px 2px 0 rgba(41, 53, 42, 0.07);
-            --shadow-md: 0 10px 15px -3px rgba(41, 53, 42, 0.1), 0 4px 6px -4px rgba(41, 53, 42, 0.1);
-            --accent-gradient: linear-gradient(to right, #29352A, #667063); 
-            --accent-color: #667063; 
-            --accent-color-rgb: 102, 112, 99;
+            --shadow-sm: 0 1px 2px 0 rgba(91, 72, 55, 0.07);
+            --shadow-md: 0 10px 15px -3px rgba(91, 72, 55, 0.1), 0 4px 6px -4px rgba(91, 72, 55, 0.1);
+            --accent-gradient: linear-gradient(to right, #5b4837, #93806f); 
+            --accent-color: #93806f; 
+            --accent-color-rgb: 147, 128, 111;
         }
 
         body {
@@ -388,46 +388,99 @@
         .store-btn {
             color: var(--text-on-accent);
             font-weight: 700;
-            border: 1px solid transparent;
-            padding: 0.75rem 1.5rem;
+            padding: 0.75rem 2rem;
             border-radius: 9999px;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
             display: inline-flex;
             align-items: center;
             background-image: var(--accent-gradient);
             border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(var(--accent-color-rgb), 0.3);
+            z-index: 1;
         }
+        
+        .store-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s ease;
+            z-index: 1;
+        }
+
+        .store-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(var(--accent-color-rgb), 0.6);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .store-btn:hover::before {
+            left: 100%;
+        }
+
         html.light-mode .store-btn {
              background-image: var(--accent-gradient);
-             border: 1px solid rgba(0, 0, 0, 0.1);
+             border: 1px solid rgba(255, 255, 255, 0.2);
              color: var(--text-on-accent);
-        }
-        .store-btn:hover {
-            transform: translateY(-2px) scale(1.05);
-            box-shadow: 0 8px 25px rgba(var(--accent-color-rgb), 0.5);
-            filter: brightness(1.15); 
+             box-shadow: 0 4px 15px rgba(var(--accent-color-rgb), 0.25);
         }
         html.light-mode .store-btn:hover {
-            box-shadow: 0 8px 25px rgba(var(--accent-color-rgb), 0.4);
+            box-shadow: 0 10px 30px rgba(var(--accent-color-rgb), 0.5);
         }
 
         .view-work-btn {
             font-weight: 700;
-            padding: 0.75rem 1.5rem;
+            padding: 0.75rem 2rem;
             border-radius: 9999px;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
             display: inline-flex;
             align-items: center;
-            background-color: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             color: var(--text-primary-color);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
         }
+        
+        .view-work-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .view-work-btn:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: var(--accent-color);
+            transform: translateY(-3px);
+            box-shadow: 0 0 20px rgba(var(--accent-color-rgb), 0.3);
+        }
+
+        .view-work-btn:hover::before {
+            left: 100%;
+        }
+
         html.light-mode .view-work-btn {
-            background-color: rgba(0, 0, 0, 0.05);
+            background-color: rgba(255, 255, 255, 0.6);
             border-color: rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
         html.light-mode .view-work-btn:hover {
-            background-color: rgba(0, 0, 0, 0.1);
+            background-color: #ffffff;
+            border-color: var(--accent-color);
+            box-shadow: 0 5px 20px rgba(var(--accent-color-rgb), 0.25);
         }
 
         .social-btn {
@@ -1082,6 +1135,32 @@
         }
         #user-menu-btn.open svg {
             transform: rotate(180deg);
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            background-color: #ef4444;
+            color: white;
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            pointer-events: none;
+            border: 2px solid var(--background-dark);
+        }
+        #admin-notification-dropdown {
+            display: none;
+            transform-origin: top right;
+            animation: grow-down 0.2s ease-in-out;
+        }
+        #admin-notification-dropdown.show {
+            display: block;
         }
 
 
@@ -1988,160 +2067,244 @@
             display: block;
         }
 
+        /* --- Modern Store Product Card Styles --- */
         .store-product-card {
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
-            border-radius: 1.5rem; 
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             border: 1px solid var(--border-primary);
-            padding: 1rem;
+            border-radius: 1.5rem;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
             position: relative;
             overflow: hidden;
-            transition: all 0.4s ease;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
-        .store-product-card:before {
+        
+        /* Hover Gradient Overlay */
+        .store-product-card::after {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            border-radius: 1.5rem;
-            border: 2px solid transparent;
-            background: linear-gradient(45deg, var(--accent-color), #8B5CF6) border-box;
-            -webkit-mask:
-                linear-gradient(#fff 0 0) padding-box,
-                linear-gradient(#fff 0 0);
-            -webkit-mask-composite: destination-out;
-            mask-composite: exclude;
+            inset: 0;
+            background: linear-gradient(to bottom, transparent 0%, rgba(var(--accent-color-rgb), 0.05) 100%);
             opacity: 0;
             transition: opacity 0.4s ease;
-            pointer-events: none; 
+            pointer-events: none;
+            z-index: 0;
         }
+
         .store-product-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 20px 30px rgba(0,0,0,0.2);
+            border-color: var(--accent-color);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
         }
-        .store-product-card:hover:before {
+        
+        .store-product-card:hover::after {
             opacity: 1;
         }
-        .store-product-card .product-card-image {
-            aspect-ratio: 1 / 1;
-            overflow: hidden;
-            border-radius: 1rem; 
-            margin-bottom: 1rem;
+
+        /* Light Mode Adjustments */
+        html.light-mode .store-product-card {
+            background: #ffffff;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            border-color: rgba(0,0,0,0.05);
         }
-        .store-product-card .product-card-image img {
-            transition: transform 0.5s ease;
-        }
-        .store-product-card:hover .product-card-image img {
-            transform: scale(1.08);
-        }
-        .store-product-card .product-category {
-            font-size: 0.875rem; 
-            color: var(--text-secondary-color);
-            font-weight: 500;
-        }
-        .store-product-card .product-title {
-            font-size: 1.25rem; 
-            font-weight: 700;
-            color: var(--text-primary-color);
-            margin: 0.25rem 0 1rem 0;
-            min-height: 3.5rem; 
-        }
-        .store-product-card .details-price-wrapper {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-top: 1rem;
-            border-top: 1px solid var(--border-primary);
-        }
-        .store-product-card .product-price-display {
-            font-size: 1.5rem; 
-            font-weight: 800;
-            background: var(--accent-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .store-product-card .details-btn {
-            background: transparent;
-            color: var(--text-primary-color);
-            font-weight: 600;
-            padding: 0.5rem 1rem;
-            border-radius: 9999px;
-            transition: all 0.3s ease;
-            border: 1px solid var(--border-primary);
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        html.light-mode .store-product-card .details-btn {
-            border-color: rgba(0,0,0,0.2);
-        }
-        .store-product-card .details-btn:hover {
-            background-color: var(--accent-color);
-            color: var(--text-on-accent);
-            transform: scale(1.05);
+        html.light-mode .store-product-card:hover {
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
             border-color: var(--accent-color);
         }
-        .store-product-card .details-btn svg {
-             width: 1rem; 
-             height: 1rem;
-             transition: transform 0.3s ease;
+
+        .store-product-card .product-card-image {
+            aspect-ratio: 1 / 1;
+            border-radius: 1rem;
+            overflow: hidden;
+            margin-bottom: 1.25rem;
+            position: relative;
+            z-index: 1;
         }
-        .store-product-card .details-btn:hover svg {
-            transform: translateX(3px);
+        
+        .store-product-card .product-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        
+        .store-product-card:hover .product-card-image img {
+            transform: scale(1.1);
+        }
+
+        .store-product-card .product-info {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            z-index: 1;
+        }
+
+        .store-product-card .product-category {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--accent-color);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .store-product-card .product-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary-color);
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            min-height: 3.25rem;
+        }
+
+        .store-product-card .product-footer {
+            margin-top: auto;
+            padding-top: 1.25rem;
+            border-top: 1px solid var(--border-primary);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 1;
+        }
+
+        .store-product-card .product-price-display {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--text-primary-color);
+        }
+
+        .store-product-card .details-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: transparent;
+            border: 1px solid var(--border-primary);
+            color: var(--text-primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        html.light-mode .store-product-card .details-btn {
+            border-color: rgba(0,0,0,0.15);
+        }
+
+        .store-product-card .details-btn svg {
+            width: 20px;
+            height: 20px;
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .store-product-card:hover .details-btn {
+            background: var(--accent-color);
+            border-color: var(--accent-color);
+            color: white;
+            transform: scale(1.1);
+        }
+        
+        .store-product-card:hover .details-btn svg {
+            transform: rotate(-45deg);
+        }
+        
+        /* RTL fixes for rotation */
+        html[dir="rtl"] .store-product-card:hover .details-btn svg {
+            transform: rotate(45deg); /* Mirror rotation for RTL */
+        }
+
+        /* --- Store Reviews Marquee Animation --- */
+        .store-reviews-mask {
+            overflow: hidden;
+            position: relative;
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            padding: 1rem 0;
+        }
+        #store-reviews-grid {
+            display: flex;
+            gap: 1.5rem;
+            width: max-content;
+            animation: scroll-reviews 60s linear infinite;
+        }
+        #store-reviews-grid:hover {
+            animation-play-state: paused;
+        }
+        @keyframes scroll-reviews {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .store-review-card {
+            width: 350px;
+            flex-shrink: 0;
+            white-space: normal;
+        }
+        /* Mobile adjustment for card width */
+        @media (max-width: 640px) {
+            .store-review-card {
+                width: 280px;
+            }
         }
 
         #product-media-slider-container {
-            perspective: 1200px;
+            perspective: 1000px; /* Reduced perspective for flatter look */
             position: relative;
             width: 100%;
             height: 100%;
         }
         .product-media-slide {
             position: absolute;
-            width: 60%;
+            width: 100%; /* Changed from 60% to 100% to fill container */
             height: 100%;
             top: 0;
-            left: 20%;
-            border-radius: 1rem;
+            left: 0; /* Changed from 20% to 0 */
             overflow: hidden;
             transition: transform 0.5s ease, opacity 0.5s ease, z-index 0.5s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: rgba(0,0,0,0.2);
+            background-color: transparent;
         }
         .product-media-slide img,
         .product-media-slide iframe {
             width: 100%;
             height: 100%;
-            object-fit: contain;
+            object-fit: cover;
         }
         .product-media-slide.active {
-            transform: translateX(0) scale(1.1);
+            transform: translateX(0); /* Removed scaling to keep it full size */
             opacity: 1;
             z-index: 10;
         }
         .product-media-slide.active[data-media-type="image"] {
-            cursor: pointer;
+            cursor: zoom-in;
         }
         .product-media-slide.prev {
-            transform: translateX(-55%) scale(0.85);
-            opacity: 0.4;
+            transform: translateX(-100%); /* Slide completely out to the left */
+            opacity: 0;
             z-index: 5;
         }
         .product-media-slide.next {
-            transform: translateX(55%) scale(0.85);
-            opacity: 0.4;
+            transform: translateX(100%); /* Slide completely out to the right */
+            opacity: 0;
             z-index: 5;
         }
         .product-media-slide.hidden-prev {
-             transform: translateX(-80%) scale(0.7);
+             transform: translateX(-100%);
              opacity: 0;
              z-index: 1;
         }
         .product-media-slide.hidden-next {
-             transform: translateX(80%) scale(0.7);
+             transform: translateX(100%);
              opacity: 0;
              z-index: 1;
         }
@@ -2555,6 +2718,86 @@
             background-color: rgba(0,0,0,0.05);
         }
 
+        /* Store Navigation Bar Styles */
+        .store-nav-container {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        .store-nav-link {
+            font-weight: 600;
+            color: var(--text-secondary-color);
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            background: transparent;
+        }
+        .store-nav-link:hover, .store-nav-link.active {
+            color: var(--text-primary-color);
+            background-color: var(--glass-hover-bg);
+        }
+        .store-nav-link.active {
+            color: var(--accent-color);
+            background-color: rgba(var(--accent-color-rgb), 0.1);
+        }
+
+        /* Dropdown Styles for Store Nav */
+        .store-nav-item {
+            position: relative;
+            display: inline-block;
+        }
+        .store-nav-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--glass-bg);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--border-primary);
+            border-radius: 1rem;
+            padding: 0.5rem;
+            min-width: 180px;
+            box-shadow: var(--shadow-md);
+            z-index: 50;
+            margin-top: 0.5rem;
+            opacity: 0;
+            transition: opacity 0.3s ease, margin-top 0.3s ease;
+        }
+        .store-nav-item:hover .store-nav-dropdown {
+            display: block;
+            opacity: 1;
+            margin-top: 0.5rem;
+            animation: fade-in-up 0.3s ease forwards;
+        }
+        .store-nav-dropdown-link {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: var(--text-secondary-color);
+            border-radius: 0.5rem;
+            transition: all 0.2s ease;
+            text-align: center;
+            white-space: nowrap;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .store-nav-dropdown-link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--text-primary-color);
+        }
+        html.light-mode .store-nav-dropdown-link:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+        
+        @keyframes fade-in-up {
+            from { opacity: 0; transform: translate(-50%, 10px); }
+            to { opacity: 1; transform: translate(-50%, 0); }
+        }
+
         .article-body[dir="rtl"] {
             text-align: right;
             direction: rtl;
@@ -2644,6 +2887,24 @@
             </nav>
             
             <div class="flex items-center gap-2 md:gap-4">
+                <!-- Admin Notifications -->
+                <div id="admin-notifications-container" class="relative hidden">
+                    <button id="admin-notification-btn" class="nav-link relative" title="Pending Reviews">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+                        <span id="admin-notification-badge" class="notification-badge hidden">0</span>
+                    </button>
+                    <div id="admin-notification-dropdown" class="glass-card absolute top-full right-0 mt-3 w-80 rounded-xl overflow-hidden shadow-lg z-50">
+                        <div class="p-3 border-b border-white/10 bg-white/5 flex justify-between items-center">
+                            <span class="font-bold text-white text-sm">Pending Reviews</span>
+                            <span id="pending-count-header" class="text-xs text-gray-400">0 pending</span>
+                        </div>
+                        <div id="pending-reviews-list" class="max-h-64 overflow-y-auto">
+                            <!-- Pending items injected here -->
+                            <div class="p-4 text-center text-gray-500 text-sm">No pending reviews.</div>
+                        </div>
+                    </div>
+                </div>
+
                  <div id="auth-container" class="text-2xl font-bold">
                     <a href="#" id="auth-link" class="gradient-text">Badr.</a>
                 </div>
@@ -2687,7 +2948,9 @@
             <div class="relative z-10 w-full flex flex-col-reverse md:grid md:grid-cols-2 items-center gap-8 md:gap-12">
                 
                 <div class="text-center md:text-left">
-                    <span class="block text-xl font-semibold text-violet-400 mb-2" id="hero-greeting" data-translate-key="heroGreeting">Hello, I'm</span>
+                    <!-- Updated Greeting: Dynamic Color & Typing Effect container -->
+                    <span class="block text-xl font-semibold text-[var(--accent-color)] mb-2 min-h-[2rem]" id="hero-greeting"></span>
+                    
                     <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white leading-tight">
                         <span class="gradient-text" data-translate-key="heroLine1">Badr</span><br><span data-translate-key="heroLine2">Ibraheem Mohameed</span>
                     </h1>
@@ -2703,7 +2966,7 @@
                         <a href="https://github.com/bdremohameed" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="GitHub" title="GitHub"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>
                         <a href="https://www.facebook.com/bdr.e.mohmed" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Facebook" title="Facebook"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
                         <a href="https://www.instagram.com/bdr_e_mohamed" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Instagram" title="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
-                        <a href="https://www.behance.net/bdremohameed" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Behance" title="Behance"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15.44 9.17h5.48V6.26h-5.48zM8.75 11.5c1.47 0 2.5-1.03 2.5-2.5s-1.03-2.5-2.5-2.5-2.5 1.03-2.5 2.5 1.03 2.5 2.5 2.5zM15.44 17.74h5.48v-2.91h-5.48zM8.75 18.02c1.47 0 2.5-1.03 2.5-2.5s-1.03-2.5-2.5-2.5-2.5 1.03-2.5 2.5 1.03 2.5 2.5 2.5zM3.02 12.27h3.94v-1H3.02z"/></svg></a>
+                        <a href="https://www.behance.net/bdremohameed" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Behance" title="Behance"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-12h4.5a3 3 0 0 1 0 6a3 3 0 0 1 0 6h-4.5" /><line x1="3" y1="12" x2="7.5" y2="12" /><path d="M14 13h7a3.5 3.5 0 0 0 -7 0v2a3.5 3.5 0 0 0 6.64 1" /><line x1="16" y1="6" x2="19" y2="6" /></svg></a>
                     </div>
 
                     <div class="mt-8 flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4" id="hero-ctas">
@@ -3039,23 +3302,264 @@
     </section>
 
     <section id="store-view" class="hidden min-h-screen py-20">
-        <div class="container mx-auto px-6">
-            <div class="flex justify-between items-center mb-8">
-                 <h2 class="text-3xl sm:text-4xl font-bold gradient-text" data-translate-key="navStore">Store</h2>
+        <div class="container mx-auto px-6 relative">
+            <!-- Close Button (Absolute Positioned) -->
+            <div class="absolute top-0 right-6 z-10">
                 <button id="close-store-btn" class="secondary-btn inline-flex items-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
                     <span>Close</span>
                 </button>
             </div>
-            <div id="store-content" class="max-w-7xl mx-auto">
-                <div id="products-grid-store" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+
+            <!-- Centered Header Area -->
+            <div class="text-center mt-8 mb-12">
+                 <h2 class="text-5xl sm:text-6xl font-bold gradient-text mb-8 inline-block" data-translate-key="navStore">Store</h2>
+                 
+                 <!-- Search Bar -->
+                <div class="relative max-w-md mx-auto">
+                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                        <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+                    </div>
+                    <input type="text" id="store-search-input" class="form-input w-full rounded-full pl-12 py-3 !bg-opacity-10 focus:!bg-opacity-20 transition-all" placeholder="Search products by name, category or tag..." autocomplete="off" data-translate-placeholder="searchPlaceholder">
                 </div>
+
+                <!-- Store Navigation Bar -->
+                <nav class="store-nav-container">
+                    <!-- Sections Dropdown -->
+                    <div class="store-nav-item">
+                        <button class="store-nav-link flex items-center gap-2 group">
+                            <span data-translate-key="storeNavSections">Sections</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform group-hover:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
+                        </button>
+                        <div class="store-nav-dropdown">
+                            <a href="#" class="store-nav-dropdown-link store-filter-trigger" data-filter="all" data-translate-key="storeNavAll">All Products</a>
+                            <a href="#" class="store-nav-dropdown-link store-filter-trigger" data-filter="Subscriptions" data-translate-key="storeNavSubscriptions">Subscriptions</a>
+                            <a href="#" class="store-nav-dropdown-link store-filter-trigger" data-filter="Software" data-translate-key="storeNavSoftware">Software</a>
+                            <a href="#" class="store-nav-dropdown-link store-filter-trigger" data-filter="Services" data-translate-key="storeNavServices">Services</a>
+                        </div>
+                    </div>
+
+                    <a href="#" class="store-nav-link contact-modal-trigger" data-translate-key="storeNavContact">Contact Us</a>
+                    <a href="#store-faq-section" class="store-nav-link" onclick="document.getElementById('store-faq-section').scrollIntoView({behavior:'smooth'}); return false;" data-translate-key="faqTitle">FAQ</a>
+                </nav>
+            </div>
+
+            <!-- Store Banner -->
+            <div class="w-full mb-16 relative group">
+                <div class="relative w-full h-64 md:h-[450px] rounded-3xl overflow-hidden shadow-2xl border border-[var(--border-primary)]">
+                    <!-- Image Element -->
+                    <img id="store-banner-img" src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop" alt="Store Banner" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 z-0">
+                    
+                    <!-- Video Element (Hidden by default) -->
+                    <video id="store-banner-video" class="absolute inset-0 w-full h-full object-cover z-0 hidden" autoplay loop muted playsinline></video>
+
+                    <!-- Overlay Gradient for better text readability -->
+                    <div class="absolute inset-0 bg-gradient-to-r from-black/95 via-black/60 to-transparent z-10"></div>
+                    
+                    <!-- Content -->
+                    <div class="absolute bottom-0 left-0 p-8 md:p-16 text-white max-w-4xl z-20 flex flex-col justify-end h-full">
+                        <div class="transform transition-all duration-700 translate-y-0 opacity-100">
+                            <span id="store-banner-badge" class="inline-block px-4 py-1.5 mb-6 text-xs font-bold tracking-widest text-amber-400 uppercase bg-black/50 border border-amber-400/30 rounded-full backdrop-blur-md shadow-lg">
+                                Premium Assets
+                            </span>
+                            <h3 id="store-banner-title" class="text-4xl md:text-6xl font-black mb-6 leading-tight drop-shadow-lg text-white">
+                                Elevate Your <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 to-amber-500">Creative Projects</span>
+                            </h3>
+                            <p id="store-banner-desc" class="text-gray-200 text-lg md:text-xl max-w-2xl leading-relaxed drop-shadow-md font-medium">
+                                Discover high-quality templates, 3D models, and design resources curated to help you stand out.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="store-content" class="max-w-7xl mx-auto">
+                
+                <!-- No Results Message -->
+                <div id="store-no-results" class="hidden text-center py-12">
+                    <p class="text-gray-400 text-xl">No products found matching your search.</p>
+                </div>
+
+                <!-- Dynamic Categories Container -->
+                <div id="store-categories-container">
+                    <!-- Categories and products will be injected here dynamically -->
+                </div>
+
                  <div id="add-product-container" class="text-center mt-12">
                     <button id="add-product-btn" class="submit-btn group">
                         <span data-translate-key="addProductBtn">Add New Product</span>
-                        <svg xmlns="http://www.w.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 ml-2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 ml-2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                     </button>
                 </div>
+
+                <!-- Trust Stats Section -->
+                <div class="w-full mt-24 mb-10">
+                    <div class="glass-card p-8 md:p-12 rounded-3xl text-center relative overflow-hidden border border-[var(--border-primary)]">
+                        <!-- Changed gradient color from green to brown (#B45309) -->
+                        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#B45309] to-transparent opacity-50"></div>
+                        
+                        <h3 class="text-2xl md:text-4xl font-bold text-white mb-12" data-translate-key="storeStatsTitle">
+                            أكثر من 400 عميل يثقون بخدماتنا
+                        </h3>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+                            <!-- Stat 1 -->
+                            <div class="flex flex-col items-center group">
+                                <!-- Changed number to 17 + and color to brown -->
+                                <span class="text-4xl md:text-5xl font-bold text-[#B45309] mb-3 transition-transform duration-300 group-hover:scale-110" dir="ltr">17 +</span>
+                                <p class="text-gray-300 font-medium" data-translate-key="storeStat1">مؤسسة وشركة وثقت بنا</p>
+                            </div>
+                            
+                            <!-- Stat 2 -->
+                            <div class="flex flex-col items-center group border-t md:border-t-0 md:border-l md:border-r border-white/5 pt-8 md:pt-0">
+                                <!-- Changed number to 3 + and color to brown -->
+                                <span class="text-4xl md:text-5xl font-bold text-[#B45309] mb-3 transition-transform duration-300 group-hover:scale-110" dir="ltr">3 +</span>
+                                <p class="text-gray-300 font-medium" data-translate-key="storeStat2">أكثر من 3 سنوات خبرة في الاشتراكات الرقمية</p>
+                            </div>
+                            
+                            <!-- Stat 3 -->
+                            <div class="flex flex-col items-center group border-t md:border-t-0 border-white/5 pt-8 md:pt-0">
+                                <!-- Changed number to 435 + and color to brown -->
+                                <span class="text-4xl md:text-5xl font-bold text-[#B45309] mb-3 transition-transform duration-300 group-hover:scale-110" dir="ltr">435 +</span>
+                                <p class="text-gray-300 font-medium" data-translate-key="storeStat3">عميل سعيد</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Store Reviews Section -->
+                <div id="store-reviews-section" class="w-full mt-16 mb-24">
+                    <div class="flex flex-col sm:flex-row justify-between items-end mb-8 gap-4">
+                        <div>
+                            <h3 class="text-3xl font-bold text-white mb-2 flex items-center gap-2">
+                                <span data-translate-key="storeReviewsTitle">Customer Reviews</span>
+                                <span class="text-sm font-normal text-gray-400 bg-white/5 px-3 py-1 rounded-full" id="store-reviews-count">0</span>
+                            </h3>
+                            <p class="text-gray-400" data-translate-key="storeReviewsDesc">See what our customers are saying about our services.</p>
+                        </div>
+                        <button id="open-store-review-modal-btn" class="secondary-btn flex items-center gap-2 group">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:text-[var(--accent-color)] transition-colors"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                            <span data-translate-key="addReviewBtn">Add Review</span>
+                        </button>
+                    </div>
+                    
+                    <div class="store-reviews-mask">
+                        <div id="store-reviews-grid" class="flex gap-6">
+                            <!-- Reviews will be injected here -->
+                            <div class="w-full text-center py-12 text-gray-500 store-review-card" style="width: 100%;">
+                                <div class="typing-indicator mx-auto mb-4" style="opacity: 0.5;"><span></span><span></span><span></span></div>
+                                Loading reviews...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ Section -->
+                <div id="store-faq-section" class="w-full mt-16 mb-24 max-w-4xl mx-auto">
+                    <h3 class="text-3xl font-bold text-white mb-10 text-center gradient-text" data-translate-key="faqTitle">Frequently Asked Questions</h3>
+                    <div class="space-y-4">
+                        <!-- Q1 -->
+                        <details class="glass-card rounded-2xl group border border-white/5">
+                            <summary class="flex items-center justify-between p-6 cursor-pointer list-none focus:outline-none">
+                                <h4 class="font-bold text-lg text-white" data-translate-key="faqQ1">Are the subscriptions official?</h4>
+                                <span class="transform transition-transform duration-300 group-open:rotate-180 text-[var(--accent-color)]">
+                                    <svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
+                                </span>
+                            </summary>
+                            <div class="px-6 pb-6 text-gray-300 leading-relaxed animate-fade-in" data-translate-key="faqA1">
+                                Yes, all subscriptions provided by Badr Store are 100% official...
+                            </div>
+                        </details>
+
+                        <!-- Q2 -->
+                        <details class="glass-card rounded-2xl group border border-white/5">
+                            <summary class="flex items-center justify-between p-6 cursor-pointer list-none focus:outline-none">
+                                <h4 class="font-bold text-lg text-white" data-translate-key="faqQ2">How is the subscription delivered?</h4>
+                                <span class="transform transition-transform duration-300 group-open:rotate-180 text-[var(--accent-color)]">
+                                    <svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
+                                </span>
+                            </summary>
+                            <div class="px-6 pb-6 text-gray-300 leading-relaxed animate-fade-in" data-translate-key="faqA2">
+                                Subscription details are sent after order completion...
+                            </div>
+                        </details>
+
+                        <!-- Q3 -->
+                        <details class="glass-card rounded-2xl group border border-white/5">
+                            <summary class="flex items-center justify-between p-6 cursor-pointer list-none focus:outline-none">
+                                <h4 class="font-bold text-lg text-white" data-translate-key="faqQ3">What if I face an issue?</h4>
+                                <span class="transform transition-transform duration-300 group-open:rotate-180 text-[var(--accent-color)]">
+                                    <svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
+                                </span>
+                            </summary>
+                            <div class="px-6 pb-6 text-gray-300 leading-relaxed animate-fade-in" data-translate-key="faqA3">
+                                Contact us directly via email or WhatsApp...
+                            </div>
+                        </details>
+
+                        <!-- Q4 -->
+                        <details class="glass-card rounded-2xl group border border-white/5">
+                            <summary class="flex items-center justify-between p-6 cursor-pointer list-none focus:outline-none">
+                                <h4 class="font-bold text-lg text-white" data-translate-key="faqQ4">Is there a warranty?</h4>
+                                <span class="transform transition-transform duration-300 group-open:rotate-180 text-[var(--accent-color)]">
+                                    <svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
+                                </span>
+                            </summary>
+                            <div class="px-6 pb-6 text-gray-300 leading-relaxed animate-fade-in" data-translate-key="faqA4">
+                                Yes, every subscription includes a warranty...
+                            </div>
+                        </details>
+
+                        <!-- Q5 -->
+                        <details class="glass-card rounded-2xl group border border-white/5">
+                            <summary class="flex items-center justify-between p-6 cursor-pointer list-none focus:outline-none">
+                                <h4 class="font-bold text-lg text-white" data-translate-key="faqQ5">Payment methods?</h4>
+                                <span class="transform transition-transform duration-300 group-open:rotate-180 text-[var(--accent-color)]">
+                                    <svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
+                                </span>
+                            </summary>
+                            <div class="px-6 pb-6 text-gray-300 leading-relaxed animate-fade-in" data-translate-key="faqA5">
+                                Yes, we provide several secure payment methods...
+                            </div>
+                        </details>
+                    </div>
+                </div>
+
+                <!-- Payment Methods Section -->
+                <div id="store-payment-methods" class="w-full mt-16 mb-24 max-w-4xl mx-auto text-center">
+                    <h3 class="text-2xl font-bold text-white mb-10 gradient-text" data-translate-key="paymentMethodsTitle">Available Payment Methods</h3>
+                    <div class="flex flex-wrap justify-center items-center gap-6">
+                        <!-- Visa -->
+                        <div class="glass-card p-4 rounded-xl flex flex-col items-center justify-center w-32 h-32 hover:scale-105 transition-transform border border-white/10 bg-white/5 group relative overflow-hidden">
+                            <div class="absolute inset-0 bg-white/5 group-hover:bg-white/10 transition-colors"></div>
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa" class="w-16 h-auto object-contain mb-3 relative z-10" style="filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));">
+                            <span class="text-sm font-bold text-gray-300 relative z-10">Visa</span>
+                        </div>
+                        
+                        <!-- MasterCard -->
+                        <div class="glass-card p-4 rounded-xl flex flex-col items-center justify-center w-32 h-32 hover:scale-105 transition-transform border border-white/10 bg-white/5 group relative overflow-hidden">
+                            <div class="absolute inset-0 bg-white/5 group-hover:bg-white/10 transition-colors"></div>
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="MasterCard" class="w-14 h-auto object-contain mb-3 relative z-10" style="filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));">
+                            <span class="text-sm font-bold text-gray-300 relative z-10">MasterCard</span>
+                        </div>
+                        
+                        <!-- InstaPay -->
+                        <div class="glass-card p-4 rounded-xl flex flex-col items-center justify-center w-32 h-32 hover:scale-105 transition-transform border border-white/10 bg-white/5 group relative overflow-hidden">
+                            <div class="absolute inset-0 bg-white/5 group-hover:bg-white/10 transition-colors"></div>
+                            <!-- Using a reliable placeholder icon style for InstaPay as direct hotlinks can be unstable, styled to match -->
+                            <img src="https://masmoegypt.org/website/assets/img/InstaPay.png" onerror="this.src='https://cdn-icons-png.flaticon.com/512/8983/8983236.png'; this.style.filter='invert(1)'" alt="InstaPay" class="w-16 h-auto object-contain mb-3 relative z-10">
+                            <span class="text-sm font-bold text-gray-300 relative z-10" data-translate-key="paymentInstaPay">InstaPay</span>
+                        </div>
+                        
+                        <!-- E-Wallet -->
+                        <div class="glass-card p-4 rounded-xl flex flex-col items-center justify-center w-32 h-32 hover:scale-105 transition-transform border border-white/10 bg-white/5 group relative overflow-hidden">
+                            <div class="absolute inset-0 bg-white/5 group-hover:bg-white/10 transition-colors"></div>
+                            <img src="https://static.vecteezy.com/system/resources/previews/022/251/552/original/online-payment-3d-rendering-icon-illustration-transparent-background-shopping-and-retail-png.png" alt="E-Wallet" class="w-12 h-auto object-contain mb-3 relative z-10 filter invert opacity-90">
+                            <span class="text-sm font-bold text-gray-300 relative z-10" data-translate-key="paymentWallet">E-Wallet</span>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
@@ -3089,7 +3593,14 @@
                     </div>
                     <div>
                         <label for="product-admin-category" class="form-label">Category</label>
-                        <input type="text" id="product-admin-category" name="category" required class="form-input">
+                        <!-- Changed to Input with Datalist for Custom Categories -->
+                        <input type="text" id="product-admin-category" name="category" required class="form-input bg-[rgba(255,255,255,0.05)] focus:bg-[rgba(255,255,255,0.1)]" list="category-suggestions" placeholder="Type or select a category">
+                        <datalist id="category-suggestions">
+                            <option value="AI Subscriptions">
+                            <option value="Chrome Extensions">
+                            <option value="Website Development">
+                            <option value="Miscellaneous Subscriptions">
+                        </datalist>
                     </div>
                 </div>
                 <div>
@@ -3541,6 +4052,30 @@
                     <label for="dark-mode-url" class="form-label">Dark Mode Profile Picture URL</label>
                     <input type="url" id="dark-mode-url" name="darkModeUrl" placeholder="https://..." required class="form-input">
                 </div>
+                
+                <div class="border-t border-white/10 pt-4 mt-4">
+                    <h4 class="text-lg font-bold text-white mb-4">Store Banner Settings</h4>
+                    <div class="space-y-4">
+                        <div>
+                            <label for="store-banner-url" class="form-label">Banner Image/Video URL</label>
+                            <input type="url" id="store-banner-url" name="storeBannerUrl" placeholder="https://.../image.jpg OR https://.../video.mp4" class="form-input">
+                            <p class="text-xs text-gray-400 mt-1">Supports .jpg, .png, .webp, .mp4, .webm</p>
+                        </div>
+                        <div>
+                            <label for="store-banner-badge-input" class="form-label">Banner Badge Text</label>
+                            <input type="text" id="store-banner-badge-input" name="storeBannerBadge" placeholder="e.g. Premium Assets" class="form-input">
+                        </div>
+                        <div>
+                            <label for="store-banner-title-input" class="form-label">Banner Title</label>
+                            <input type="text" id="store-banner-title-input" name="storeBannerTitle" placeholder="e.g. Elevate Your Creative Projects" class="form-input">
+                        </div>
+                        <div>
+                            <label for="store-banner-desc-input" class="form-label">Banner Description</label>
+                            <textarea id="store-banner-desc-input" name="storeBannerDesc" rows="2" placeholder="e.g. Discover high-quality templates..." class="form-input"></textarea>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="border-t border-white/10 pt-6 mt-6">
                     <div class="flex items-center justify-between">
                         <div>
@@ -3606,6 +4141,45 @@
         </div>
     </div>
 
+    <!-- Store Review Modal -->
+    <div id="store-review-modal" class="modal-hidden fixed inset-0 z-[80] flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/70 backdrop-blur-sm store-review-modal-overlay-bg"></div>
+        <div class="relative w-11/12 max-w-md project-modal-content glass-card rounded-2xl p-6 md:p-8 z-10">
+            <button id="close-store-review-modal-btn" class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors" aria-label="Close">
+                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+            <h3 class="text-2xl font-bold mb-2" data-translate-key="writeReviewTitle">Write a Review</h3>
+            <p class="text-gray-400 text-sm mb-6" data-translate-key="writeReviewSubtitle">Share your experience with our products.</p>
+            
+            <form id="store-review-form" class="space-y-4">
+                <div>
+                    <label class="form-label block mb-2 text-center">Rating</label>
+                    <div class="flex justify-center flex-row-reverse gap-2" id="store-review-rating">
+                        <input type="radio" id="store-star5" name="rating" value="5" class="hidden peer/5"><label for="store-star5" class="cursor-pointer text-gray-600 hover:text-yellow-400 peer-checked/5:text-yellow-400 transition-colors"><svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></label>
+                        <input type="radio" id="store-star4" name="rating" value="4" class="hidden peer/4"><label for="store-star4" class="cursor-pointer text-gray-600 hover:text-yellow-400 peer-checked/4:text-yellow-400 peer-checked/5:text-yellow-400 transition-colors"><svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></label>
+                        <input type="radio" id="store-star3" name="rating" value="3" class="hidden peer/3"><label for="store-star3" class="cursor-pointer text-gray-600 hover:text-yellow-400 peer-checked/3:text-yellow-400 peer-checked/4:text-yellow-400 peer-checked/5:text-yellow-400 transition-colors"><svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></label>
+                        <input type="radio" id="store-star2" name="rating" value="2" class="hidden peer/2"><label for="store-star2" class="cursor-pointer text-gray-600 hover:text-yellow-400 peer-checked/2:text-yellow-400 peer-checked/3:text-yellow-400 peer-checked/4:text-yellow-400 peer-checked/5:text-yellow-400 transition-colors"><svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></label>
+                        <input type="radio" id="store-star1" name="rating" value="1" class="hidden peer/1"><label for="store-star1" class="cursor-pointer text-gray-600 hover:text-yellow-400 peer-checked/1:text-yellow-400 peer-checked/2:text-yellow-400 peer-checked/3:text-yellow-400 peer-checked/4:text-yellow-400 peer-checked/5:text-yellow-400 transition-colors"><svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></label>
+                    </div>
+                </div>
+                <div>
+                    <label for="store-review-name" class="form-label" data-translate-key="formName">Your Name</label>
+                    <input type="text" id="store-review-name" name="name" required class="form-input">
+                </div>
+                <div>
+                    <label for="store-review-message" class="form-label" data-translate-key="formMessage">Your Message</label>
+                    <textarea id="store-review-message" name="message" rows="3" required class="form-input"></textarea>
+                </div>
+                <div id="store-review-status" class="text-center text-sm h-5"></div>
+                <div class="text-center pt-2">
+                    <button type="submit" class="submit-btn group w-full justify-center py-3">
+                        <span data-translate-key="submitReviewBtn">Submit Review</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
 
     <footer class="mt-20 border-t border-white/10 pt-12 pb-24 sm:pb-20">
         <div class="container mx-auto px-6 text-center text-gray-500">
@@ -3630,6 +4204,8 @@
         import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, collection, doc, getDoc, addDoc, updateDoc, deleteDoc, onSnapshot, serverTimestamp, query, orderBy, increment, setDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
+        const apiKey = "AIzaSyAV6ndFn5zodpoVixidsrQZofBDSYYD1j4";
+
         const firebaseConfig = {
             apiKey: "AIzaSyAscmJUPUyFwcE9fiYDNon6-YRM4Xgu1a4",
             authDomain: "website-me-7404b.firebaseapp.com",
@@ -3648,10 +4224,79 @@
         const articlesCollection = collection(db, 'articles');
         const certificatesCollection = collection(db, 'certificates');
         const productsCollection = collection(db, 'products');
+        const storeReviewsCollection = collection(db, 'store_reviews');
         const siteStatusRef = doc(db, 'settings', 'site_status');
         const visitsRef = doc(db, 'settings', 'visits');
 
-        const translations = {
+        // Helper function to handle banner updates (Image vs Video)
+        function updateStoreBannerDisplay(url) {
+            const imgEl = document.getElementById('store-banner-img');
+            const videoEl = document.getElementById('store-banner-video');
+            
+            if (!imgEl || !videoEl || !url) return;
+
+            // Check if URL is a video
+            const isVideo = url.match(/\.(mp4|webm|ogg|mov)$/i);
+
+            if (isVideo) {
+                videoEl.src = url;
+                videoEl.classList.remove('hidden');
+                imgEl.classList.add('hidden');
+                // Ensure video plays
+                videoEl.play().catch(e => console.log("Autoplay prevented:", e));
+            } else {
+                imgEl.src = url;
+                imgEl.classList.remove('hidden');
+                videoEl.classList.add('hidden');
+                videoEl.pause();
+            }
+        }
+
+        // Helper function to update banner texts
+        function updateStoreBannerText(settings) {
+            // Define the elements and their corresponding setting values
+            const elements = [
+                { 
+                    el: document.getElementById('store-banner-badge'), 
+                    val: settings.storeBannerBadge 
+                },
+                { 
+                    el: document.getElementById('store-banner-title'), 
+                    val: settings.storeBannerTitle, 
+                    isHTML: true 
+                },
+                { 
+                    el: document.getElementById('store-banner-desc'), 
+                    val: settings.storeBannerDesc 
+                }
+            ];
+
+            elements.forEach(({ el, val, isHTML }) => {
+                if (!el) return;
+                
+                // If a value is explicitly provided (string, even if empty)
+                if (val !== undefined) {
+                    if (val && val.trim() !== "") {
+                        // If text exists, show element and set text
+                        if (isHTML) el.innerHTML = val;
+                        else el.textContent = val;
+                        
+                        el.classList.remove('hidden');
+                        el.style.display = ''; // Reset display to default (block/inline-block)
+                    } else {
+                        // If text is empty/deleted, hide element completely
+                        el.classList.add('hidden');
+                        el.style.display = 'none'; // Force hide
+                        
+                        // Clear content so it's empty when opening settings next time
+                        if (isHTML) el.innerHTML = "";
+                        else el.textContent = "";
+                    }
+                }
+            });
+        }
+
+            const translations = {
             en: {
                 navHome: 'Home', navSkills: 'Skills', navExperience: 'Experience', navProjects: 'Projects', navBlog: 'Blog', navCertificates: 'Certificates',
                 heroLine1: 'Badr', heroLine2: 'Ibraheem Mohameed', heroLine3: 'Digital Experience Designer',
@@ -3781,6 +4426,41 @@
                 searchNoResultsDesc: "Sorry, we couldn't find anything for your search. Please try a different term or check your spelling.",
                 searchResultTypeProject: "Project",
                 searchResultTypeArticle: "Article",
+                // Store Stats
+                storeStatsTitle: "More than 400 clients trust our services",
+                storeStat1: "Institutions and companies trusted us",
+                storeStat2: "More than 3 years of experience",
+                storeStat3: "Happy Clients",
+                // Store Reviews
+                storeReviewsTitle: "Customer Reviews",
+                storeReviewsDesc: "See what our customers are saying about our services.",
+                addReviewBtn: "Add Review",
+                writeReviewTitle: "Write a Review",
+                writeReviewSubtitle: "Share your experience with our products.",
+                submitReviewBtn: "Submit Review",
+                // FAQ
+                faqTitle: "Frequently Asked Questions",
+                faqQ1: "Are the subscriptions you offer official?",
+                faqA1: "Yes, all subscriptions provided by Badr Store are 100% official and activated directly from the original source.",
+                faqQ2: "How is the subscription delivered after purchase?",
+                faqA2: "Subscription details are sent after order completion to the registered email or via WhatsApp, as preferred by the customer.",
+                faqQ3: "What should I do if I face a problem with activation or usage?",
+                faqA3: "Contact us directly via email or WhatsApp, and the technical support team will help you as soon as possible.",
+                faqQ4: "Is there a warranty on subscriptions?",
+                faqA4: "Yes, every subscription includes a warranty for the duration specified in the product (e.g., a full year or 3 years depending on the subscription type).",
+                faqQ5: "Can I use different payment methods?",
+                faqA5: "Yes, we provide several secure payment methods such as Visa / MasterCard, InstaPay, Vodafone Cash, and payment cards (depending on the country).",
+                // Payment Methods
+                paymentMethodsTitle: "Available Payment Methods",
+                paymentInstaPay: "InstaPay",
+                paymentWallet: "Electronic Wallet",
+                // Store Nav
+                storeNavSections: "Sections",
+                storeNavAll: "All Products",
+                storeNavSubscriptions: "Subscriptions",
+                storeNavSoftware: "Software",
+                storeNavServices: "Services",
+                storeNavContact: "Contact Us",
             },
             ar: {
                 navHome: 'الرئيسية', navSkills: 'المهارات', navExperience: 'الخبرة', navProjects: 'المشاريع', navBlog: 'المدونة', navCertificates: 'الشهادات',
@@ -3919,6 +4599,41 @@
                 searchNoResultsDesc: "عذراً، لم نتمكن من العثور على أي شيء لبحثك. يرجى تجربة مصطلح مختلف أو التحقق من التهجئة.",
                 searchResultTypeProject: "مشروع",
                 searchResultTypeArticle: "مقال",
+                // Store Stats
+                storeStatsTitle: "أكثر من 400 عميل يثقون بخدماتنا",
+                storeStat1: "مؤسسة وشركة وثقت بنا",
+                storeStat2: "أكثر من 3 سنوات خبرة في الاشتراكات الرقمية",
+                storeStat3: "عميل سعيد",
+                // Store Reviews
+                storeReviewsTitle: "آراء العملاء",
+                storeReviewsDesc: "شاهد ما يقوله عملاؤنا عن خدماتنا.",
+                addReviewBtn: "إضافة تقييم",
+                writeReviewTitle: "اكتب تقييمك",
+                writeReviewSubtitle: "شارك تجربتك مع منتجاتنا.",
+                submitReviewBtn: "إرسال التقييم",
+                // FAQ
+                faqTitle: "الأسئلة الشائعة",
+                faqQ1: "هل الاشتراكات التي تقدمونها رسمية؟",
+                faqA1: "نعم، جميع الاشتراكات التي يوفرها متجر  بدر رسمية 100% ويتم تفعيلها مباشرة من المصدر الأصلي.",
+                faqQ2: "كيف يتم تسليم الاشتراك بعد الشراء؟",
+                faqA2: "يتم إرسال بيانات الاشتراك بعد إتمام الطلب إلى البريد الإلكتروني المسجّل أو عبر الواتساب حسب ما يفضّله العميل.",
+                faqQ3: "ماذا أفعل إذا واجهت مشكلة في التفعيل أو الاستخدام؟",
+                faqA3: "تواصل معنا مباشرة عبر البريد أو الواتساب، وفريق الدعم الفني راح يساعدك بأسرع وقت.",
+                faqQ4: "هل يوجد ضمان على الاشتراكات؟",
+                faqA4: "نعم، كل اشتراك يحتوي على ضمان ضمن المدة الموضحة بالمنتج (مثلاً سنة كاملة أو 3 سنوات حسب نوع الاشتراك).",
+                faqQ5: "هل يمكنني استخدام طرق دفع مختلفة؟",
+                faqA5: "نعم، نوفر عدة طرق دفع آمنة مثل Visa / MasterCard  insta pay   - vodafone cash، وبطاقات الدفع (حسب الدولة).",
+                // Payment Methods
+                paymentMethodsTitle: "طرق الدفع المتاحة",
+                paymentInstaPay: "انستا باي",
+                paymentWallet: "محفظة إلكترونية",
+                // Store Nav
+                storeNavSections: "الأقسام",
+                storeNavAll: "كل المنتجات",
+                storeNavSubscriptions: "اشتراكات",
+                storeNavSoftware: "برمجيات",
+                storeNavServices: "خدمات",
+                storeNavContact: "تواصل معنا",
             }
         };
 
@@ -3976,6 +4691,8 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
+            const apiKey = ""; // API Key defined once for the environment to inject
+
             const originalTitle = document.title;
             let lastScrollPosition = 0;
             
@@ -3996,6 +4713,48 @@
             let editingCertificateId = null;
             let editingProductId = null;
             
+            // Helper function to handle API calls with exponential backoff
+            async function callGeminiAPI(payload) {
+                // استخدام gemini-1.5-flash لأنه الأسرع والأكثر استقراراً حالياً
+                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+                
+                // تقليل عدد المحاولات وأوقات الانتظار لتسريع الرد في حالة الخطأ
+                const delays = [1000, 2000]; // محاولتين فقط: انتظار 1 ثانية ثم 2 ثانية
+
+                for (let i = 0; i <= delays.length; i++) {
+                    try {
+                        // إضافة Timeout لعدم الانتظار للأبد
+                        const controller = new AbortController();
+                        const timeoutId = setTimeout(() => controller.abort(), 10000); // مهلة 10 ثواني كحد أقصى
+
+                        const response = await fetch(url, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload),
+                            signal: controller.signal
+                        });
+                        
+                        clearTimeout(timeoutId);
+
+                        if (!response.ok) {
+                            // Retry on 429 (Too Many Requests) or 5xx server errors
+                            if (response.status === 429 || response.status >= 500) {
+                                console.warn(`API Busy/Error (${response.status}), retrying...`);
+                                throw new Error(`Retryable error: ${response.status}`);
+                            }
+                            throw new Error(`API Error: ${response.status}`);
+                        }
+                        return await response.json();
+                    } catch (error) {
+                        if (error.name === 'AbortError') {
+                            console.warn("Request timed out, retrying...");
+                        }
+                        if (i === delays.length) throw error; // All retries failed
+                        await new Promise(resolve => setTimeout(resolve, delays[i]));
+                    }
+                }
+            }
+
             const mainContent = document.querySelector('main');
             const projectDetailView = document.getElementById('project-detail-view');
             const projectsGrid = document.getElementById('projects-grid');
@@ -4123,6 +4882,93 @@
                         addArticleContainer.style.display = 'block'; 
                         document.getElementById('admin-footer-controls').style.display = 'block';
                         
+                        // Show notifications container
+                        const notifContainer = document.getElementById('admin-notifications-container');
+                        if(notifContainer) notifContainer.classList.remove('hidden');
+
+                        // Admin Notification Logic
+                        const notifBtn = document.getElementById('admin-notification-btn');
+                        const notifDropdown = document.getElementById('admin-notification-dropdown');
+                        
+                        if (notifBtn && notifDropdown) {
+                            notifBtn.addEventListener('click', (e) => {
+                                e.stopPropagation();
+                                notifDropdown.classList.toggle('show');
+                            });
+
+                            // Listen for pending reviews
+                            onSnapshot(storeReviewsCollection, (snapshot) => {
+                                const allReviews = snapshot.docs.map(d => ({...d.data(), id: d.id}));
+                                const pendingReviews = allReviews.filter(r => r.status === 'pending');
+                                
+                                const badge = document.getElementById('admin-notification-badge');
+                                const list = document.getElementById('pending-reviews-list');
+                                const headerCount = document.getElementById('pending-count-header');
+                                
+                                if (headerCount) headerCount.textContent = `${pendingReviews.length} pending`;
+
+                                if (pendingReviews.length > 0) {
+                                    badge.textContent = pendingReviews.length;
+                                    badge.classList.remove('hidden');
+                                } else {
+                                    badge.classList.add('hidden');
+                                }
+                                
+                                if (list) {
+                                    if (pendingReviews.length === 0) {
+                                        list.innerHTML = '<div class="p-4 text-center text-gray-500 text-sm">No pending reviews.</div>';
+                                    } else {
+                                        list.innerHTML = pendingReviews.map(r => `
+                                            <div class="p-3 border-b border-white/10 hover:bg-white/5 transition-colors">
+                                                <div class="flex justify-between items-start mb-1">
+                                                    <span class="font-bold text-white text-sm">${escapeHTML(r.name)}</span>
+                                                    <span class="text-xs text-yellow-400 flex items-center gap-1">
+                                                        <svg class="w-3 h-3 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                                                        ${r.rating}
+                                                    </span>
+                                                </div>
+                                                <p class="text-xs text-gray-300 mb-2 line-clamp-2 italic">"${escapeHTML(r.message)}"</p>
+                                                <div class="flex gap-2 justify-end">
+                                                    <button class="text-xs bg-green-500/20 text-green-400 px-3 py-1.5 rounded hover:bg-green-500/30 transition-colors font-semibold approve-review-btn" data-id="${r.id}">Approve</button>
+                                                    <button class="text-xs bg-red-500/20 text-red-400 px-3 py-1.5 rounded hover:bg-red-500/30 transition-colors font-semibold reject-review-btn" data-id="${r.id}">Reject</button>
+                                                </div>
+                                            </div>
+                                        `).join('');
+                                    }
+                                    
+                                    // Attach listeners for dynamic buttons
+                                    list.querySelectorAll('.approve-review-btn').forEach(btn => {
+                                        btn.addEventListener('click', async (e) => {
+                                            e.stopPropagation(); // Prevent dropdown close
+                                            const id = e.target.dataset.id;
+                                            try {
+                                                await updateDoc(doc(db, 'store_reviews', id), { status: 'approved' });
+                                            } catch(err) { console.error(err); }
+                                        });
+                                    });
+                                    
+                                    list.querySelectorAll('.reject-review-btn').forEach(btn => {
+                                        btn.addEventListener('click', async (e) => {
+                                            e.stopPropagation(); // Prevent dropdown close
+                                            if(confirm('Delete this review permanently?')) {
+                                                const id = e.target.dataset.id;
+                                                try {
+                                                    await deleteDoc(doc(db, 'store_reviews', id));
+                                                } catch(err) { console.error(err); }
+                                            }
+                                        });
+                                    });
+                                }
+                            });
+                            
+                            // Close dropdown when clicking outside
+                            document.addEventListener('click', (e) => {
+                                if (!notifBtn.contains(e.target) && !notifDropdown.contains(e.target)) {
+                                    notifDropdown.classList.remove('show');
+                                }
+                            });
+                        }
+
                         const adminSettings = adminDoc.data();
                         const profilePic = document.getElementById('profile-picture-img');
                         if (adminSettings.lightModeUrl) {
@@ -4131,6 +4977,13 @@
                         if (adminSettings.darkModeUrl) {
                             profilePic.dataset.darkSrc = adminSettings.darkModeUrl;
                         }
+                        
+                        // Load Store Banner for Admin
+                        if (adminSettings.storeBannerUrl) {
+                            updateStoreBannerDisplay(adminSettings.storeBannerUrl);
+                        }
+                        // Load Store Text for Admin
+                        updateStoreBannerText(adminSettings);
 
                         authContainer.innerHTML = `
                             <div class="relative" id="user-menu">
@@ -4195,6 +5048,13 @@
                             if (publicSettings.darkModeUrl) {
                                 profilePic.dataset.darkSrc = publicSettings.darkModeUrl;
                             }
+                            
+                            // Load Store Banner for Public
+                            if (publicSettings.storeBannerUrl) {
+                                updateStoreBannerDisplay(publicSettings.storeBannerUrl);
+                            }
+                            // Load Store Text for Public
+                            updateStoreBannerText(publicSettings);
                         }
                     } catch (error) {
                         console.error("Could not load public admin settings:", error);
@@ -4202,14 +5062,18 @@
                     document.body.classList.remove('logged-in');
                     addArticleContainer.style.display = 'none'; // Hide add article button
                     document.getElementById('admin-footer-controls').style.display = 'none';
-                    authContainer.innerHTML = `<a href="#hero" id="auth-link" class="gradient-text text-2xl font-bold">Badr.</a>`;
-                    // The router will handle the #hero link, no custom click listener needed.
-                    /*
-                    document.getElementById('auth-link').addEventListener('click', (e) => {
+                    
+                    // Hide admin notifications
+                    const notifContainer = document.getElementById('admin-notifications-container');
+                    if(notifContainer) notifContainer.classList.add('hidden');
+
+                    // Changed to scroll to top functionality
+                    authContainer.innerHTML = `<a href="#" id="back-to-top-logo" class="gradient-text text-2xl font-bold">Badr.</a>`;
+                    
+                    document.getElementById('back-to-top-logo').addEventListener('click', (e) => {
                         e.preventDefault();
-                        // showLoginModal(); // Disabled login modal
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
                     });
-                    */
                 }
                 
                 try {
@@ -4286,8 +5150,8 @@
             }
 
             function listenForProducts() {
-                const productsGridStore = document.getElementById('products-grid-store');
-                if (!productsGridStore) return;
+                // Updated: Removed the check for 'products-grid-store' as it no longer exists in the categorized layout.
+                // This ensures data fetching continues even with the new layout.
 
                 onSnapshot(query(productsCollection, orderBy('createdAt', 'desc')), (snapshot) => {
                     productsData = snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
@@ -4295,7 +5159,8 @@
                     updateAllStructuredData();
                 }, (error) => {
                     console.error("Error fetching products:", error);
-                    productsGridStore.innerHTML = `<p class="text-red-400 col-span-full text-center">Failed to load products.</p>`;
+                    const storeContent = document.getElementById('store-content');
+                    if (storeContent) storeContent.innerHTML = `<p class="text-red-400 col-span-full text-center py-10">Failed to load products. Please refresh the page.</p>`;
                 });
             }
 
@@ -4311,47 +5176,103 @@
                 });
             }
 
-            function displayProductsInStore() {
-                const productsGridStore = document.getElementById('products-grid-store');
-                if (!productsGridStore) return;
+            function displayProductsInStore(productsToRender = productsData) {
                 const isLoggedIn = document.body.classList.contains('logged-in');
-                productsGridStore.innerHTML = '';
+                const categoriesContainer = document.getElementById('store-categories-container');
+                
+                if (!categoriesContainer) return;
+                
+                // Clear previous content
+                categoriesContainer.innerHTML = '';
 
-                if (productsData.length === 0) {
-                    productsGridStore.innerHTML = `<p class="text-gray-400 text-center col-span-full">No products available yet.</p>`;
+                const noResultsEl = document.getElementById('store-no-results');
+                if (productsToRender.length === 0) {
+                    if(noResultsEl) noResultsEl.classList.remove('hidden');
                     return;
+                } else {
+                    if(noResultsEl) noResultsEl.classList.add('hidden');
                 }
 
-                productsData.forEach(product => {
-                    const adminControls = isLoggedIn ? `
-                        <div class="admin-controls">
-                            <button class="admin-btn edit-product-btn" data-id="${product.id}" aria-label="Edit Product"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg></button>
-                            <button class="admin-btn delete-product-btn delete" data-id="${product.id}" aria-label="Delete Product"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></button>
-                        </div>
-                    ` : '';
-                    
-                    const coverImage = (product.media && product.media.length > 0) ? product.media.find(m => m.type === 'image')?.url || product.media[0].url : 'https://placehold.co/400x400/0D0D0D/FFD700?text=No+Image';
+                // 1. Group products by category
+                const groupedProducts = {};
+                productsToRender.forEach(product => {
+                    // Default to 'Miscellaneous' if empty
+                    const cat = (product.category && product.category.trim() !== "") ? product.category : 'Miscellaneous';
+                    if (!groupedProducts[cat]) groupedProducts[cat] = [];
+                    groupedProducts[cat].push(product);
+                });
 
-                    const cardHTML = `
-                        <div class="store-product-card">
-                            ${adminControls}
-                            <div class="product-card-image">
-                                <img src="${coverImage}" alt="${product.name}" class="w-full h-full object-cover">
+                // 2. Sort categories alphabetically (or you could define a specific order array)
+                const sortedCategories = Object.keys(groupedProducts).sort();
+
+                // 3. Render each category section
+                sortedCategories.forEach((category, index) => {
+                    const products = groupedProducts[category];
+                    
+                    // Generate a stable color based on index for variety
+                    // Using safe colors present in user's previous design: purple, blue, green, amber
+                    const colorOptions = [
+                        { name: 'purple', colorClass: 'text-purple-400', borderClass: 'border-purple-500', bgClass: 'bg-purple-500/10' },
+                        { name: 'blue', colorClass: 'text-blue-400', borderClass: 'border-blue-500', bgClass: 'bg-blue-500/10' },
+                        { name: 'green', colorClass: 'text-green-400', borderClass: 'border-green-500', bgClass: 'bg-green-500/10' },
+                        { name: 'amber', colorClass: 'text-amber-400', borderClass: 'border-amber-500', bgClass: 'bg-amber-500/10' }
+                    ];
+                    
+                    // Pick color based on char code sum of category name to be consistent
+                    const charSum = category.split('').reduce((a, b) => a + b.charCodeAt(0), 0);
+                    const theme = colorOptions[charSum % colorOptions.length];
+
+                    // Generic Icon
+                    const iconSVG = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="${theme.colorClass}"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>`;
+
+                    // Create Section Element
+                    const section = document.createElement('div');
+                    section.className = 'store-category-section mb-16';
+                    section.innerHTML = `
+                        <h3 class="text-2xl font-bold text-white mb-8 border-l-4 ${theme.borderClass} pl-4 flex items-center gap-3">
+                            <span class="${theme.bgClass} p-2 rounded-lg">${iconSVG}</span>
+                            ${category}
+                        </h3>
+                        <div class="products-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                            <!-- Products will be appended here -->
+                        </div>
+                    `;
+
+                    const grid = section.querySelector('.products-grid');
+
+                    products.forEach(product => {
+                        const adminControls = isLoggedIn ? `
+                            <div class="admin-controls">
+                                <button class="admin-btn edit-product-btn" data-id="${product.id}" aria-label="Edit Product"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg></button>
+                                <button class="admin-btn delete-product-btn delete" data-id="${product.id}" aria-label="Delete Product"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></button>
                             </div>
-                            <div>
-                                <p class="product-category">${product.category}</p>
-                                <h4 class="product-title">${product.name}</h4>
-                                <div class="details-price-wrapper">
+                        ` : '';
+                        
+                        const coverImage = (product.media && product.media.length > 0) ? product.media.find(m => m.type === 'image')?.url || product.media[0].url : 'https://placehold.co/400x400/0D0D0D/FFD700?text=No+Image';
+
+                        const cardHTML = `
+                            <div class="store-product-card group">
+                                ${adminControls}
+                                <div class="product-card-image">
+                                    <img src="${coverImage}" alt="${product.name}" loading="lazy">
+                                </div>
+                                <div class="product-info">
+                                    <p class="product-category">${product.category}</p>
+                                    <h4 class="product-title" title="${product.name}">${product.name}</h4>
+                                </div>
+                                <div class="product-footer">
                                     <span class="product-price-display">${product.currency || 'EGP'} ${product.price}</span>
-                                    <a href="#" class="details-btn view-product-btn" data-id="${product.id}">
-                                        <span data-translate-key="productDetailBtn">Details</span>
-                                        <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" /></svg>
+                                    <a href="#" class="details-btn view-product-btn" data-id="${product.id}" aria-label="View Details">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
                                     </a>
                                 </div>
                             </div>
-                        </div>
-                    `;
-                    productsGridStore.innerHTML += cardHTML;
+                        `;
+                        
+                        grid.innerHTML += cardHTML;
+                    });
+
+                    categoriesContainer.appendChild(section);
                 });
 
                 attachProductEventListeners();
@@ -5204,86 +6125,36 @@
             }
             
 
-            async function getProjectRecommendations(currentProject) {
+            function getProjectRecommendations(currentProject) {
                 const recommendationsContainer = document.getElementById('project-recommendations-container');
                 if (!recommendationsContainer) return;
+
+                // Rule-based logic: matching tags
+                const currentTags = currentProject.tags ? currentProject.tags.toLowerCase().split(',').map(t => t.trim()) : [];
                 
-
-                recommendationsContainer.innerHTML = `
-                    <h4 class="text-xl font-bold text-white">You May Also Like</h4>
-                    <div class="text-center p-4">
-                        <div class="typing-indicator" style="opacity: 0.5;"><span></span><span></span><span></span></div>
-                        <p class="text-gray-400 mt-2 text-sm">Generating recommendations with Gemini AI...</p>
-                    </div>
-                `;
-
-
-                const otherProjects = myProjects
+                // Score projects based on tag overlap
+                let scoredProjects = myProjects
                     .filter(p => p.id !== currentProject.id)
-                    .map(p => ({ title: p.title, description: p.description, tags: p.tags }));
-
-                if (otherProjects.length < 3) {
-                     recommendationsContainer.innerHTML = ''; 
-                     return;
-                }
-
-                const apiKey = "AIzaSyAbPyXoqxoc03BIaAipmbcXRWxOdS9AJl4"; 
-                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
-
-                const systemPrompt = `You are an expert portfolio curator. Your task is to recommend three relevant projects from a provided list based on a user's currently viewed project. Analyze the current project's title, description, and tags. Then, from the list of "other projects", select the three that are most similar in style, tools used, or theme.
-                
-                You MUST respond ONLY with a valid JSON array containing the exact titles of the three recommended projects. Do not include any other text, explanation, or formatting.
-                
-                Example response:
-                ["Project Title A", "Project Title B", "Project Title C"]`;
-                
-                const userQuery = `Current Project:
-                - Title: "${currentProject.title}"
-                - Description: "${currentProject.description}"
-                - Tags: "${currentProject.tags}"
-
-                List of other projects to choose from:
-                ${JSON.stringify(otherProjects, null, 2)}
-
-                Based on the "Current Project", what are the three most relevant projects from the list?`;
-
-                const payload = {
-                    systemInstruction: { parts: [{ text: systemPrompt }] },
-                    contents: [{ parts: [{ text: userQuery }] }],
-                    generationConfig: {
-                        responseMimeType: "application/json",
-                    }
-                };
-
-
-                try {
-                    const response = await fetch(apiUrl, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
+                    .map(p => {
+                        const pTags = p.tags ? p.tags.toLowerCase().split(',').map(t => t.trim()) : [];
+                        // Count how many tags overlap
+                        const commonTags = pTags.filter(tag => currentTags.includes(tag));
+                        return { ...p, score: commonTags.length };
                     });
 
-                    if (!response.ok) {
-                        throw new Error(`API Error: ${response.status}`);
-                    }
+                // Sort by score descending, then by date descending as fallback
+                scoredProjects.sort((a, b) => {
+                    if (b.score !== a.score) return b.score - a.score;
+                    return new Date(b.date || 0) - new Date(a.date || 0);
+                });
 
-                    const result = await response.json();
-                    const recommendedText = result.candidates?.[0]?.content?.parts?.[0]?.text;
-
-                    if (!recommendedText) {
-                        throw new Error("No recommendation text received from API.");
-                    }
-
-                    const recommendedTitles = JSON.parse(recommendedText);
-                    renderRecommendations(recommendedTitles);
-
-                } catch (error) {
-                    console.error("Error getting AI recommendations:", error);
-                    recommendationsContainer.innerHTML = `
-                        <h4 class="text-xl font-bold text-white">You May Also Like</h4>
-                        <p class="text-gray-400 text-sm">Could not load recommendations at this time.</p>
-                    `;
-                }
+                // Take top 3
+                const recommendedProjects = scoredProjects.slice(0, 3);
+                
+                // Extract titles as expected by renderRecommendations
+                const titles = recommendedProjects.map(p => p.title);
+                
+                renderRecommendations(titles);
             }
 
             function renderRecommendations(titles) {
@@ -5336,7 +6207,6 @@
             const loginError = document.getElementById('login-error');
             const googleSignInBtn = document.getElementById('google-signin-btn');
 
-            /* --- LOGIN MODAL DISABLED ---
             function showLoginModal() { if (loginModal) loginModal.classList.remove('modal-hidden'); }
             function hideLoginModal() { if (loginModal) loginModal.classList.add('modal-hidden'); }
 
@@ -5344,10 +6214,8 @@
                 closeLoginModalBtn.addEventListener('click', hideLoginModal);
                 loginModalOverlay.addEventListener('click', hideLoginModal);
             }
-            */
 
             if (googleSignInBtn) {
-                /* --- GOOGLE SIGN-IN DISABLED ---
                 googleSignInBtn.addEventListener('click', () => {
                     loginError.textContent = ''; 
                     const provider = new GoogleAuthProvider();
@@ -5359,7 +6227,6 @@
                             loginError.textContent = "Could not sign in with Google.";
                         });
                 });
-                */
             }
             
 
@@ -5904,123 +6771,42 @@
             }
 
 
-            async function getArticleRecommendations(currentArticle) {
+            function getArticleRecommendations(currentArticle) {
                 const recommendationsContainer = document.getElementById('article-recommendations-container');
                 if (!recommendationsContainer) return;
-                
 
-                recommendationsContainer.innerHTML = `
-                    <h4 class="text-xl font-bold text-white">Related Articles</h4>
-                    <div class="text-center p-4">
-                        <div class="typing-indicator" style="opacity: 0.5;"><span></span><span></span><span></span></div>
-                        <p class="text-gray-400 mt-2 text-sm">Finding similar articles with Gemini AI...</p>
-                    </div>
-                `;
+                // Rule-based logic: matching tags
+                const currentTags = currentArticle.tags ? currentArticle.tags.toLowerCase().split(',').map(t => t.trim()) : [];
 
-
-                const otherArticles = articlesData
+                // Score articles based on tag overlap
+                let scoredArticles = articlesData
                     .filter(a => a.id !== currentArticle.id)
-                    .map(a => ({ 
-                        id: a.id, 
-                        title: a.title, 
-                        tags: a.tags, 
-                        coverImageUrl: a.coverImageUrl, 
-                        content: a.content ? a.content.substring(0, 200) + '...' : '', 
-                        createdAt: a.createdAt?.toDate ? a.createdAt.toDate().toISOString().split('T')[0] : 'N/A' 
-                    }));
-
-                if (otherArticles.length < 3) {
-                     recommendationsContainer.innerHTML = ''; 
-                     return;
-                }
-
-                const apiKey = "AIzaSyAbPyXoqxoc03BIaAipmbcXRWxOdS9AJl4"; 
-                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
-
-                const systemPrompt = `You are an expert blog editor. Your task is to recommend three relevant articles from a provided list based on a user's currently viewed article.
-                
-                1.  Analyze the current article's title and tags.
-                2.  From the list of "other articles", select the three that are most similar in topic or theme.
-                3.  For each recommended article, you MUST:
-                    a.  Provide its exact \`id\`, \`title\`, and \`coverImageUrl\`.
-                    b.  Generate a **very brief, one-sentence description** (max 15 words) based on its \`content\` snippet.
-                    c.  Provide its publication date (\`createdAt\`).
-
-                You MUST respond ONLY with a valid JSON array adhering to this schema. Do not include any other text.
-                
-                JSON Schema:
-                [
-                  {
-                    "type": "article",
-                    "id": "The unique ID of the item",
-                    "title": "The title of the item",
-                    "coverImageUrl": "The cover image URL",
-                    "description": "A very short, 15-word max summary of the article.",
-                    "date": "The publication date (e.g., 2024-10-25)"
-                  }
-                ]`;
-                
-                const userQueryForApi = `WEBSITE CONTENT:
-- Other Articles: ${JSON.stringify(otherArticles)}
-
-USER IS VIEWING:
-- Current Article: { title: "${currentArticle.title}", tags: "${currentArticle.tags}" }
-
-Based on the "Current Article", select the three most relevant from "Other Articles" and format them according to the schema.`;
-
-
-                const payload = {
-                    systemInstruction: { parts: [{ text: systemPrompt }] },
-                    contents: [{ parts: [{ text: userQueryForApi }] }],
-                    generationConfig: {
-                        responseMimeType: "application/json",
-                        responseSchema: {
-                            type: "ARRAY",
-                            items: {
-                                type: "OBJECT",
-                                properties: {
-                                    type: { type: "STRING" },
-                                    id: { type: "STRING" },
-                                    title: { type: "STRING" },
-                                    coverImageUrl: { type: "STRING" },
-                                    description: { type: "STRING" }, 
-                                    date: { type: "STRING" }          
-                                },
-                                required: ["type", "id", "title", "description", "date"] 
-                            }
-                        }
-                    }
-                };
-
-
-                try {
-                    const response = await fetch(apiUrl, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
+                    .map(a => {
+                        const aTags = a.tags ? a.tags.toLowerCase().split(',').map(t => t.trim()) : [];
+                        const score = aTags.filter(tag => currentTags.includes(tag)).length;
+                        return { ...a, score };
                     });
 
-                    if (!response.ok) {
-                        throw new Error(`API Error: ${response.status}`);
-                    }
+                // Sort by score descending, then by createdAt descending
+                scoredArticles.sort((a, b) => {
+                    if (b.score !== a.score) return b.score - a.score;
+                    const dateA = a.createdAt?.toDate ? a.createdAt.toDate() : new Date(0);
+                    const dateB = b.createdAt?.toDate ? b.createdAt.toDate() : new Date(0);
+                    return dateB - dateA;
+                });
 
-                    const result = await response.json();
-                    const recommendedText = result.candidates?.[0]?.content?.parts?.[0]?.text;
+                const topArticles = scoredArticles.slice(0, 3);
 
-                    if (!recommendedText) {
-                        throw new Error("No recommendation text received from API.");
-                    }
+                // Map to the structure expected by renderArticleRecommendations
+                const formattedRecommendations = topArticles.map(a => ({
+                    id: a.id,
+                    title: a.title,
+                    coverImageUrl: a.coverImageUrl,
+                    description: a.content ? a.content.replace(/[#*`]/g, '').substring(0, 80) + '...' : '',
+                    date: a.createdAt?.toDate ? a.createdAt.toDate().toISOString() : new Date().toISOString()
+                }));
 
-                    const recommendedTitles = JSON.parse(recommendedText);
-                    renderArticleRecommendations(recommendedTitles);
-
-                } catch (error) {
-                    console.error("Error getting AI article recommendations:", error);
-                    recommendationsContainer.innerHTML = `
-                        <h4 class="text-xl font-bold text-white">Related Articles</h4>
-                        <p class="text-gray-400 text-sm">Could not load recommendations at this time.</p>
-                    `;
-                }
+                renderArticleRecommendations(formattedRecommendations);
             }
 
             function renderArticleRecommendations(titles) {
@@ -6303,62 +7089,99 @@ Based on the "Current Article", select the three most relevant from "Other Artic
                             return `<div class="product-media-slide" data-index="${index}" data-media-type="youtube">
                                         <iframe src="https://www.youtube.com/embed/${item.videoId}?enablejsapi=1" 
                                                 frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                                allowfullscreen></iframe>
+                                                allowfullscreen class="w-full h-full bg-black"></iframe>
                                     </div>`;
                         }
                         return `<div class="product-media-slide" data-index="${index}" data-media-type="image" data-media-url="${item.url}">
-                                    <img src="${item.url}" alt="${product.name} - Image ${index + 1}">
+                                    <img src="${item.url}" alt="${product.name} - Image ${index + 1}" class="w-full h-full object-cover cursor-zoom-in">
                                 </div>`;
                     }).join('')
                     : `<div class="product-media-slide active" data-index="0" data-media-type="image">
-                           <img src="https://placehold.co/600x400/0D0D0D/FFD700?text=No+Media" alt="Placeholder">
+                           <img src="https://placehold.co/600x400/0D0D0D/FFD700?text=No+Media" alt="Placeholder" class="w-full h-full object-cover">
                        </div>`;
 
-                const galleryNavHTML = hasMedia && unifiedMedia.length > 1 ? `
-                    <button id="product-gallery-prev" class="slider-btn absolute top-1/2 -translate-y-1/2 left-0 sm:-left-4 z-30 disabled"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
-                    <button id="product-gallery-next" class="slider-btn absolute top-1/2 -translate-y-1/2 right-0 sm:-right-4 z-30"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button>
+                // Generate Thumbnails HTML
+                const thumbnailsHTML = hasMedia && unifiedMedia.length > 1 ? unifiedMedia.map((item, index) => {
+                    let src = item.type === 'youtube' ? item.thumbnailUrl : item.url;
+                    return `
+                        <button class="product-thumbnail relative w-20 h-20 rounded-xl overflow-hidden border-2 border-transparent transition-all duration-300 flex-shrink-0 hover:opacity-100 opacity-60 focus:outline-none" data-index="${index}">
+                            <img src="${src}" alt="Thumbnail ${index + 1}" class="w-full h-full object-cover">
+                            ${item.type === 'youtube' ? '<div class="absolute inset-0 flex items-center justify-center bg-black/40"><svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>' : ''}
+                        </button>
+                    `;
+                }).join('') : '';
+
+                const navArrowsHTML = hasMedia && unifiedMedia.length > 1 ? `
+                    <button id="product-gallery-prev" class="absolute left-4 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-[var(--accent-color)] text-white p-3 rounded-full backdrop-blur-md transition-all border border-white/10 opacity-0 group-hover:opacity-100 translate-x-[-10px] group-hover:translate-x-0 hover:scale-110 z-20"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+                    <button id="product-gallery-next" class="absolute right-4 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-[var(--accent-color)] text-white p-3 rounded-full backdrop-blur-md transition-all border border-white/10 opacity-0 group-hover:opacity-100 translate-x-[10px] group-hover:translate-x-0 hover:scale-110 z-20"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button>
                 ` : '';
                 
                 const tagsHTML = product.tags 
                     ? product.tags.split(',').map(tag => 
-                        `<span class="inline-block border border-[var(--border-primary)] bg-white/5 text-gray-300 text-sm font-medium mr-2 mb-2 px-4 py-1.5 rounded-full">#${tag.trim()}</span>`
+                        `<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-white/5 text-gray-300 border border-white/10">#${tag.trim()}</span>`
                       ).join('')
                     : '';
 
 
                 productDetailContent.innerHTML = `
                     <div class="max-w-7xl mx-auto">
-                        <!-- Media Slider Section -->
-                        <div class="relative h-[300px] sm:h-[400px] md:h-[550px] flex items-center justify-center mb-12">
-                             <div id="product-media-slider-container">
-                                ${slidesHTML}
-                            </div>
-                            ${galleryNavHTML}
-                        </div>
-
-                        <!-- Details Section -->
-                        <div class="max-w-4xl mx-auto">
-                            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">${product.name}</h1>
-                            <div class="flex flex-wrap mb-8">
-                                ${tagsHTML}
-                            </div>
-                            <h2 class="text-2xl font-bold gradient-text mb-4" data-translate-key="productDescriptionTitle">Description</h2>
-                            <p class="text-gray-300 leading-relaxed mb-12">${product.description.replace(/\n/g, '<br>')}</p>
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
                             
-                            <!-- Price and Order Section -->
-                            <div class="border border-[var(--border-primary)] p-6 rounded-2xl">
-                                <p class="text-sm text-gray-400 mb-2">${product.category}</p>
-                                <div class="text-4xl md:text-5xl font-bold text-white mb-6">
-                                    <span>${product.currency || 'EGP'} ${product.price}</span>
+                            <!-- Left Column: Media (Sticky) -->
+                            <div class="relative w-full lg:sticky lg:top-24">
+                                <div class="relative w-full aspect-[4/3] lg:aspect-square rounded-3xl overflow-hidden border border-[var(--border-primary)] bg-[#1a1a1a] shadow-2xl mb-4 group">
+                                     <div id="product-media-slider-container" class="w-full h-full flex items-center justify-center overflow-hidden relative">
+                                        ${slidesHTML}
+                                    </div>
+                                    ${navArrowsHTML}
                                 </div>
-                                <div class="flex flex-col sm:flex-row gap-4">
-                                    <a href="https://wa.me/201069913150?text=Hello, I'm interested in the product: ${encodeURIComponent(product.name)} (${window.location.href})" target="_blank" rel="noopener noreferrer" class="submit-btn group w-full justify-center flex-grow text-center">
-                                        <span data-translate-key="orderViaWhatsApp">Order via WhatsApp</span>
-                                        <svg class="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.894 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 4.316 1.905 6.03l-.419 1.533 1.519-.4zM9.5 14.5c-.042-.124-.125-.195-.27-.295-.145-.1-.315-.148-.43-.153s-.24-.008-.344.092c-.105.1-.33.34-.438.465-.108.125-.216.25-.324.375s-.24.165-.368.125c-.128-.04-.547-.21-1.046-.595s-.863-.835-1.19-1.16c-.27-.27-.504-.635-.504-.975s.25-.56.375-.75c.125-.19.25-.31.375-.435s.125-.24.062-.375c-.062-.125-.562-1.345-.75-1.845-.19-.5-.375-.435-.5-.435s-.24-.008-.344.092c-.105.1-.33.34-.438.465s-.33.375-.438.635c-.108.25-.165.56-.165.875s.125 1.19.25 1.435c.125.25.562.935 1.312 1.688s1.438 1.19 2.188 1.5s1.19.438 1.562.438c.312 0 .562-.062.75-.125s.562-.625.625-.75c.062-.125.062-.25.062-.31s-.062-.125-.125-.19c0-.062-.042-.125-.062-.165z"/></svg>
+                                
+                                <!-- Thumbnails Strip -->
+                                ${thumbnailsHTML ? `<div id="product-thumbnails" class="flex gap-3 overflow-x-auto pb-2 px-1 scrollbar-hide justify-center lg:justify-start">${thumbnailsHTML}</div>` : ''}
+                            </div>
+
+                            <!-- Right Column: Details -->
+                            <div class="flex flex-col h-full py-4">
+                                <div class="mb-8 animate-fade-in-up">
+                                    <div class="flex items-center gap-3 mb-6">
+                                        <span class="inline-block py-1.5 px-4 rounded-full bg-[var(--accent-color)]/10 text-[var(--accent-color)] text-xs font-bold uppercase tracking-wider border border-[var(--accent-color)]/20">
+                                            ${product.category}
+                                        </span>
+                                    </div>
+                                    
+                                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6 leading-[1.1] tracking-tight">
+                                        ${product.name}
+                                    </h1>
+                                    
+                                    <div class="flex items-baseline gap-4 mb-8 pb-8 border-b border-white/10">
+                                        <div class="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400">
+                                            ${product.currency || 'EGP'} ${product.price}
+                                        </div>
+                                        <span class="text-green-400 text-sm font-medium flex items-center gap-1">
+                                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                            Available Now
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="prose prose-invert prose-lg text-gray-300 mb-10 leading-relaxed max-w-none">
+                                    <h3 class="text-xl font-bold text-white mb-4" data-translate-key="productDescriptionTitle">Overview</h3>
+                                    ${product.description.replace(/\n/g, '<br>')}
+                                </div>
+
+                                ${tagsHTML ? `<div class="flex flex-wrap gap-2 mb-10">${tagsHTML}</div>` : ''}
+
+                                <!-- Action Buttons Area -->
+                                <div class="flex flex-col sm:flex-row gap-4 mt-auto">
+                                    <a href="https://wa.me/201069913150?text=Hello, I'm interested in the product: ${encodeURIComponent(product.name)} (${window.location.href})" 
+                                       target="_blank" rel="noopener noreferrer" 
+                                       class="flex-1 bg-gradient-to-r from-[var(--accent-color)] to-[#8a7573] hover:from-[#a8918f] hover:to-[var(--accent-color)] text-white font-bold py-4 px-8 rounded-2xl transition-all transform hover:-translate-y-1 shadow-lg hover:shadow-[var(--accent-color)]/30 flex items-center justify-center gap-3 text-lg group">
+                                        <span>Order via WhatsApp</span>
+                                        <svg class="w-6 h-6 transition-transform group-hover:translate-x-1" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.894 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 4.316 1.905 6.03l-.419 1.533 1.519-.4zM9.5 14.5c-.042-.124-.125-.195-.27-.295-.145-.1-.315-.148-.43-.153s-.24-.008-.344.092c-.105.1-.33.34-.438.465-.108.125-.216.25-.324.375s-.24.165-.368.125c-.128-.04-.547-.21-1.046-.595s-.863-.835-1.19-1.16c-.27-.27-.504-.635-.504-.975s.25-.56.375-.75c.125-.19.25-.31.375-.435s.125-.24.062-.375c-.062-.125-.562-1.345-.75-1.845-.19-.5-.375-.435-.5-.435s-.24-.008-.344.092c-.105.1-.33.34-.438.465s-.33.375-.438.635c-.108.25-.165.56-.165.875s.125 1.19.25 1.435c.125.25.562.935 1.312 1.688s1.438 1.19 2.188 1.5s1.19.438 1.562.438c.312 0 .562-.062.75-.125s.562-.625.625-.75c.062-.125.062-.25.062-.31s-.062-.125-.125-.19c-.062-.062-.24-.125-.312-.19s-.125-.125-.125-.19c0-.062-.042-.125-.062-.165z"/></path></svg>
                                     </a>
-                                    <button id="share-product-btn" class="share-btn" style="width: auto; padding: 0 1.5rem; gap: 0.5rem; border-radius: 9999px; height: auto;">
-                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
-                                         <span>Share</span>
+                                    
+                                    <button id="share-product-btn" class="p-4 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 text-white transition-all hover:border-white/30 flex items-center justify-center group" aria-label="Share">
+                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:scale-110 transition-transform"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
                                     </button>
                                 </div>
                             </div>
@@ -6379,7 +7202,7 @@ Based on the "Current Article", select the three most relevant from "Other Artic
                         navigator.clipboard.writeText(shareUrl).then(() => {
                             const originalHTML = shareProductBtn.innerHTML;
                             shareProductBtn.classList.add('copied');
-                            shareProductBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> <span>Copied!</span>';
+                            shareProductBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
                             setTimeout(() => {
                                 shareProductBtn.classList.remove('copied');
                                 shareProductBtn.innerHTML = originalHTML;
@@ -6394,6 +7217,8 @@ Based on the "Current Article", select the three most relevant from "Other Artic
                 const sliderContainer = document.getElementById('product-media-slider-container');
                 const prevBtn = document.getElementById('product-gallery-prev');
                 const nextBtn = document.getElementById('product-gallery-next');
+                const thumbnails = document.querySelectorAll('.product-thumbnail');
+
                 if (!sliderContainer || mediaCount <= 1) {
                     if(prevBtn) prevBtn.style.display = 'none';
                     if(nextBtn) nextBtn.style.display = 'none';
@@ -6431,22 +7256,48 @@ Based on the "Current Article", select the three most relevant from "Other Artic
                         }
                     });
                     
-                    prevBtn.classList.toggle('disabled', currentIndex === 0);
-                    nextBtn.classList.toggle('disabled', currentIndex === mediaCount - 1);
+                    // Update Nav Buttons State
+                    if (prevBtn) prevBtn.classList.toggle('disabled', currentIndex === 0);
+                    if (nextBtn) nextBtn.classList.toggle('disabled', currentIndex === mediaCount - 1);
+
+                    // Update Thumbnails State
+                    thumbnails.forEach(thumb => {
+                        const idx = parseInt(thumb.dataset.index);
+                        if (idx === currentIndex) {
+                            thumb.classList.add('border-[var(--accent-color)]', 'opacity-100', 'scale-105');
+                            thumb.classList.remove('border-transparent', 'opacity-60');
+                            thumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                        } else {
+                            thumb.classList.add('border-transparent', 'opacity-60');
+                            thumb.classList.remove('border-[var(--accent-color)]', 'opacity-100', 'scale-105');
+                        }
+                    });
                 }
 
-                prevBtn.addEventListener('click', () => {
-                    if (currentIndex > 0) {
-                        currentIndex--;
-                        updateSlider();
-                    }
-                });
+                if (prevBtn) {
+                    prevBtn.addEventListener('click', () => {
+                        if (currentIndex > 0) {
+                            currentIndex--;
+                            updateSlider();
+                        }
+                    });
+                }
 
-                nextBtn.addEventListener('click', () => {
-                    if (currentIndex < mediaCount - 1) {
-                        currentIndex++;
+                if (nextBtn) {
+                    nextBtn.addEventListener('click', () => {
+                        if (currentIndex < mediaCount - 1) {
+                            currentIndex++;
+                            updateSlider();
+                        }
+                    });
+                }
+
+                // Add click listener to thumbnails
+                thumbnails.forEach(thumb => {
+                    thumb.addEventListener('click', () => {
+                        currentIndex = parseInt(thumb.dataset.index);
                         updateSlider();
-                    }
+                    });
                 });
 
                 updateSlider(); 
@@ -6819,17 +7670,15 @@ Based on the "Current Article", select the three most relevant from "Other Artic
                     </div>
                 `;
 
-                const projectsContext = myProjects.map(p => ({ title: p.title, description: p.description, tags: p.tags })).slice(0, 15);
-                const articlesContext = articlesData.map(a => ({ title: a.title, tags: a.tags })).slice(0, 15);
-
-                const apiKey = "AIzaSyAbPyXoqxoc03BIaAipmbcXRWxOdS9AJl4";
-                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+                // تقليل السياق إلى أهم 10 عناصر لتسريع المعالجة
+                const projectsContext = myProjects.map(p => ({ title: p.title, description: p.description, tags: p.tags })).slice(0, 10);
+                const articlesContext = articlesData.map(a => ({ title: a.title, tags: a.tags })).slice(0, 10);
 
                 const systemPrompt = `You are a helpful AI assistant for Badr Ibraheem's portfolio website. Your task is to provide a comprehensive response to a user's search query based on the provided website content (projects and articles).
                 Your response MUST be in JSON format and adhere to the provided schema.
-                1.  **Analyze the User's Query:** Understand the user's intent (are they asking a question, looking for a specific project, or exploring a topic?).
-                2.  **Generate a 'summary':** Write a concise, conversational answer to the user's query using the provided content. If you find directly relevant projects or articles, mention their titles within the summary. If no relevant information is found, state that you couldn't find a match on the site.
-                3.  **Generate 'suggestions':** Create an array of 3 to 4 follow-up search queries that the user might find interesting. These suggestions should guide the user to explore other relevant areas of the portfolio.
+                1.  **Analyze the User's Query:** Understand the user's intent.
+                2.  **Generate a 'summary':** Write a concise, conversational answer (max 3 sentences).
+                3.  **Generate 'suggestions':** Create an array of 3 follow-up search queries.
                 Respond in the language of the user's query. The user's query is: "${query}"`;
                 
                 const userQuery = `Website Content:\n- Projects: ${JSON.stringify(projectsContext)}\n- Articles: ${JSON.stringify(articlesContext)}\n\nBased on the content above, answer the search query: "${query}"`;
@@ -6854,15 +7703,8 @@ Based on the "Current Article", select the three most relevant from "Other Artic
                 };
 
                 try {
-                    const response = await fetch(apiUrl, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
-
-                    if (!response.ok) throw new Error(`API Error: ${response.status}`);
+                    const result = await callGeminiAPI(payload);
                     
-                    const result = await response.json();
                     const jsonText = result.candidates?.[0]?.content?.parts?.[0]?.text;
                     if (!jsonText) throw new Error("No response text from AI.");
                     
@@ -7116,19 +7958,16 @@ Based on the "Current Article", select the three most relevant from "Other Artic
                 renderMessages();
                 showTypingIndicator();
 
-                const apiKey = "AIzaSyAbPyXoqxoc03BIaAipmbcXRWxOdS9AJl4"; 
-                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+                // تقليل السياق إلى أهم 8 عناصر لتسريع المحادثة
+                const projectsContext = myProjects.map(p => ({ id: p.id, title: p.title, description: p.description, tags: p.tags, coverImageUrl: p.coverImageUrl })).slice(0, 8);
+                const articlesContext = articlesData.map(a => ({ id: a.id, title: a.title, tags: a.tags, coverImageUrl: a.coverImageUrl })).slice(0, 8);
 
-                const projectsContext = myProjects.map(p => ({ id: p.id, title: p.title, description: p.description, tags: p.tags, coverImageUrl: p.coverImageUrl })).slice(0, 10);
-                const articlesContext = articlesData.map(a => ({ id: a.id, title: a.title, tags: a.tags, coverImageUrl: a.coverImageUrl })).slice(0, 10);
-
-                const systemPrompt = `You are a helpful and friendly AI assistant for Badr Ibraheem's portfolio website. Your goal is to answer user questions and suggest relevant content.
+                const systemPrompt = `You are a helpful and friendly AI assistant for Badr Ibraheem's portfolio website.
 - **Analyze the User's Query:** Understand their intent.
-- **Formulate an Answer:** Based on the provided JSON data for projects and articles, create a concise, conversational answer.
-- **Provide Suggestions:** From the provided content, select 2-3 of the MOST relevant projects or articles related to the user's query. If no content is relevant, return an empty array.
+- **Formulate an Answer:** Keep it short, concise and friendly (max 50 words).
+- **Provide Suggestions:** Select 2 MOST relevant items.
 - **Language:** Respond in the same language as the user's query.
-- **JSON Output:** Your entire response MUST be a valid JSON object following this schema: 
-{
+- **JSON Output:** {
   "answer": "Your conversational answer here.", 
   "suggestions": [
     {
@@ -7176,17 +8015,8 @@ USER QUERY: "${userMessage}"`;
                 };
 
                 try {
-                    const response = await fetch(apiUrl, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
+                    const result = await callGeminiAPI(payload);
 
-                    if (!response.ok) {
-                        throw new Error(`API request failed with status ${response.status}`);
-                    }
-
-                    const result = await response.json();
                     const jsonText = result.candidates?.[0]?.content?.parts?.[0]?.text;
                     if (!jsonText) throw new Error("No valid JSON response from AI.");
 
@@ -7286,8 +8116,31 @@ USER QUERY: "${userMessage}"`;
             async function showSettingsModal() {
                 if (settingsModal) {
                     const profilePic = document.getElementById('profile-picture-img');
-                    document.getElementById('light-mode-url').value = profilePic.dataset.lightSrc;
-                    document.getElementById('dark-mode-url').value = profilePic.dataset.darkSrc;
+                    const storeBannerImg = document.getElementById('store-banner-img');
+                    const storeBannerVideo = document.getElementById('store-banner-video');
+                    
+                    // Text Elements
+                    const badgeEl = document.getElementById('store-banner-badge');
+                    const titleEl = document.getElementById('store-banner-title');
+                    const descEl = document.getElementById('store-banner-desc');
+
+                    document.getElementById('light-mode-url').value = profilePic.dataset.lightSrc || '';
+                    document.getElementById('dark-mode-url').value = profilePic.dataset.darkSrc || '';
+                    
+                    // Populate Text Inputs
+                    if (badgeEl) document.getElementById('store-banner-badge-input').value = badgeEl.textContent.trim();
+                    if (titleEl) document.getElementById('store-banner-title-input').value = titleEl.textContent.trim();
+                    if (descEl) document.getElementById('store-banner-desc-input').value = descEl.textContent.trim();
+
+                    // Get current banner URL
+                    let currentBannerUrl = '';
+                    if (storeBannerVideo && !storeBannerVideo.classList.contains('hidden')) {
+                        currentBannerUrl = storeBannerVideo.src;
+                    } else if (storeBannerImg) {
+                        currentBannerUrl = storeBannerImg.src;
+                    }
+                    
+                    document.getElementById('store-banner-url').value = currentBannerUrl;
 
                     const maintenanceToggle = document.getElementById('maintenance-mode-toggle');
                     try {
@@ -7337,9 +8190,23 @@ USER QUERY: "${userMessage}"`;
 
                     const lightModeUrl = document.getElementById('light-mode-url').value;
                     const darkModeUrl = document.getElementById('dark-mode-url').value;
-                    const settingsData = { lightModeUrl, darkModeUrl };
+                    const storeBannerUrl = document.getElementById('store-banner-url').value;
                     
-                    settingsStatus.textContent = 'Saving image settings...';
+                    // New Text Fields
+                    const storeBannerBadge = document.getElementById('store-banner-badge-input').value;
+                    const storeBannerTitle = document.getElementById('store-banner-title-input').value;
+                    const storeBannerDesc = document.getElementById('store-banner-desc-input').value;
+                    
+                    const settingsData = { 
+                        lightModeUrl, 
+                        darkModeUrl, 
+                        storeBannerUrl,
+                        storeBannerBadge,
+                        storeBannerTitle,
+                        storeBannerDesc
+                    };
+                    
+                    settingsStatus.textContent = 'Saving settings...';
                     try {
                         const adminRef = doc(db, 'admins', user.uid);
                         const publicSettingsRef = doc(db, 'settings', 'main_profile');
@@ -7351,14 +8218,18 @@ USER QUERY: "${userMessage}"`;
                         const profilePic = document.getElementById('profile-picture-img');
                         profilePic.dataset.lightSrc = lightModeUrl;
                         profilePic.dataset.darkSrc = darkModeUrl;
+                        
+                        // Update banner visuals immediately
+                        if (storeBannerUrl) updateStoreBannerDisplay(storeBannerUrl);
+                        updateStoreBannerText(settingsData);
 
                         applyTheme(localStorage.getItem('theme') || 'dark');
-                        settingsStatus.textContent = 'Image settings saved!';
+                        settingsStatus.textContent = 'Settings saved successfully!';
                         setTimeout(hideSettingsModal, 1500);
 
                     } catch (error) {
                         console.error("Error saving settings:", error);
-                        settingsStatus.textContent = 'Failed to save image settings.';
+                        settingsStatus.textContent = 'Failed to save settings.';
                     }
                 });
             }
@@ -7432,6 +8303,29 @@ USER QUERY: "${userMessage}"`;
             const langOptions = document.querySelectorAll('.language-option');
             const htmlEl = document.documentElement;
 
+            // Greeting Typed Instance
+            let greetingTyped = null;
+
+            function initGreetingTyped(lang) {
+                if (greetingTyped) {
+                    greetingTyped.destroy();
+                }
+
+                const strings = lang === 'ar' 
+                    ? ['مرحباً، أنا', 'أهلاً بك، أنا'] 
+                    : ["Hello, I'm", "Welcome, I'm"];
+
+                greetingTyped = new Typed('#hero-greeting', {
+                    strings: strings,
+                    typeSpeed: 50,
+                    backSpeed: 30,
+                    backDelay: 3000,
+                    startDelay: 500,
+                    loop: true,
+                    showCursor: false // Keeps it clean
+                });
+            }
+
             function setCookie(name, value, days) {
                 let expires = "";
                 if (days) {
@@ -7462,6 +8356,9 @@ USER QUERY: "${userMessage}"`;
             }
 
             function translatePage(lang = 'en') {
+                // Update Greeting Typing Effect
+                initGreetingTyped(lang);
+
                 document.querySelectorAll('[data-translate-key]').forEach(el => {
                     const key = el.dataset.translateKey;
                     const translationExists = translations[lang] && translations[lang][key];
@@ -7758,6 +8655,7 @@ USER QUERY: "${userMessage}"`;
             listenForCertificates();
             listenForProducts();
             updateAndDisplayVisitorCount();
+            listenForStoreReviews();
 
 
             const testimonialsSection = document.getElementById('testimonials');
@@ -7879,13 +8777,161 @@ USER QUERY: "${userMessage}"`;
                 });
             }
 
-            searchCloseBtn.addEventListener('click', hideSearchUI);
+            // --- Store Reviews Logic ---
+            
+            function listenForStoreReviews() {
+                const reviewsGrid = document.getElementById('store-reviews-grid');
+                if (!reviewsGrid) return;
 
-            searchModal.addEventListener('click', (e) => {
-                if(e.target === searchModal) {
-                    hideSearchUI();
+                onSnapshot(query(storeReviewsCollection, orderBy('createdAt', 'desc')), (snapshot) => {
+                    const reviews = snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
+                    displayStoreReviews(reviews);
+                }, (error) => {
+                    console.error("Error fetching store reviews: ", error);
+                    reviewsGrid.innerHTML = `
+                        <div class="col-span-full text-center py-10">
+                            <p class="text-red-400">Failed to load reviews. Please try refreshing.</p>
+                        </div>
+                    `;
+                });
+            }
+
+            function displayStoreReviews(reviews) {
+                const reviewsGrid = document.getElementById('store-reviews-grid');
+                const countEl = document.getElementById('store-reviews-count');
+                if (!reviewsGrid) return;
+
+                // Filter only approved reviews for public display
+                const approvedReviews = reviews.filter(r => r.status === 'approved' || r.status === undefined);
+
+                if (countEl) countEl.textContent = approvedReviews.length;
+
+                if (approvedReviews.length === 0) {
+                    reviewsGrid.style.animation = 'none';
+                    reviewsGrid.style.width = '100%';
+                    reviewsGrid.style.justifyContent = 'center';
+                    reviewsGrid.innerHTML = `
+                        <div class="text-center py-12 glass-card rounded-2xl border-dashed border-2 border-[var(--border-primary)] w-full max-w-2xl mx-auto">
+                            <svg class="w-12 h-12 mx-auto text-gray-500 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+                            <p class="text-gray-400">No reviews yet. Be the first to leave one!</p>
+                        </div>
+                    `;
+                    return;
                 }
-            });
+
+                // Reset styles if previously set for empty state
+                reviewsGrid.style.animation = '';
+                reviewsGrid.style.width = '';
+                reviewsGrid.style.justifyContent = '';
+
+                // Duplicate reviews to ensure seamless scrolling loop
+                // We need at least 2 sets, but if few reviews, replicate more to fill screen width
+                let displayReviews = [...approvedReviews];
+                while (displayReviews.length < 6) {
+                    displayReviews = [...displayReviews, ...approvedReviews];
+                }
+                // Double final set for the loop effect
+                displayReviews = [...displayReviews, ...displayReviews];
+
+                reviewsGrid.innerHTML = displayReviews.map(review => {
+                    const date = review.createdAt?.toDate ? new Date(review.createdAt.toDate()).toLocaleDateString() : 'Just now';
+                    const rating = parseInt(review.rating) || 5;
+                    let stars = '';
+                    for(let i=0; i<5; i++) {
+                        stars += `<svg class="w-4 h-4 ${i < rating ? 'text-yellow-400 fill-yellow-400' : 'text-gray-600'}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>`;
+                    }
+                    
+                    return `
+                        <div class="store-review-card glass-card p-6 rounded-2xl flex flex-col h-full transition-transform hover:-translate-y-1 border border-white/5">
+                            <div class="flex justify-between items-start mb-4">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-full bg-[var(--accent-color)]/20 flex items-center justify-center text-[var(--accent-color)] font-bold text-lg border border-[var(--accent-color)]/30 flex-shrink-0">
+                                        ${review.name.charAt(0).toUpperCase()}
+                                    </div>
+                                    <div>
+                                        <h5 class="font-bold text-white text-sm truncate max-w-[120px]">${escapeHTML(review.name)}</h5>
+                                        <span class="text-xs text-gray-500">${date}</span>
+                                    </div>
+                                </div>
+                                <div class="flex gap-0.5 flex-shrink-0">
+                                    ${stars}
+                                </div>
+                            </div>
+                            <p class="text-gray-300 text-sm leading-relaxed flex-grow line-clamp-4">"${escapeHTML(review.message)}"</p>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            // Store Review Modal Logic
+            const storeReviewModal = document.getElementById('store-review-modal');
+            const openStoreReviewBtn = document.getElementById('open-store-review-modal-btn');
+            const closeStoreReviewBtn = document.getElementById('close-store-review-modal-btn');
+            const storeReviewForm = document.getElementById('store-review-form');
+            const storeReviewStatus = document.getElementById('store-review-status');
+            const storeReviewModalOverlay = document.querySelector('.store-review-modal-overlay-bg');
+
+            if (openStoreReviewBtn && storeReviewModal) {
+                openStoreReviewBtn.addEventListener('click', () => {
+                    storeReviewForm.reset();
+                    storeReviewStatus.innerHTML = '';
+                    storeReviewModal.classList.remove('modal-hidden');
+                });
+            }
+
+            function closeStoreReviewModal() {
+                storeReviewModal.classList.add('modal-hidden');
+            }
+
+            if (closeStoreReviewBtn) closeStoreReviewBtn.addEventListener('click', closeStoreReviewModal);
+            if (storeReviewModalOverlay) storeReviewModalOverlay.addEventListener('click', closeStoreReviewModal);
+
+            if (storeReviewForm) {
+                storeReviewForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    const submitBtn = storeReviewForm.querySelector('button[type="submit"]');
+                    
+                    const name = document.getElementById('store-review-name').value.trim();
+                    const message = document.getElementById('store-review-message').value.trim();
+                    const ratingEl = document.querySelector('input[name="rating"]:checked');
+                    const rating = ratingEl ? ratingEl.value : null;
+
+                    if (!rating) {
+                        storeReviewStatus.innerHTML = `<p class="text-red-400">Please select a rating.</p>`;
+                        return;
+                    }
+
+                    if (isOffensive(name) || isOffensive(message)) {
+                        storeReviewStatus.innerHTML = `<p class="text-red-400">Please use respectful language.</p>`;
+                        return;
+                    }
+
+                    submitBtn.disabled = true;
+                    storeReviewStatus.innerHTML = `<p class="text-gray-400">Submitting...</p>`;
+
+                    try {
+                        await addDoc(storeReviewsCollection, {
+                            name,
+                            message,
+                            rating: parseInt(rating),
+                            status: 'pending', // Reviews now start as pending
+                            createdAt: serverTimestamp()
+                        });
+                        
+                        storeReviewStatus.innerHTML = `<p class="text-green-400">Review submitted for approval!</p>`;
+                        setTimeout(() => {
+                            closeStoreReviewModal();
+                            storeReviewForm.reset();
+                            submitBtn.disabled = false;
+                            storeReviewStatus.innerHTML = '';
+                        }, 1500);
+                    } catch (error) {
+                        console.error("Error adding review:", error);
+                        storeReviewStatus.innerHTML = `<p class="text-red-400">Failed to submit. Try again.</p>`;
+                        submitBtn.disabled = false;
+                    }
+                });
+            }
 
             closeSearchBtn.addEventListener('click', () => {
                 renderPage({ view: 'home' });
@@ -7894,6 +8940,37 @@ USER QUERY: "${userMessage}"`;
             closeStoreBtn.addEventListener('click', () => {
                 renderPage({ view: 'home' });
                 window.location.hash = '';
+            });
+
+            const storeSearchInput = document.getElementById('store-search-input');
+            if (storeSearchInput) {
+                storeSearchInput.addEventListener('input', (e) => {
+                    const term = e.target.value.toLowerCase();
+                    const filtered = productsData.filter(p => 
+                        (p.name && p.name.toLowerCase().includes(term)) || 
+                        (p.category && p.category.toLowerCase().includes(term)) ||
+                        (p.tags && p.tags.toLowerCase().includes(term))
+                    );
+                    displayProductsInStore(filtered);
+                });
+            }
+
+            // Store Filter Logic for Dropdown
+            document.querySelectorAll('.store-filter-trigger').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const filter = e.currentTarget.dataset.filter;
+                    
+                    if (filter === 'all') {
+                        displayProductsInStore(productsData);
+                    } else {
+                        // Filter locally based on category string match
+                        const filtered = productsData.filter(p => 
+                            p.category && p.category.includes(filter)
+                        );
+                        displayProductsInStore(filtered);
+                    }
+                });
             });
 
             searchForm.addEventListener('submit', (e) => {
@@ -8284,7 +9361,4 @@ USER QUERY: "${userMessage}"`;
     </script>
 </body>
 
-
 </html>
-
-
