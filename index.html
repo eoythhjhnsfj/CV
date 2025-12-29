@@ -4209,8 +4209,6 @@
         import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, collection, doc, getDoc, addDoc, updateDoc, deleteDoc, onSnapshot, serverTimestamp, query, orderBy, increment, setDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        const apiKey = "AIzaSyAV6ndFn5zodpoVixidsrQZofBDSYYD1j4";
-
         const firebaseConfig = {
             apiKey: "AIzaSyAscmJUPUyFwcE9fiYDNon6-YRM4Xgu1a4",
             authDomain: "website-me-7404b.firebaseapp.com",
@@ -4721,7 +4719,7 @@
             // Helper function to handle API calls with exponential backoff
             async function callGeminiAPI(payload) {
                 // استخدام gemini-1.5-flash لأنه الأسرع والأكثر استقراراً حالياً
-                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+                
                 
                 // تقليل عدد المحاولات وأوقات الانتظار لتسريع الرد في حالة الخطأ
                 const delays = [1000, 2000]; // محاولتين فقط: انتظار 1 ثانية ثم 2 ثانية
