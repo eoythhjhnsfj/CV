@@ -5067,6 +5067,24 @@
                     event.preventDefault();
                 }
             });
+
+            // Prevent Developer Tools keyboard shortcuts
+            document.addEventListener('keydown', (event) => {
+                if (!document.body.classList.contains('logged-in')) {
+                    // Prevent F12
+                    if (event.key === 'F12' || event.keyCode === 123) {
+                        event.preventDefault();
+                    }
+                    // Prevent Ctrl+Shift+I / Ctrl+Shift+J / Ctrl+Shift+C (Inspector & Console)
+                    if (event.ctrlKey && event.shiftKey && (event.key === 'I' || event.key === 'i' || event.key === 'J' || event.key === 'j' || event.key === 'C' || event.key === 'c')) {
+                        event.preventDefault();
+                    }
+                    // Prevent Ctrl+U (View Source)
+                    if (event.ctrlKey && (event.key === 'U' || event.key === 'u')) {
+                        event.preventDefault();
+                    }
+                }
+            });
             
             const body = document.body;
             const currentTheme = localStorage.getItem('theme');
